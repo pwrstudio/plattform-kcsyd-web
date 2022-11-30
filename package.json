@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.84",
 		"@sveltejs/kit": "next",
+		"node-sass": "^8.0.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
 		"svelte-preprocess": "^4.10.6",
@@ -19,5 +20,12 @@
 		"typescript": "^4.7.4",
 		"vite": "^3.1.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@sanity/block-content-to-html": "^2.0.0",
+		"@sanity/client": "^3.4.1",
+		"@sanity/image-url": "^1.0.1",
+		"get-video-id": "^3.6.5",
+		"lodash": "^4.17.21"
+	}
 }
