@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlFor } from "$lib/modules/sanity"
   import { renderBlockText } from "$lib/modules/sanity.js"
 
   interface Artist {
@@ -21,15 +22,19 @@
   console.log(data)
 </script>
 
-<h1>{data.title}</h1>
-<h1>{data.title_eng}</h1>
-<p>{data.nationalitet}</p>
-<p>{data.tidskategori}</p>
+<div class="page">
+  <img src={urlFor(data.mainImage).url()} alt={data.title} />
 
-<div>{@html renderBlockText(data.content_sve.content)}</div>
+  <h1>{data.title}</h1>
+  <h1>{data.title_eng}</h1>
+  <p>{data.nationalitet}</p>
+  <p>{data.tidskategori}</p>
 
-<div>{@html renderBlockText(data.content_eng.content)}</div>
+  <div>{@html renderBlockText(data.content_sve.content)}</div>
 
-<style lang="scss">
-  @import "src/lib/style/variables.scss";
-</style>
+  <div>{@html renderBlockText(data.content_eng.content)}</div>
+
+  <style lang="scss">
+    @import "src/lib/style/variables.scss";
+  </style>
+</div>

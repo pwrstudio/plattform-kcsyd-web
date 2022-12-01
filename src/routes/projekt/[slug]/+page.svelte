@@ -19,18 +19,26 @@
     bildspel?: any[]
   }
 
-  export let data: Project
-
-  console.log(data)
+  export let data: { project: Project }
+  const { project } = data
+  console.log(project)
 </script>
 
-<h1>{data.title}</h1>
-<h1>{data.title_eng}</h1>
+<div class="page">
+  <h1>{project.layout}</h1>
+  <h1>{project.title}</h1>
+  <h1>{project.title_eng}</h1>
 
-<div>{@html renderBlockText(data.content_sve.content)}</div>
+  <div>{@html renderBlockText(project.content_sve.content)}</div>
 
-<div>{@html renderBlockText(data.content_eng.content)}</div>
+  <div>{@html renderBlockText(project.content_eng.content)}</div>
+</div>
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
+
+  .page {
+    background: $black;
+    color: $white;
+  }
 </style>

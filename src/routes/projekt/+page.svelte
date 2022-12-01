@@ -2,20 +2,21 @@
   interface Project {
     _id: string
     title: string
+    slug: {
+      _type: "slug"
+      current: string
+    }
   }
 
-  interface Projects {
-    [index: number]: Project
-  }
-
-  export let data: Projects
-  console.log(data)
+  export let data: { projekt: Project[] }
+  const { projekt } = data
+  console.log(projekt)
 </script>
 
 <h1>PROJEKT</h1>
 
-{#each Object.values(data) as projekt (projekt._id)}
-  <a href={"/projekt/" + projekt.slug.current}>{projekt.title}</a>
+{#each projekt as project (project._id)}
+  <a href={"/projekt/" + project.slug.current}>{project.title}</a>
 {/each}
 
 <style lang="scss">
