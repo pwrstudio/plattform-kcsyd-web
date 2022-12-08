@@ -4,4 +4,4 @@
   export let data: ContactPageType
 </script>
 
-<ContactPage {data} language={Language.Swedish} />
+<ContactPage {data} language={Language.English} />

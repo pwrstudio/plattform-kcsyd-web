@@ -4,4 +4,4 @@
   export let data: AboutPageType
 </script>
 
-<AboutPage {data} language={Language.Swedish} />
+<AboutPage {data} language={Language.English} />

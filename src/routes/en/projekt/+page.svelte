@@ -7,4 +7,4 @@
   }
 </script>
 
-<ProjectsListingPage {data} language={Language.Swedish} />
+<ProjectsListingPage {data} language={Language.English} />

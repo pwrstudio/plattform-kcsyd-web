@@ -5,7 +5,6 @@
 
   export let data
   const { splash } = data
-  console.log(splash)
 
   let menuActive = false
   const toggleMenu = () => {
@@ -23,10 +22,9 @@
 </div>
 
 {#if menuActive}
-  <Menu />
+  <Menu on:close={toggleMenu} />
 {/if}
 
-<!-- MAIN CONTENT ==> -->
 <slot />
 
 <style lang="scss">

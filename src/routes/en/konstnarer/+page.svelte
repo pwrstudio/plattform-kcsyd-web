@@ -4,4 +4,4 @@
   export let data: ArtistsType
 </script>
 
-<LandingPage {data} language={Language.Swedish} />
+<LandingPage {data} language={Language.English} />
