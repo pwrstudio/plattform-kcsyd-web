@@ -3,6 +3,8 @@
   import "swiper/css"
   import { Language } from "$lib/types"
   import { urlFor } from "$lib/modules/sanity"
+  import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
+  import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
   export let language: Language
   export let projects: any[]
   const urlPrefix = language === Language.English ? "/en/" : "/"
@@ -16,8 +18,20 @@
         href={urlPrefix + "projekt/" + project.slug.current}
         data-sveltekit-preload-data
       >
-        <img src={urlFor(project.mainImage).url()} alt={project.title} />
-        <div class="caption">{project.title}</div>
+        <img
+          src={urlFor(project.mainImage).saturation(-100).url()}
+          alt={project.title}
+        />
+        <div class="caption">
+          <div class="first-row">PÅGÅENDE PROJEKT</div>
+          <div class="second-row">
+            <div class="arrow"><SmallArrowLeft /></div>
+            <div>
+              {project.title}
+            </div>
+            <div class="arrow"><SmallArrowRight /></div>
+          </div>
+        </div>
       </a>
     </SwiperSlide>
   {/each}
@@ -28,25 +42,39 @@
 
   .inner {
     width: 100%;
-    height: 100%;
+    height: 45vh;
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_SMALL;
-    background: red;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    text-decoration: none;
+    color: $white;
+    padding-bottom: 10px;
 
     img {
-      max-width: 80%;
-      max-height: 80%;
-      max-width: 100%;
-      max-height: 100%;
+      max-height: calc(100% - 40px);
+      max-width: 90%;
     }
 
-    a {
-      text-decoration: none;
-      color: $white;
+    .caption {
+      width: 100%;
+      text-align: center;
+
+      .second-row {
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+        .arrow {
+          height: 8px;
+          width: 8px;
+        }
+      }
     }
+  }
+
+  :global(.swiper) {
+    height: 100%;
   }
 </style>

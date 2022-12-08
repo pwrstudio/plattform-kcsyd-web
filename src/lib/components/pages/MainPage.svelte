@@ -82,20 +82,20 @@
 
     &.left {
       left: 0;
-      width: calc(50vw - 50px);
+      width: calc(50vw - 45px);
       background: $white;
       overflow-y: auto;
     }
 
     &.center {
-      left: calc(50vw - 50px);
-      width: 100px;
+      left: calc(50vw - 45px);
+      width: 90px;
       background: $grey;
     }
 
     &.right {
-      left: calc(50vw + 50px);
-      width: calc(50vw - 50px);
+      left: calc(50vw + 45px);
+      width: calc(50vw - 45px);
       display: flex;
       flex-direction: column;
     }
