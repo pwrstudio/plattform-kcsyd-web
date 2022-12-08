@@ -12,7 +12,12 @@
     {:else}
       <div>{@html renderBlockText(data.content_sve.content)}</div>
     {/if}
-    <div class="sidfot">SIDFOT</div>
+    <div class="sidfot">
+      <div class="text-logotyp">Plattform KcSyd</div>
+      <div class="tagline">
+        En konstnärsdriven plattform för offentlig konst i södra sverige
+      </div>
+    </div>
   </div>
 </div>
 
@@ -53,5 +58,27 @@
   :global(.page figure) {
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .sidfot {
+    margin-top: 40px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+    min-height: 200px;
+
+    .text-logotyp {
+      padding: 10px;
+      font-size: $FONT_SIZE_XLARGE;
+      line-height: 1em;
+      width: 50%;
+      border-right: 1px solid black;
+    }
+
+    .tagline {
+      padding: 10px;
+      font-size: $FONT_SIZE_LARGE;
+      width: 50%;
+    }
   }
 </style>

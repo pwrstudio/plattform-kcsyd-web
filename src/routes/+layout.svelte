@@ -32,8 +32,11 @@
 
   .menu-toggle {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 30px;
+    right: 15px;
     z-index: 1000;
+    height: 25px;
+    z-index: 1000;
+    cursor: pointer;
   }
 </style>

@@ -3,26 +3,21 @@
   data-name="Layer 2"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 28.82 28.82"
+  viewBox="0 0 22.01 42.96"
 >
   <defs>
     <clipPath id="clippath">
-      <rect class="cls-1" width="28.82" height="28.82" />
+      <rect class="cls-1" width="22.01" height="42.96" />
     </clipPath>
   </defs>
   <g id="Layer_1-2" data-name="Layer 1">
     <g class="cls-3">
-      <line class="cls-2" x1="28.55" y1=".27" x2=".27" y2="28.55" />
-      <line class="cls-2" x1="28.55" y1="28.55" x2=".27" y2=".27" />
+      <polyline class="cls-2" points="21.74 .27 .53 21.48 21.74 42.69" />
     </g>
   </g>
 </svg>
 
 <style>
-  svg {
-    height: 100%;
-  }
-
   .cls-1,
   .cls-2 {
     fill: none;
@@ -33,7 +28,7 @@
   }
 
   .cls-2 {
-    stroke: #231f20;
+    stroke: #fff;
     stroke-width: 0.75px;
   }
 </style>

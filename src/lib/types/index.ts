@@ -1,3 +1,9 @@
+export enum MainPageType {
+    Landing,
+    Listing,
+    Single
+}
+
 export enum Language {
     Swedish,
     English
@@ -52,6 +58,8 @@ export interface ArtistType {
         current: string
     }
 }
+
 export interface ArtistsType {
     [index: number]: ArtistType
 }
+

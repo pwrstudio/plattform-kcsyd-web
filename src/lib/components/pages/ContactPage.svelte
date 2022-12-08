@@ -3,16 +3,20 @@
   import { Language, type ContactPageType } from "$lib/types"
   export let language: Language
   export let data: ContactPageType
+
+  const infoText =
+    language === Language.English
+      ? data.info_eng.content
+      : data.info_sve.content
+  const content =
+    language === Language.English
+      ? data.content_eng.content
+      : data.content_sve.content
 </script>
 
 <div class="page">
-  {#if language === Language.English}
-    <div>{@html renderBlockText(data.info_eng.content)}</div>
-    <div>{@html renderBlockText(data.content_eng.content)}</div>
-  {:else}
-    <div>{@html renderBlockText(data.info_sve.content)}</div>
-    <div>{@html renderBlockText(data.content_sve.content)}</div>
-  {/if}
+  <div>{@html renderBlockText(infoText)}</div>
+  <div>{@html renderBlockText(content)}</div>
 </div>
 
 <style lang="scss">

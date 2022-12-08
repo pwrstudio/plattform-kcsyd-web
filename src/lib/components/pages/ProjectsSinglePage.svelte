@@ -4,20 +4,19 @@
   export let language: Language
   export let data: { project: ProjectType }
   const { project } = data
+  const title =
+    language === Language.English ? project.title_eng : project.title
+  const content =
+    language === Language.English
+      ? project.content_eng.content
+      : project.content_sve.content
 </script>
 
 <div class="page">
   <h1>{project.layout}</h1>
-  {#if language === Language.English}
-    <h1>{project.title_eng}</h1>
-    {#if project.content_eng}
-      <div>{@html renderBlockText(project.content_eng.content)}</div>
-    {/if}
-  {:else}
-    <h1>{project.title}</h1>
-    {#if project.content_sve}
-      <div>{@html renderBlockText(project.content_sve.content)}</div>
-    {/if}
+  <h1>{title}</h1>
+  {#if content}
+    <div>{@html renderBlockText(content)}</div>
   {/if}
 </div>
 

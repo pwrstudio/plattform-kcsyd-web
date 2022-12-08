@@ -1,7 +1,11 @@
 <script lang="ts">
-  import LandingPage from "$lib/components/pages/LandingPage.svelte"
-  import { Language } from "$lib/types/"
-  export let data
+  import MainPage from "$lib/components/pages/MainPage.svelte"
+  import { Language, MainPageType } from "$lib/types/"
+  export let data: any
 </script>
 
-<LandingPage {data} language={Language.English} />
+<MainPage
+  {data}
+  language={Language.English}
+  mainPageType={MainPageType.Landing}
+/>

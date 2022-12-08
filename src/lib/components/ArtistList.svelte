@@ -1,6 +1,9 @@
 <script lang="ts">
-  export let artists: any[]
-  export let title
+  import { type ArtistType, Language } from "$lib/types"
+  export let language: Language
+  export let artists: ArtistType[]
+  export let title: string
+  const urlPrefix = language === Language.English ? "/en/" : "/"
 </script>
 
 {#if artists.length > 0}
@@ -9,7 +12,11 @@
   </div>
 
   {#each artists as artist}
-    <a href={"konstnarer/" + artist.slug.current} class="item">
+    <a
+      href={urlPrefix + "konstnarer/" + artist.slug.current}
+      class="item"
+      data-sveltekit-preload-data
+    >
       {artist.konstnarer.join(", ")}
       <span class="nationality">[{artist.nationalitet}]</span>
     </a>

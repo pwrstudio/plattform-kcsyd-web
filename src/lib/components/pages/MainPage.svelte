@@ -1,11 +1,14 @@
 <script lang="ts">
+  import { onMount } from "svelte"
   import Marquee from "$lib/components/Marquee.svelte"
   import Slideshow from "$lib/components/Slideshow.svelte"
   import ArtistList from "$lib/components/ArtistList.svelte"
   import { renderBlockText, urlFor } from "$lib/modules/sanity"
-  import { Language } from "$lib/types"
+  import { Language, MainPageType } from "$lib/types"
+  export let mainPageType: MainPageType
   export let language: Language
   export let data
+
   const {
     omKcSyd,
     hemsideBild,
@@ -13,6 +16,17 @@
     konstnarerKommande,
     konstnarerTidigare,
   } = data
+
+  let artistsEl: HTMLElement
+
+  onMount(async () => {
+    if (
+      mainPageType === MainPageType.Listing ||
+      mainPageType === MainPageType.Single
+    ) {
+      artistsEl.scrollIntoView()
+    }
+  })
 </script>
 
 <!-- LEFT -->
@@ -20,15 +34,17 @@
   <div class="landing-page-image">
     <img src={urlFor(hemsideBild.mainImage).url()} alt="Plattform KcSyd" />
   </div>
-  <div class="artists">
-    {#if language == Language.English}
+  <div class="artists" bind:this={artistsEl}>
+    {#if mainPageType === MainPageType.Single}
+      <slot />
+    {:else if language == Language.English}
       <h2>Artists' profiles</h2>
-      <ArtistList artists={konstnarerKommande} title="Upcoming" />
-      <ArtistList artists={konstnarerTidigare} title="Previous" />
+      <ArtistList artists={konstnarerKommande} title="Upcoming" {language} />
+      <ArtistList artists={konstnarerTidigare} title="Previous" {language} />
     {:else}
       <h2>Konstnärsprofiler</h2>
-      <ArtistList artists={konstnarerKommande} title="Kommande" />
-      <ArtistList artists={konstnarerTidigare} title="Tidigare" />
+      <ArtistList artists={konstnarerKommande} title="Kommande" {language} />
+      <ArtistList artists={konstnarerTidigare} title="Tidigare" {language} />
     {/if}
   </div>
 </div>
@@ -52,7 +68,7 @@
   </div>
   <!-- BOTTOM -->
   <div class="row bottom">
-    <Slideshow projects={projektPagaende} />
+    <Slideshow projects={projektPagaende} {language} />
   </div>
 </div>
 

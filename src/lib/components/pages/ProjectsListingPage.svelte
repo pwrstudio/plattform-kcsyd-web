@@ -6,28 +6,25 @@
     projektArkivDokumentation: ProjectType[]
   }
   const { projektPagaende, projektArkivDokumentation } = data
+
+  const onGoingHeader = language === Language.English ? "Ongoing" : "Pågående"
+  const pastHeader =
+    language === Language.English
+      ? "Archive/documentation"
+      : "Arkiv/dokumentation"
+  const urlPrefix = language === Language.English ? "/en/" : "/"
 </script>
 
 <div class="page">
-  {#if language === Language.English}
-    <div>Ongoing</div>
-    {#each projektPagaende as project (project._id)}
-      <a href={"/en/projekt/" + project.slug.current}>{project.title}</a>
-    {/each}
-    <div>Archive/documentation</div>
-    {#each projektArkivDokumentation as project (project._id)}
-      <a href={"/en/projekt/" + project.slug.current}>{project.title}</a>
-    {/each}
-  {:else}
-    <div>Pågående</div>
-    {#each projektPagaende as project (project._id)}
-      <a href={"/projekt/" + project.slug.current}>{project.title}</a>
-    {/each}
-    <div>Arkiv/dokumentation</div>
-    {#each projektArkivDokumentation as project (project._id)}
-      <a href={"/projekt/" + project.slug.current}>{project.title}</a>
-    {/each}
-  {/if}
+  <div>{onGoingHeader}</div>
+  {#each projektPagaende as project (project._id)}
+    <a href={urlPrefix + "projekt/" + project.slug.current}>{project.title}</a>
+  {/each}
+  <div />
+  <div>{pastHeader}</div>
+  {#each projektArkivDokumentation as project (project._id)}
+    <a href={urlPrefix + "projekt/" + project.slug.current}>{project.title}</a>
+  {/each}
 </div>
 
 <style lang="scss">
