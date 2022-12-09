@@ -1,13 +1,22 @@
 <script lang="ts">
+  import Splash from "./Splash.svelte"
   import { navigating, page } from "$app/stores"
   import { languageStore, UIColorStore } from "$lib/stores"
   import { Language, UIColor } from "$lib/types"
   import { fade } from "svelte/transition"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
+  export let splash: any
+
+  console.log(splash)
 
   const closeMenu = () => {
     dispatch("close")
+  }
+
+  let splashOpen = true
+  const closeSplash = () => {
+    splashOpen = false
   }
 
   $: console.log($navigating)
@@ -73,6 +82,10 @@
   $: activeMenuItems =
     $languageStore === Language.English ? menuItems.eng : menuItems.sve
 </script>
+
+{#if splash.mainImage && splashOpen}
+  <Splash {splash} on:close={closeSplash} />
+{/if}
 
 <div class="menu" transition:fade>
   <div class="language-switch">

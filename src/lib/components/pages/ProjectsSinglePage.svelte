@@ -72,36 +72,38 @@
   <div class="inner">
     <div class="top-bar">{timeCategoryHeader()}</div>
 
-    {#if project.layout === "alt2"}
-      <div class="hero">
-        <img
-          src={urlFor(project.mainImage).saturation(-100).url()}
-          alt={title}
-        />
-      </div>
-    {/if}
-
-    <div class="column left">
-      {#if project.layout === "alt1"}
-        {#if project.bildspel && project.bildspel.length > 0}
-          <SingleProjectSlideshow slides={project.bildspel} {language} />
-        {:else}
-          <SingleProjectImage {project} {language} />
-        {/if}
-      {/if}
-
-      {#if project.layout === "alt3"}
-        <div class="category">{category}</div>
-        <div class="rubrik-text">
-          {Language.English ? project.rubriktext_eng : project.rubriktext_sve}
+    <div class="content" class:double={project.layout === "alt2"}>
+      {#if project.layout === "alt2"}
+        <div class="hero">
+          <img
+            src={urlFor(project.mainImage).saturation(-100).url()}
+            alt={title}
+          />
         </div>
       {/if}
-    </div>
 
-    <div class="column right">
-      <div class="category">{category}</div>
-      <h1>{title}</h1>
-      <div>{@html renderBlockText(content)}</div>
+      <div class="column left">
+        {#if project.layout === "alt1" || project.layout === "alt2"}
+          {#if project.bildspel && project.bildspel.length > 0}
+            <SingleProjectSlideshow slides={project.bildspel} {language} />
+          {:else}
+            <SingleProjectImage {project} {language} />
+          {/if}
+        {/if}
+
+        {#if project.layout === "alt3"}
+          <div class="category">{category}</div>
+          <div class="rubrik-text">
+            {Language.English ? project.rubriktext_eng : project.rubriktext_sve}
+          </div>
+        {/if}
+      </div>
+
+      <div class="column right">
+        <div class="category">{category}</div>
+        <h1>{title}</h1>
+        <div>{@html renderBlockText(content)}</div>
+      </div>
     </div>
   </div>
 </div>
@@ -159,57 +161,62 @@
         border-bottom: 1px solid $white;
         font-family: $ATLAS_STACK;
         font-size: $FONT_SIZE_MEDIUM;
-        margin-bottom: 10px;
         text-transform: uppercase;
       }
 
-      .hero {
-        width: 100%;
+      .content {
         height: calc(100vh - 70px);
-        background: red;
+        overflow-y: auto;
 
-        img {
+        .hero {
+          padding-top: 10px;
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
+          height: calc(100vh - 70px);
 
-      .column {
-        width: 50%;
-        float: left;
-        height: calc(100vh - 70px);
-
-        @include screen-size("small") {
-          height: auto;
-          width: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
 
-        &.left {
-          border-right: 1px solid $white;
+        .column {
+          width: 50%;
+          float: left;
+          height: calc(100vh - 70px);
+          margin-top: 10px;
 
           @include screen-size("small") {
-            border-right: unset;
-            border-bottom: 1px solid $white;
+            height: auto;
+            width: 100%;
           }
 
-          .category {
+          &.left {
+            border-right: 1px solid $white;
+
+            @include screen-size("small") {
+              border-right: unset;
+              border-bottom: 1px solid $white;
+            }
+
+            .category {
+              font-size: $FONT_SIZE_MEDIUM;
+            }
+
+            .rubrik-text {
+              font-family: $BARBARA_STACK;
+              font-size: $FONT_SIZE_XLARGE;
+            }
+          }
+
+          &.right {
             font-size: $FONT_SIZE_MEDIUM;
-          }
+            padding: 10px;
+            overflow-y: auto;
 
-          .rubrik-text {
-            font-family: $BARBARA_STACK;
-            font-size: $FONT_SIZE_XLARGE;
-          }
-        }
-
-        &.right {
-          font-size: $FONT_SIZE_MEDIUM;
-          padding: 10px;
-          overflow-y: auto;
-
-          .category {
-            font-size: $FONT_SIZE_SMALL;
+            .category {
+              font-size: $FONT_SIZE_SMALL;
+            }
           }
         }
       }

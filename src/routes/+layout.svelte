@@ -29,7 +29,7 @@
 </div>
 
 {#if menuActive}
-  <Menu on:close={toggleMenu} />
+  <Menu on:close={toggleMenu} {splash} />
 {/if}
 
 <slot />
