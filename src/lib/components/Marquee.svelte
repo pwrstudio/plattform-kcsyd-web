@@ -26,7 +26,7 @@
     user-select: none;
     font-family: $ATLAS_STACK;
     width: 100vh;
-    height: 70px;
+    height: 90px;
     // background: red;
     transform-origin: bottom left;
     transform: translateY(-90px) rotateZ(90deg);
@@ -38,6 +38,7 @@
 
     @include screen-size("small") {
       transform: unset;
+      height: 70px;
     }
 
     .marquee-inner {
