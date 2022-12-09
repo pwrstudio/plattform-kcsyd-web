@@ -17,7 +17,9 @@
   </g>
 </svg>
 
-<style>
+<style lang="scss">
+  @import "src/lib/style/variables.scss";
+
   .cls-1,
   .cls-2 {
     fill: none;
@@ -28,7 +30,7 @@
   }
 
   .cls-2 {
-    stroke: #fff;
+    stroke: $white;
     stroke-width: 0.75px;
   }
 </style>

@@ -12,8 +12,10 @@
   </g>
 </svg>
 
-<style>
+<style lang="scss">
+  @import "src/lib/style/variables.scss";
+
   .cls-1 {
-    fill: #fff;
+    fill: $white;
   }
 </style>

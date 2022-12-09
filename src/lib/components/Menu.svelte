@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { languageStore } from "$lib/stores"
-  import { Language } from "$lib/types"
+  import { navigating, page } from "$app/stores"
+  import { languageStore, UIColorStore } from "$lib/stores"
+  import { Language, UIColor } from "$lib/types"
   import { fade } from "svelte/transition"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
@@ -8,6 +9,8 @@
   const closeMenu = () => {
     dispatch("close")
   }
+
+  UIColorStore.set(UIColor.Black)
 
   interface MenuItem {
     title: string

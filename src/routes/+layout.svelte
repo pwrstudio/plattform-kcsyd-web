@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { UIColorStore } from "$lib/stores"
   import Menu from "$lib/components/Menu.svelte"
   import X from "$lib/graphics/X.svelte"
   import Hamburger from "$lib/graphics/Hamburger.svelte"
+  import { UIColor } from "$lib/types"
 
   export let data
   const { splash } = data
@@ -15,9 +17,9 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="menu-toggle" on:click={toggleMenu}>
   {#if menuActive}
-    <X />
+    <X white={$UIColorStore === UIColor.White} />
   {:else}
-    <Hamburger />
+    <Hamburger white={$UIColorStore === UIColor.White} />
   {/if}
 </div>
 

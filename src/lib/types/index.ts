@@ -9,6 +9,11 @@ export enum Language {
     English
 }
 
+export enum UIColor {
+    Black,
+    White
+}
+
 export interface AboutPageType {
     title: string
     title_eng: string

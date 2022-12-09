@@ -1,5 +1,10 @@
+<script lang="ts">
+  export let white = false
+</script>
+
 <svg
   id="Layer_2"
+  class:white
   data-name="Layer 2"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -18,7 +23,9 @@
   </g>
 </svg>
 
-<style>
+<style lang="scss">
+  @import "src/lib/style/variables.scss";
+
   svg {
     height: 100%;
   }
@@ -33,7 +40,13 @@
   }
 
   .cls-2 {
-    stroke: #231f20;
+    stroke: $black;
     stroke-width: 0.75px;
+  }
+
+  .white {
+    .cls-2 {
+      stroke: $white;
+    }
   }
 </style>
