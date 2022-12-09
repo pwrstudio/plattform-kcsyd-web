@@ -10,6 +10,8 @@
     dispatch("close")
   }
 
+  $: console.log($navigating)
+
   UIColorStore.set(UIColor.Black)
 
   interface MenuItem {

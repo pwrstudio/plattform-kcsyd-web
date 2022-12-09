@@ -43,6 +43,10 @@
     <div class="section">
       <div class="section-header">{pastHeader}</div>
       {#each projektArkivDokumentation as project (project._id)}
+        {@const category =
+          language === Language.English
+            ? project.kategori_eng
+            : project.kategori_sve}
         <a class="project" href={urlPrefix + "projekt/" + project.slug.current}>
           <div class="image">
             <img
@@ -54,6 +58,7 @@
               alt={project.title}
             />
           </div>
+          <div class="category">{category}</div>
           <div class="title">{project.title}</div>
         </a>
       {/each}
@@ -93,7 +98,7 @@
           border-bottom: 1px solid white;
           width: 100%;
           padding: 10px;
-          margin-bottom: 10px;
+          margin-bottom: 20px;
           text-transform: uppercase;
         }
 
@@ -106,8 +111,15 @@
           display: block;
           float: left;
           height: 360px;
+          margin-bottom: 20px;
+
+          .category {
+            font-size: $FONT_SIZE_SMALL;
+            margin-bottom: 5px;
+          }
 
           .image {
+            margin-bottom: 10px;
             img {
               max-width: 100%;
             }

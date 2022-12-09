@@ -12,6 +12,8 @@
     language === Language.English
       ? project.content_eng.content
       : project.content_sve.content
+  const category =
+    language === Language.English ? project.kategori_eng : project.kategori_sve
 </script>
 
 <div class="page">
@@ -28,6 +30,7 @@
       {/if}
 
       {#if project.layout === "alt3"}
+        <div class="category">{category}</div>
         <div class="rubrik-text">
           {Language.English ? project.rubriktext_eng : project.rubriktext_sve}
         </div>
@@ -35,7 +38,7 @@
     </div>
 
     <div class="column right">
-      <h1>{project.layout}</h1>
+      <div class="category">{category}</div>
       <h1>{title}</h1>
       <div>{@html renderBlockText(content)}</div>
     </div>
@@ -81,6 +84,10 @@
         &.left {
           border-right: 1px solid $white;
 
+          .category {
+            font-size: $FONT_SIZE_MEDIUM;
+          }
+
           .rubrik-text {
             font-family: $BARBARA_STACK;
             font-size: $FONT_SIZE_XLARGE;
@@ -91,6 +98,10 @@
           font-size: $FONT_SIZE_MEDIUM;
           padding: 10px;
           overflow-y: auto;
+
+          .category {
+            font-size: $FONT_SIZE_SMALL;
+          }
         }
       }
     }
