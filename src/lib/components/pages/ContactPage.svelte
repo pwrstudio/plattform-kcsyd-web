@@ -52,6 +52,10 @@
     font-size: $FONT_SIZE_LARGE;
     padding-bottom: 5em;
 
+    @include screen-size("small") {
+      overflow-y: auto;
+    }
+
     .inner {
       width: 1020px;
       max-width: 90vw;
@@ -72,6 +76,11 @@
         width: 50%;
         float: left;
         height: calc(100vh - 70px);
+
+        @include screen-size("small") {
+          width: 100%;
+          height: auto;
+        }
 
         &.left {
           border-right: 1px solid black;

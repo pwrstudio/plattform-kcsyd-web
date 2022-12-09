@@ -40,6 +40,7 @@
       width: 50ch;
       margin-left: auto;
       margin-right: auto;
+      max-width: 90vw;
     }
   }
 
@@ -73,18 +74,32 @@
     display: flex;
     min-height: 200px;
 
+    @include screen-size("small") {
+      flex-wrap: wrap;
+    }
+
     .text-logotyp {
       padding: 10px;
       font-size: $FONT_SIZE_XLARGE;
       line-height: 1em;
       width: 50%;
       border-right: 1px solid black;
+
+      @include screen-size("small") {
+        width: 100%;
+        border-right: unset;
+        border-bottom: 1px solid black;
+      }
     }
 
     .tagline {
       padding: 10px;
       font-size: $FONT_SIZE_LARGE;
       width: 50%;
+
+      @include screen-size("small") {
+        width: 100%;
+      }
     }
   }
 </style>

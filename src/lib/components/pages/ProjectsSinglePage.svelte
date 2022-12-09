@@ -121,6 +121,10 @@
     font-size: $FONT_SIZE_LARGE;
     padding-bottom: 5em;
 
+    @include screen-size("small") {
+      overflow-y: auto;
+    }
+
     .page-navigation {
       width: 40px;
       height: 40px;
@@ -128,6 +132,10 @@
       top: 50%;
       transform: translateY(-50%);
       display: block;
+
+      @include screen-size("small") {
+        display: none;
+      }
 
       &.next {
         right: 10px;
@@ -172,8 +180,18 @@
         float: left;
         height: calc(100vh - 70px);
 
+        @include screen-size("small") {
+          height: auto;
+          width: 100%;
+        }
+
         &.left {
           border-right: 1px solid $white;
+
+          @include screen-size("small") {
+            border-right: unset;
+            border-bottom: 1px solid $white;
+          }
 
           .category {
             font-size: $FONT_SIZE_MEDIUM;

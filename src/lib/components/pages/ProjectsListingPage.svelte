@@ -113,6 +113,11 @@
           height: 360px;
           margin-bottom: 20px;
 
+          @include screen-size("small") {
+            width: 50%;
+            height: 260px;
+          }
+
           // &:nth-child(3) {
           //   border-right: 1px solid black;
           // }

@@ -136,6 +136,11 @@
     align-items: center;
     z-index: 100;
 
+    @include screen-size("small") {
+      top: 70px;
+      height: calc(100vh - 70px);
+    }
+
     .inner {
       width: 80vw;
       a {
@@ -146,6 +151,10 @@
         text-decoration: none;
         border-bottom: 1px solid black;
         padding: 10px 0;
+
+        @include screen-size("small") {
+          font-size: $FONT_SIZE_LARGE;
+        }
       }
     }
   }

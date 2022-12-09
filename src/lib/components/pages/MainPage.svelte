@@ -29,6 +29,24 @@
   })
 </script>
 
+<!-- RIGHT -->
+<div class="column right">
+  <!-- TOP -->
+  <div class="row top">
+    {#if language == Language.English}
+      {@html renderBlockText(omKcSyd.intro_eng?.content)}
+      <a href="/en/om-plattform-kcsyd" data-sveltekit-preload-data>Read more</a>
+    {:else}
+      {@html renderBlockText(omKcSyd.intro_sve?.content)}
+      <a href="/om-plattform-kcsyd" data-sveltekit-preload-data>Läs mer</a>
+    {/if}
+  </div>
+  <!-- BOTTOM -->
+  <div class="row bottom">
+    <Slideshow projects={projektPagaende} {language} />
+  </div>
+</div>
+
 <!-- LEFT -->
 <div class="column left">
   <div class="landing-page-image">
@@ -54,24 +72,6 @@
   <Marquee />
 </div>
 
-<!-- RIGHT -->
-<div class="column right">
-  <!-- TOP -->
-  <div class="row top">
-    {#if language == Language.English}
-      {@html renderBlockText(omKcSyd.intro_eng?.content)}
-      <a href="/en/om-plattform-kcsyd" data-sveltekit-preload-data>Read more</a>
-    {:else}
-      {@html renderBlockText(omKcSyd.intro_sve?.content)}
-      <a href="/om-plattform-kcsyd" data-sveltekit-preload-data>Läs mer</a>
-    {/if}
-  </div>
-  <!-- BOTTOM -->
-  <div class="row bottom">
-    <Slideshow projects={projektPagaende} {language} />
-  </div>
-</div>
-
 <style lang="scss">
   @import "src/lib/style/variables.scss";
 
@@ -80,17 +80,36 @@
     position: fixed;
     top: 0;
 
+    @include screen-size("small") {
+      height: auto;
+      position: static;
+    }
+
     &.left {
       left: 0;
       width: calc(50vw - 45px);
       background: $white;
       overflow-y: auto;
+
+      @include screen-size("small") {
+        left: unset;
+        width: 100%;
+      }
     }
 
     &.center {
       left: calc(50vw - 45px);
       width: 90px;
       background: $grey;
+
+      @include screen-size("small") {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 70px;
+        z-index: 100;
+      }
     }
 
     &.right {
@@ -98,6 +117,11 @@
       width: calc(50vw - 45px);
       display: flex;
       flex-direction: column;
+
+      @include screen-size("small") {
+        left: unset;
+        width: 100%;
+      }
     }
   }
 
@@ -131,6 +155,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    @include screen-size("small") {
+      display: none;
     }
   }
 

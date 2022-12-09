@@ -26,7 +26,7 @@
     user-select: none;
     font-family: $ATLAS_STACK;
     width: 100vh;
-    height: 90px;
+    height: 70px;
     // background: red;
     transform-origin: bottom left;
     transform: translateY(-90px) rotateZ(90deg);
@@ -36,19 +36,19 @@
     --move-initial: -50%;
     --move-final: 0;
 
+    @include screen-size("small") {
+      transform: unset;
+    }
+
     .marquee-inner {
       width: fit-content;
       display: flex;
       position: relative;
-      //   transform: translate3d(var(--move-initial), 0, 0);
       animation: marquee 10s linear infinite;
       animation-play-state: running;
       justify-content: center;
       align-items: center;
-      //   background: blue;
       height: 100%;
-
-      //   transform: translate3d(var(--move-initial), 0, 0);
 
       .marquee-content {
         min-width: 100vh;
@@ -66,6 +66,10 @@
           border-top: 1px solid black;
           border-bottom: 1px solid black;
           white-space: nowrap;
+
+          @include screen-size("small") {
+            padding: 10px;
+          }
         }
       }
     }

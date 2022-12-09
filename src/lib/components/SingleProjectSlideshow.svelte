@@ -48,11 +48,17 @@
     padding-left: 10px;
     padding-right: 10px;
 
+    @include screen-size("small") {
+      height: auto;
+      padding-bottom: 10px;
+    }
+
     img {
       max-width: 100%;
     }
 
     .caption {
+      margin-top: 20px;
       width: 100%;
       text-align: center;
       padding: 0 10px;
