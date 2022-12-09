@@ -6,33 +6,26 @@
   import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
   export let language: Language
-  export let projects: any[]
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  export let slides: any[]
 </script>
 
 <Swiper spaceBetween={50} slidesPerView={1} loop={true}>
-  {#each projects as project}
+  {#each slides as slide}
+    {@const caption =
+      (language === Language.English
+        ? slide.bildtext_eng
+        : slide.bildtext_sve) || ""}
     <SwiperSlide>
-      <a
-        class="inner"
-        href={urlPrefix + "projekt/" + project.slug.current}
-        data-sveltekit-preload-data
-      >
-        <img
-          src={urlFor(project.mainImage).saturation(-100).url()}
-          alt={project.title}
-        />
-        <div class="caption">
-          <div class="first-row">PÅGÅENDE PROJEKT</div>
-          <div class="second-row">
-            <div class="arrow"><SmallArrowLeft /></div>
-            <div>
-              {project.title}
-            </div>
-            <div class="arrow"><SmallArrowRight /></div>
-          </div>
+      <div class="inner">
+        <div class="image">
+          <img src={urlFor(slide).saturation(-100).url()} alt={caption} />
         </div>
-      </a>
+        <div class="caption">
+          <div class="arrow"><SmallArrowLeft /></div>
+          <div>{caption}</div>
+          <div class="arrow"><SmallArrowRight /></div>
+        </div>
+      </div>
     </SwiperSlide>
   {/each}
 </Swiper>
@@ -42,7 +35,7 @@
 
   .inner {
     width: 100%;
-    height: 45vh;
+    height: calc(100% - 20px);
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_SMALL;
     display: flex;
@@ -52,24 +45,22 @@
     text-decoration: none;
     color: $white;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     img {
-      max-height: calc(100% - 40px);
-      max-width: 90%;
+      max-width: 100%;
     }
 
     .caption {
       width: 100%;
       text-align: center;
-
-      .second-row {
-        padding: 0 10px;
-        display: flex;
-        justify-content: space-between;
-        .arrow {
-          height: 8px;
-          width: 8px;
-        }
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+      .arrow {
+        height: 8px;
+        width: 8px;
       }
     }
   }

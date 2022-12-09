@@ -59,7 +59,7 @@
   <!-- TOP -->
   <div class="row top">
     {#if language == Language.English}
-      {@html renderBlockText(omKcSyd.introt_eng?.content)}
+      {@html renderBlockText(omKcSyd.intro_eng?.content)}
       <a href="/en/om-plattform-kcsyd" data-sveltekit-preload-data>Read more</a>
     {:else}
       {@html renderBlockText(omKcSyd.intro_sve?.content)}

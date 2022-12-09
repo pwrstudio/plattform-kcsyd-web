@@ -1,4 +1,6 @@
 <script lang="ts">
+  import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
+  import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
   import { renderBlockText } from "$lib/modules/sanity.js"
   import { Language, type ProjectType } from "$lib/types"
   export let language: Language
@@ -16,11 +18,24 @@
   <div class="inner">
     <div class="top-bar">ARKIV / DOKUMENTATION*</div>
 
-    <div class="column left">LEFT</div>
+    <div class="column left">
+      {#if project.layout === "alt1"}
+        {#if project.bildspel && project.bildspel.length > 0}
+          <SingleProjectSlideshow slides={project.bildspel} {language} />
+        {:else}
+          <SingleProjectImage {project} {language} />
+        {/if}
+      {/if}
+
+      {#if project.layout === "alt3"}
+        <div class="rubrik-text">
+          {Language.English ? project.rubriktext_eng : project.rubriktext_sve}
+        </div>
+      {/if}
+    </div>
 
     <div class="column right">
       <h1>{project.layout}</h1>
-
       <h1>{title}</h1>
       <div>{@html renderBlockText(content)}</div>
     </div>
@@ -65,34 +80,10 @@
 
         &.left {
           border-right: 1px solid $white;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
 
-          .top {
-            border-left: 1px solid $black;
-            padding: 10px;
-            .logo {
-              font-size: $FONT_SIZE_XLARGE;
-              line-height: 1em;
-              padding-bottom: 10px;
-              border-bottom: 1px solid $black;
-            }
-            .tagline {
-              padding: 10px;
-            }
-          }
-
-          .bottom {
-            .info-text {
-              font-family: $ATLAS_STACK;
-              font-size: $FONT_SIZE_MEDIUM;
-            }
-            .logos {
-              height: 60px;
-              border-top: 1px solid $black;
-              border-bottom: 1px solid $black;
-            }
+          .rubrik-text {
+            font-family: $BARBARA_STACK;
+            font-size: $FONT_SIZE_XLARGE;
           }
         }
 
@@ -107,5 +98,9 @@
 
   :global(h1) {
     font-size: $FONT_SIZE_MEDIUM;
+  }
+
+  :global(.column a) {
+    color: inherit;
   }
 </style>

@@ -13,7 +13,7 @@ export interface AboutPageType {
     title: string
     title_eng: string
     intro_sve: any
-    introt_eng: any
+    intro_eng: any
     content_sve: any
     content_eng: any
 }
@@ -35,6 +35,8 @@ export interface ProjectType {
     tidskategori: string
     kategori_sve: string
     kategori_eng: string
+    rubriktext_sve: string
+    rubriktext_eng: string
     mainImage: any
     slug: {
         type: "slug"
