@@ -113,6 +113,10 @@
           height: 360px;
           margin-bottom: 20px;
 
+          // &:nth-child(3) {
+          //   border-right: 1px solid black;
+          // }
+
           .category {
             font-size: $FONT_SIZE_SMALL;
             margin-bottom: 5px;

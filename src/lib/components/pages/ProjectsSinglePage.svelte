@@ -1,24 +1,85 @@
 <script lang="ts">
+  import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
+  import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
   import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
-  import { renderBlockText } from "$lib/modules/sanity.js"
+  import { renderBlockText, urlFor } from "$lib/modules/sanity.js"
   import { Language, type ProjectType } from "$lib/types"
   export let language: Language
-  export let data: { project: ProjectType }
-  const { project } = data
+  export let data: { project: ProjectType; projectList: ProjectType[] }
+  const { project, projectList } = data
+
   const title =
     language === Language.English ? project.title_eng : project.title
+
   const content =
     language === Language.English
       ? project.content_eng.content
       : project.content_sve.content
+
   const category =
     language === Language.English ? project.kategori_eng : project.kategori_sve
+
+  const urlPrefix = language === Language.English ? "/en/" : "/"
+
+  const timeCategoryHeader = () => {
+    if (language === Language.English) {
+      if (project.tidskategori === "pagaende-projekt") return "Ongoing project"
+      return "Archive/documentation*"
+    }
+    if (language === Language.Swedish) {
+      if (project.tidskategori === "pagaende-projekt") return "Pågående projekt"
+      return "Arkiv/dokumentation*"
+    }
+  }
+
+  const projectIndex = projectList.findIndex(
+    (p: ProjectType) => p._id === project._id
+  )
+
+  let prevProjectLink =
+    urlPrefix +
+    "projekt/" +
+    (projectIndex === 0
+      ? projectList[projectList.length - 1].slug.current
+      : projectList[projectIndex - 1].slug.current)
+
+  let nextProjectLink =
+    urlPrefix +
+    "projekt/" +
+    (projectIndex === projectList.length - 1
+      ? projectList[0].slug.current
+      : projectList[projectIndex + 1].slug.current)
 </script>
 
 <div class="page">
+  <a
+    href={prevProjectLink}
+    class="page-navigation prev"
+    data-sveltekit-preload-data
+    data-sveltekit-reload
+  >
+    <LargeArrowLeft />
+  </a>
+  <a
+    href={nextProjectLink}
+    class="page-navigation next"
+    data-sveltekit-preload-data
+    data-sveltekit-reload
+  >
+    <LargeArrowRight />
+  </a>
   <div class="inner">
-    <div class="top-bar">ARKIV / DOKUMENTATION*</div>
+    <div class="top-bar">{timeCategoryHeader()}</div>
+
+    {#if project.layout === "alt2"}
+      <div class="hero">
+        <img
+          src={urlFor(project.mainImage).saturation(-100).url()}
+          alt={title}
+        />
+      </div>
+    {/if}
 
     <div class="column left">
       {#if project.layout === "alt1"}
@@ -60,6 +121,23 @@
     font-size: $FONT_SIZE_LARGE;
     padding-bottom: 5em;
 
+    .page-navigation {
+      width: 40px;
+      height: 40px;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+
+      &.next {
+        right: 10px;
+      }
+
+      &.prev {
+        left: 10px;
+      }
+    }
+
     .inner {
       width: 1020px;
       max-width: 90vw;
@@ -74,6 +152,19 @@
         font-family: $ATLAS_STACK;
         font-size: $FONT_SIZE_MEDIUM;
         margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: red;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
       .column {
