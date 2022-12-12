@@ -27,7 +27,7 @@
   @import "src/lib/style/variables.scss";
 
   .item {
-    padding-top: 20px;
+    padding-top: 15px;
     padding-bottom: 20px;
     border-bottom: 1px solid $black;
     width: 100%;
@@ -39,6 +39,9 @@
 
     &.header {
       font-size: $FONT_SIZE_MEDIUM;
+      text-transform: uppercase;
+      padding-top: 35px;
+      padding-bottom: 10px;
     }
 
     .nationality {
@@ -46,5 +49,12 @@
       top: -10px;
       font-size: $FONT_SIZE_MEDIUM;
     }
+
+    // &:hover {
+    //   &.header {
+    //     background: transparent;
+    //   }
+    //   background: $grey;
+    // }
   }
 </style>

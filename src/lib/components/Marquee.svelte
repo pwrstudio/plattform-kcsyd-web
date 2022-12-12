@@ -16,6 +16,22 @@
       </div>
       <div class="divider" />
     </div>
+    <div class="marquee-content">
+      <div class="text-section">Plattform KcSyd</div>
+      <div class="divider" />
+      <div class="text-section">
+        En konstnärsdriven plattform för offentlig konst i södra sverige
+      </div>
+      <div class="divider" />
+    </div>
+    <div class="marquee-content">
+      <div class="text-section">Plattform KcSyd</div>
+      <div class="divider" />
+      <div class="text-section">
+        En konstnärsdriven plattform för offentlig konst i södra sverige
+      </div>
+      <div class="divider" />
+    </div>
   </div>
 </div>
 
@@ -26,8 +42,7 @@
     user-select: none;
     font-family: $ATLAS_STACK;
     width: 100vh;
-    height: 90px;
-    // background: red;
+    height: 94px;
     transform-origin: bottom left;
     transform: translateY(-90px) rotateZ(90deg);
     position: relative;
@@ -45,14 +60,17 @@
       width: fit-content;
       display: flex;
       position: relative;
-      animation: marquee 10s linear infinite;
+      animation: marquee 20s linear infinite;
       animation-play-state: running;
       justify-content: center;
       align-items: center;
       height: 100%;
 
+      &:hover {
+        animation-play-state: paused;
+      }
+
       .marquee-content {
-        min-width: 100vh;
         display: flex;
 
         .divider {

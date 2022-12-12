@@ -15,7 +15,9 @@
     <div class="sidfot">
       <div class="text-logotyp">Plattform KcSyd</div>
       <div class="tagline">
-        En konstnärsdriven plattform för offentlig konst i södra sverige
+        <div>
+          En konstnärsdriven plattform för offentlig konst i södra Sverige
+        </div>
       </div>
     </div>
   </div>
@@ -32,12 +34,12 @@
     width: 100vw;
     height: 100vh;
     overflow-y: auto;
-    padding: 20px;
+    padding-top: 35px;
     font-family: $BARBARA_STACK;
     font-size: $FONT_SIZE_LARGE;
 
     .inner {
-      width: 50ch;
+      width: 720px;
       margin-left: auto;
       margin-right: auto;
       max-width: 90vw;
@@ -51,14 +53,20 @@
   :global(.page .small) {
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_MEDIUM;
-    margin-left: 40px;
+    margin-left: 35px;
+  }
+
+  :global(.page h2:first-child) {
+    margin-top: 0;
   }
 
   :global(.page h2) {
     font-size: $FONT_SIZE_LARGE;
+    margin-top: 2em;
   }
 
   :global(.page img) {
+    margin-top: 10px;
     width: 100%;
   }
 
@@ -73,13 +81,14 @@
     border-bottom: 1px solid black;
     display: flex;
     min-height: 200px;
+    margin-bottom: 35px;
 
     @include screen-size("small") {
       flex-wrap: wrap;
     }
 
     .text-logotyp {
-      padding: 10px;
+      margin: 15px;
       font-size: $FONT_SIZE_XLARGE;
       line-height: 1em;
       width: 50%;
@@ -93,9 +102,12 @@
     }
 
     .tagline {
-      padding: 10px;
-      font-size: $FONT_SIZE_LARGE;
+      margin: 15px;
+      font-size: $FONT_SIZE_SEMI_EXTRA;
       width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       @include screen-size("small") {
         width: 100%;

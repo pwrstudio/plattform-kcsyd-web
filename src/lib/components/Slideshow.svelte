@@ -15,7 +15,7 @@
     <SwiperSlide>
       <a
         class="inner"
-        href={urlPrefix + "projekt/" + project.slug.current}
+        href={urlPrefix + "projekt/"}
         data-sveltekit-preload-data
       >
         <img
@@ -42,7 +42,7 @@
 
   .inner {
     width: 100%;
-    height: 45vh;
+    height: calc(50vh - 70px);
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_SMALL;
     display: flex;
@@ -51,24 +51,25 @@
     align-items: center;
     text-decoration: none;
     color: $white;
-    padding-bottom: 10px;
 
     img {
       max-height: calc(100% - 40px);
       max-width: 90%;
+      user-select: none;
     }
 
     .caption {
       width: 100%;
       text-align: center;
+      user-select: none;
 
       .second-row {
         padding: 0 10px;
         display: flex;
         justify-content: space-between;
         .arrow {
-          height: 8px;
-          width: 8px;
+          height: 7px;
+          width: 7px;
         }
       }
     }

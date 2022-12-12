@@ -20,7 +20,7 @@
 </div>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="menu-toggle" on:click={toggleMenu}>
+<div class="menu-toggle" class:x={menuActive} on:click={toggleMenu}>
   {#if menuActive}
     <X white={$UIColorStore === UIColor.White} />
   {:else}
@@ -42,9 +42,13 @@
     top: 30px;
     right: 15px;
     z-index: 1000;
-    height: 25px;
     z-index: 1000;
     cursor: pointer;
+
+    &.x {
+      top: 25px;
+      right: 20px;
+    }
 
     @include screen-size("small") {
       top: 80px;

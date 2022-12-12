@@ -3,12 +3,13 @@
   import Marquee from "$lib/components/Marquee.svelte"
   import Slideshow from "$lib/components/Slideshow.svelte"
   import ArtistList from "$lib/components/ArtistList.svelte"
+  import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
   import { renderBlockText, urlFor } from "$lib/modules/sanity"
   import { Language, MainPageType } from "$lib/types"
+
   export let mainPageType: MainPageType
   export let language: Language
   export let data
-
   const {
     omKcSyd,
     hemsideBild,
@@ -18,6 +19,10 @@
   } = data
 
   let artistsEl: HTMLElement
+
+  function scrollDown() {
+    artistsEl.scrollIntoView({ behavior: "smooth" })
+  }
 
   onMount(async () => {
     if (
@@ -49,8 +54,11 @@
 
 <!-- LEFT -->
 <div class="column left">
-  <div class="landing-page-image">
+  <div class="landing-page-image" on:click={scrollDown}>
     <img src={urlFor(hemsideBild.mainImage).url()} alt="Plattform KcSyd" />
+    <div class="arrow-down">
+      <LargeArrowDown />
+    </div>
   </div>
   <div class="artists" bind:this={artistsEl}>
     {#if mainPageType === MainPageType.Single}
@@ -87,7 +95,7 @@
 
     &.left {
       left: 0;
-      width: calc(50vw - 45px);
+      width: calc(50vw - 47px);
       background: $white;
       overflow-y: auto;
 
@@ -98,8 +106,8 @@
     }
 
     &.center {
-      left: calc(50vw - 45px);
-      width: 90px;
+      left: calc(50vw - 47px);
+      width: 94px;
       background: $grey;
 
       @include screen-size("small") {
@@ -113,8 +121,8 @@
     }
 
     &.right {
-      left: calc(50vw + 45px);
-      width: calc(50vw - 45px);
+      left: calc(50vw + 47px);
+      width: calc(50vw - 47px);
       display: flex;
       flex-direction: column;
 
@@ -128,17 +136,22 @@
   .row {
     width: 100%;
     height: 50%;
-    padding: 20px;
+    padding: 35px;
 
     &.top {
       background: $lime;
       font-family: $BARBARA_STACK;
       font-size: $FONT_SIZE_LARGE;
+      overflow-y: auto;
 
       a {
         color: inherit;
         text-decoration: none;
         border-bottom: 3px dotted black;
+
+        &:hover {
+          border-bottom: 3px dotted transparent;
+        }
       }
     }
 
@@ -150,6 +163,8 @@
   .landing-page-image {
     width: 100%;
     height: 100vh;
+    position: realtive;
+    cursor: pointer;
 
     img {
       width: 100%;
@@ -160,19 +175,38 @@
     @include screen-size("small") {
       display: none;
     }
+
+    .arrow-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   .artists {
     margin-top: 20px;
     padding-bottom: 100px;
     min-height: 100vh;
-    padding: 20px;
+    padding: 35px;
 
     h2 {
       font-weight: normal;
       font-size: $FONT_SIZE_LARGE;
       font-family: $BARBARA_STACK;
       text-transform: uppercase;
+      margin-bottom: 0;
+      user-select: none;
+      padding: 0;
     }
+  }
+
+  :global(.row.top p:first-child) {
+    margin-top: 0;
+  }
+
+  :global(.row.top h1, h2, h3) {
+    font-size: $FONT_SIZE_LARGE;
+    margin-top: 0;
   }
 </style>

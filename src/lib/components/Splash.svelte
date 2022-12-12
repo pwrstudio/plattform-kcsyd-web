@@ -23,7 +23,7 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    padding: 30px;
+    padding: 65px 100px;
     background: $lime;
     z-index: 10000;
   }

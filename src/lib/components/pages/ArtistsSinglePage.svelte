@@ -9,13 +9,19 @@
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
+  const caption =
+    language === Language.English
+      ? data.mainImage.bildtext_eng || ""
+      : data.mainImage.bildtext_sve || ""
+  console.log(data)
 </script>
 
 <div class="single-artist">
   <img src={urlFor(data.mainImage).url()} alt={title} />
+  {#if caption.length > 0}
+    <figcaption>{caption}</figcaption>
+  {/if}
   <h1>{title}</h1>
-  <p>{data.nationalitet}</p>
-  <p>{data.tidskategori}</p>
   <div>{@html renderBlockText(content)}</div>
 </div>
 
@@ -24,7 +30,6 @@
 
   .single-artist {
     font-family: $ATLAS_STACK;
-    padding-bottom: 5em;
 
     h1 {
       font-size: $FONT_SIZE_MEDIUM;
@@ -34,6 +39,14 @@
 
     img {
       max-width: 100%;
+    }
+
+    figcaption {
+      font-size: $FONT_SIZE_SMALL;
+      width: 100%;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 25px;
     }
   }
 </style>

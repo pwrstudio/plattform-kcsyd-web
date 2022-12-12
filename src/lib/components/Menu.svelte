@@ -1,25 +1,21 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
+  import { quadOut } from "svelte/easing"
   import Splash from "./Splash.svelte"
-  import { navigating, page } from "$app/stores"
   import { languageStore, UIColorStore } from "$lib/stores"
   import { Language, UIColor } from "$lib/types"
-  import { fade } from "svelte/transition"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
   export let splash: any
-
-  console.log(splash)
 
   const closeMenu = () => {
     dispatch("close")
   }
 
-  let splashOpen = true
+  let splashOpen = false
   const closeSplash = () => {
     splashOpen = false
   }
-
-  $: console.log($navigating)
 
   UIColorStore.set(UIColor.Black)
 
@@ -87,7 +83,7 @@
   <Splash {splash} on:close={closeSplash} />
 {/if}
 
-<div class="menu" transition:fade>
+<div class="menu" transition:fade={{ easing: quadOut, duration: 400 }}>
   <div class="language-switch">
     <span
       class="language-option"
@@ -97,7 +93,8 @@
       }}
     >
       SVE
-    </span>/
+    </span>
+    <span class="slash">/</span>
     <span
       class="language-option"
       class:selected={$languageStore === Language.English}
@@ -123,8 +120,8 @@
 
   .language-switch {
     position: absolute;
-    top: 20px;
-    left: 10vw;
+    top: 30px;
+    left: 180px;
     font-size: $FONT_SIZE_LARGE;
     user-select: none;
     cursor: pointer;
@@ -133,6 +130,12 @@
       &.selected {
         border-bottom: 1px solid black;
       }
+    }
+
+    .slash {
+      display: inline-block;
+      padding-left: 3px;
+      padding-right: 3px;
     }
   }
 
@@ -155,7 +158,9 @@
     }
 
     .inner {
-      width: 80vw;
+      width: calc(100vw - 360px);
+      max-width: 95vw;
+
       a {
         font-size: $FONT_SIZE_XLARGE;
         line-height: 1em;
@@ -164,6 +169,7 @@
         text-decoration: none;
         border-bottom: 1px solid black;
         padding: 10px 0;
+        user-select: none;
 
         @include screen-size("small") {
           font-size: $FONT_SIZE_LARGE;
