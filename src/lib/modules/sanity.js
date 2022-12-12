@@ -19,8 +19,8 @@ const SANITY_PROJECT_ID = "1oasromd"
 export const client = sanityClient({
     projectId: SANITY_PROJECT_ID,
     dataset: "production",
-    apiVersion: '2022-10-20', // use a UTC date string
-    useCdn: false,
+    apiVersion: '2022-12-12', // use a UTC date string
+    useCdn: true,
 })
 
 const h = blocksToHtml.h
