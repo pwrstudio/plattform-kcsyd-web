@@ -1,6 +1,12 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
+  import { quadOut } from "svelte/easing"
   import { urlFor } from "$lib/modules/sanity"
-  import { Language, type ProjectType } from "$lib/types"
+  import Hamburger from "$lib/components/Hamburger.svelte"
+  import { Language, UIColor, type ProjectType } from "$lib/types"
+  import { menuActive } from "$lib/stores"
+  import { onMount } from "svelte"
+
   export let language: Language
   export let data: {
     projektPagaende: ProjectType[]
@@ -15,10 +21,24 @@
       ? "Archive / documentation*"
       : "Arkiv / dokumentation*"
   const urlPrefix = language === Language.English ? "/en/" : "/"
+
+  const openMenu = () => {
+    menuActive.set(true)
+  }
+
+  onMount(async () => {
+    menuActive.set(false)
+  })
 </script>
 
+{#if !$menuActive}
+  <span on:click={openMenu}>
+    <Hamburger color={UIColor.White} />
+  </span>
+{/if}
+
 <div class="page">
-  <div class="inner">
+  <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <!-- ONGOING -->
     <div class="section">
       <div class="section-header">{onGoingHeader}</div>

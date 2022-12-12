@@ -1,10 +1,12 @@
 <script lang="ts">
-  export let white = false
+  import { UIColor } from "$lib/types"
+  export let color: UIColor
+  const colorClass = color === UIColor.White ? "white" : ""
 </script>
 
 <svg
   id="Layer_2"
-  class:white
+  class={colorClass}
   data-name="Layer 2"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"

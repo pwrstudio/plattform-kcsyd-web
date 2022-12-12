@@ -1,8 +1,12 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
+  import { quadOut } from "svelte/easing"
+  import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
   import Marquee from "$lib/components/Marquee.svelte"
   import Slideshow from "$lib/components/Slideshow.svelte"
   import ArtistList from "$lib/components/ArtistList.svelte"
+  import Hamburger from "$lib/components/Hamburger.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
   import { renderBlockText, urlFor } from "$lib/modules/sanity"
   import { Language, MainPageType } from "$lib/types"
@@ -24,6 +28,10 @@
     artistsEl.scrollIntoView({ behavior: "smooth" })
   }
 
+  const openMenu = () => {
+    menuActive.set(true)
+  }
+
   const urlPrefix = language === Language.English ? "/en/" : "/"
 
   onMount(async () => {
@@ -33,11 +41,18 @@
     ) {
       artistsEl.scrollIntoView()
     }
+    menuActive.set(false)
   })
 </script>
 
+{#if !$menuActive}
+  <span on:click={openMenu}>
+    <Hamburger />
+  </span>
+{/if}
+
 <!-- RIGHT -->
-<div class="column right">
+<div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
   <!-- TOP -->
   <div class="row top">
     {#if language == Language.English}
@@ -55,7 +70,7 @@
 </div>
 
 <!-- LEFT -->
-<div class="column left">
+<div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   {#if mainPageType === MainPageType.Landing}
     <div class="landing-page-image" on:click={scrollDown}>
       <img src={urlFor(hemsideBild.mainImage).url()} alt="Plattform KcSyd" />
@@ -84,6 +99,7 @@
   href={urlPrefix + "information-kontakt"}
   data-sveltekit-preload-data
   class="column center"
+  in:fade={{ easing: quadOut, duration: 400 }}
 >
   <Marquee />
 </a>

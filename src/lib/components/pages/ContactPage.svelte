@@ -1,4 +1,9 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
+  import { quadOut } from "svelte/easing"
+  import { menuActive } from "$lib/stores"
+  import { onMount } from "svelte"
+  import X from "$lib/components/X.svelte"
   import { renderBlockText } from "$lib/modules/sanity.js"
   import { Language, type ContactPageType } from "$lib/types"
   export let language: Language
@@ -12,10 +17,19 @@
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
+  const urlPrefix = language === Language.English ? "/en/" : "/"
+
+  onMount(async () => {
+    menuActive.set(false)
+  })
 </script>
 
+<a href={urlPrefix + ""}>
+  <X />
+</a>
+
 <div class="page">
-  <div class="inner">
+  <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="top-bar">Information/Kontakt</div>
 
     <div class="column left">

@@ -1,17 +1,14 @@
 <script lang="ts">
-  import { UIColorStore } from "$lib/stores"
+  import X from "$lib/components/X.svelte"
   import Menu from "$lib/components/Menu.svelte"
-  import X from "$lib/graphics/X.svelte"
-  import Hamburger from "$lib/graphics/Hamburger.svelte"
-  import { UIColor } from "$lib/types"
   import Marquee from "$lib/components/Marquee.svelte"
+  import { menuActive } from "$lib/stores"
 
   export let data
   const { splash } = data
 
-  let menuActive = false
-  const toggleMenu = () => {
-    menuActive = !menuActive
+  const closeMenu = () => {
+    menuActive.set(false)
   }
 </script>
 
@@ -19,41 +16,17 @@
   <Marquee />
 </div>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="menu-toggle" class:x={menuActive} on:click={toggleMenu}>
-  {#if menuActive}
-    <X white={$UIColorStore === UIColor.White} />
-  {:else}
-    <Hamburger white={$UIColorStore === UIColor.White} />
-  {/if}
-</div>
-
-{#if menuActive}
-  <Menu on:close={toggleMenu} {splash} />
+{#if $menuActive}
+  <span on:click={closeMenu}>
+    <X />
+  </span>
+  <Menu {splash} />
 {/if}
 
 <slot />
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
-
-  .menu-toggle {
-    position: fixed;
-    top: 30px;
-    right: 15px;
-    z-index: 1000;
-    z-index: 1000;
-    cursor: pointer;
-
-    &.x {
-      top: 25px;
-      right: 20px;
-    }
-
-    @include screen-size("small") {
-      top: 80px;
-    }
-  }
 
   .phone-marquee {
     display: none;

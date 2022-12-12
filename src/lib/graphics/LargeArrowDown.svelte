@@ -12,7 +12,7 @@
   @import "src/lib/style/variables.scss";
 
   svg {
-    height: 50px;
+    height: 30px;
   }
 
   .cls-2 {

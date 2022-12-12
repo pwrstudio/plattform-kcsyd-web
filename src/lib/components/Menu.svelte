@@ -1,24 +1,17 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import Splash from "./Splash.svelte"
-  import { languageStore, UIColorStore } from "$lib/stores"
-  import { Language, UIColor } from "$lib/types"
+  import Splash from "$lib/components/Splash.svelte"
+  import { languageStore } from "$lib/stores"
+  import { Language } from "$lib/types"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
   export let splash: any
-
-  const closeMenu = () => {
-    dispatch("close")
-  }
 
   let splashOpen = false
   const closeSplash = () => {
     splashOpen = false
   }
-
-  UIColorStore.set(UIColor.Black)
-
   interface MenuItem {
     title: string
     link: string
@@ -83,7 +76,7 @@
   <Splash {splash} on:close={closeSplash} />
 {/if}
 
-<div class="menu" transition:fade={{ easing: quadOut, duration: 400 }}>
+<div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>
   <div class="language-switch">
     <span
       class="language-option"
@@ -108,7 +101,7 @@
 
   <div class="inner">
     {#each activeMenuItems as item}
-      <a href={item.link} data-sveltekit-preload-data on:click={closeMenu}>
+      <a href={item.link} data-sveltekit-preload-data>
         {item.title}
       </a>
     {/each}
@@ -146,11 +139,11 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: white;
+    background: $grey;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
 
     @include screen-size("small") {
       top: 70px;

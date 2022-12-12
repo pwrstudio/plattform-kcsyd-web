@@ -1,10 +1,15 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
+  import { quadOut } from "svelte/easing"
+  import { menuActive } from "$lib/stores"
+  import { onMount } from "svelte"
+  import X from "$lib/components/X.svelte"
   import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
   import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
   import { renderBlockText, urlFor } from "$lib/modules/sanity.js"
-  import { Language, type ProjectType } from "$lib/types"
+  import { Language, type ProjectType, UIColor } from "$lib/types"
   export let language: Language
   export let data: { project: ProjectType; projectList: ProjectType[] }
   const { project, projectList } = data
@@ -56,7 +61,15 @@
     (projectIndex === projectList.length - 1
       ? projectList[0].slug.current
       : projectList[projectIndex + 1].slug.current)
+
+  onMount(async () => {
+    menuActive.set(false)
+  })
 </script>
+
+<a href={urlPrefix + "projekt"} data-sveltekit-preload-data>
+  <X color={UIColor.White} />
+</a>
 
 <div class="page">
   <a
@@ -75,7 +88,7 @@
   >
     <LargeArrowRight />
   </a>
-  <div class="inner">
+  <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="top-bar">{timeCategoryHeader()}</div>
 
     <div class="content" class:double={project.layout === "alt2"}>

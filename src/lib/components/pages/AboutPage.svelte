@@ -1,12 +1,26 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
+  import { quadOut } from "svelte/easing"
+  import { menuActive } from "$lib/stores"
+  import { onMount } from "svelte"
   import { renderBlockText } from "$lib/modules/sanity.js"
+  import X from "$lib/components/X.svelte"
   import { Language, type AboutPageType } from "$lib/types"
   export let language: Language
   export let data: AboutPageType
+  const urlPrefix = language === Language.English ? "/en/" : "/"
+
+  onMount(async () => {
+    menuActive.set(false)
+  })
 </script>
 
+<a href={urlPrefix + ""}>
+  <X />
+</a>
+
 <div class="page">
-  <div class="inner about">
+  <div class="inner about" in:fade={{ easing: quadOut, duration: 400 }}>
     {#if language === Language.English}
       <div>{@html renderBlockText(data.content_eng.content)}</div>
     {:else}
