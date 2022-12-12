@@ -24,6 +24,8 @@
     artistsEl.scrollIntoView({ behavior: "smooth" })
   }
 
+  const urlPrefix = language === Language.English ? "/en/" : "/"
+
   onMount(async () => {
     if (
       mainPageType === MainPageType.Listing ||
@@ -54,12 +56,14 @@
 
 <!-- LEFT -->
 <div class="column left">
-  <div class="landing-page-image" on:click={scrollDown}>
-    <img src={urlFor(hemsideBild.mainImage).url()} alt="Plattform KcSyd" />
-    <div class="arrow-down">
-      <LargeArrowDown />
+  {#if mainPageType === MainPageType.Landing}
+    <div class="landing-page-image" on:click={scrollDown}>
+      <img src={urlFor(hemsideBild.mainImage).url()} alt="Plattform KcSyd" />
+      <div class="arrow-down">
+        <LargeArrowDown />
+      </div>
     </div>
-  </div>
+  {/if}
   <div class="artists" bind:this={artistsEl}>
     {#if mainPageType === MainPageType.Single}
       <slot />
@@ -76,9 +80,13 @@
 </div>
 
 <!-- CENTER -->
-<div class="column center">
+<a
+  href={urlPrefix + "information-kontakt"}
+  data-sveltekit-preload-data
+  class="column center"
+>
   <Marquee />
-</div>
+</a>
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
@@ -109,6 +117,8 @@
       left: calc(50vw - 47px);
       width: 94px;
       background: $grey;
+      display: block;
+      text-decoration: none;
 
       @include screen-size("small") {
         position: fixed;

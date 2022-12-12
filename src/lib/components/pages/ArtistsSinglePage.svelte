@@ -1,4 +1,5 @@
 <script lang="ts">
+  import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
   import { urlFor } from "$lib/modules/sanity"
   import { renderBlockText } from "$lib/modules/sanity.js"
   import { Language, type ArtistType } from "$lib/types"
@@ -13,17 +14,22 @@
     language === Language.English
       ? data.mainImage.bildtext_eng || ""
       : data.mainImage.bildtext_sve || ""
-  console.log(data)
+  const urlPrefix = language === Language.English ? "/en/" : "/"
 </script>
 
 <div class="single-artist">
+  <a
+    href={urlPrefix + "konstnarer"}
+    data-sveltekit-preload-data
+    class="back-arrow"
+  >
+    <LargeArrowLeft black={true} />
+  </a>
+
   <div class="image">
     <img src={urlFor(data.mainImage).width(800).url()} alt={title} />
   </div>
-
-  {#if caption.length > 0}
-    <figcaption>{caption}</figcaption>
-  {/if}
+  <figcaption>{caption}</figcaption>
   <h1>{title}</h1>
   <div>{@html renderBlockText(content)}</div>
 </div>
@@ -33,6 +39,13 @@
 
   .single-artist {
     font-family: $ATLAS_STACK;
+    position: relative;
+
+    .back-arrow {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
 
     h1 {
       font-size: $FONT_SIZE_MEDIUM;
@@ -41,7 +54,9 @@
     }
 
     .image {
-      width: 100%;
+      width: calc(100% - 80px);
+      margin-left: auto;
+      margin-right: auto;
       line-height: 0;
 
       img {

@@ -11,10 +11,11 @@
   @import "src/lib/style/variables.scss";
 
   svg {
-    height: 40px;
+    height: 50px;
   }
 
   .cls-2 {
+    fill: transparent;
     stroke: $white;
     stroke-width: 0.75px;
   }
