@@ -3,12 +3,13 @@
   import { quadOut } from "svelte/easing"
   import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
+  import Metadata from "$lib/components/Metadata.svelte"
   import X from "$lib/components/X.svelte"
   import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
   import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
-  import { renderBlockText, urlFor } from "$lib/modules/sanity.js"
+  import { renderBlockText, toPlainText, urlFor } from "$lib/modules/sanity.js"
   import { Language, type ProjectType, UIColor } from "$lib/types"
   export let language: Language
   export let data: { project: ProjectType; projectList: ProjectType[] }
@@ -27,6 +28,11 @@
     language === Language.English
       ? project.content_eng.content
       : project.content_sve.content
+
+  const description =
+    language === Language.English
+      ? toPlainText(project.content_eng.content)
+      : toPlainText(project.content_sve.content)
 
   const category =
     language === Language.English ? project.kategori_eng : project.kategori_sve
@@ -66,6 +72,8 @@
     menuActive.set(false)
   })
 </script>
+
+<Metadata {title} {description} />
 
 <a href={urlPrefix + "projekt"} data-sveltekit-preload-data>
   <X color={UIColor.White} />
@@ -216,20 +224,31 @@
 
           &.left {
             border-right: 1px solid $white;
+            overflow-y: auto;
 
             @include screen-size("small") {
               border-right: unset;
               border-bottom: 1px solid $white;
+              padding-bottom: 15px;
+              margin-bottom: 15px;
             }
 
             .category {
               font-size: $FONT_SIZE_MEDIUM;
+
+              @include screen-size("small") {
+                font-size: $FONT_SIZE_SMALL;
+              }
             }
 
             .rubrik-text {
               font-family: $BARBARA_STACK;
               font-size: $FONT_SIZE_XLARGE;
               line-height: 1em;
+
+              @include screen-size("small") {
+                font-size: $FONT_SIZE_SEMI_EXTRA;
+              }
             }
           }
 
@@ -238,6 +257,10 @@
             padding-left: 15px;
             overflow-y: auto;
             padding-bottom: 40px;
+
+            @include screen-size("small") {
+              padding-left: unset;
+            }
 
             .category {
               font-size: $FONT_SIZE_SMALL;

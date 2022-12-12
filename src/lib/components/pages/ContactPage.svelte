@@ -1,9 +1,11 @@
 <script lang="ts">
+  import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
   import X from "$lib/components/X.svelte"
+  import Logos from "$lib/components/Logos.svelte"
   import { renderBlockText } from "$lib/modules/sanity.js"
   import { Language, type ContactPageType } from "$lib/types"
   export let language: Language
@@ -24,6 +26,8 @@
   })
 </script>
 
+<Metadata title={"Information / Kontakt"} />
+
 <a href={urlPrefix + ""}>
   <X />
 </a>
@@ -41,12 +45,21 @@
       </div>
       <div class="bottom">
         <div class="info-text">{@html renderBlockText(infoText)}</div>
-        <div class="logos">TODO: logos</div>
+        <div class="logos">
+          <Logos />
+        </div>
       </div>
     </div>
 
     <div class="column right">
       <div>{@html renderBlockText(content)}</div>
+    </div>
+
+    <div class="logos-phone">
+      <div class="info-text">{@html renderBlockText(infoText)}</div>
+      <div class="logos">
+        <Logos />
+      </div>
     </div>
   </div>
 </div>
@@ -105,8 +118,16 @@
           flex-direction: column;
           justify-content: space-between;
 
+          @include screen-size("small") {
+            border-right: unset;
+          }
+
           .top {
             border-left: 1px solid black;
+
+            @include screen-size("small") {
+              border-left: unset;
+            }
 
             .logo {
               font-size: 60px;
@@ -114,16 +135,29 @@
               margin: 0 15px;
               padding: 15px 0;
               border-bottom: 1px solid black;
+
+              @include screen-size("small") {
+                margin: 0;
+              }
             }
 
             .tagline {
               padding: 15px;
               font-size: 24px;
+
+              @include screen-size("small") {
+                padding: 15px 0;
+              }
             }
           }
 
           .bottom {
             margin-bottom: 15px;
+
+            @include screen-size("small") {
+              display: none;
+            }
+
             .info-text {
               font-family: $ATLAS_STACK;
               font-size: $FONT_SIZE_MEDIUM;
@@ -140,8 +174,31 @@
           padding: 0 15px;
           overflow-y: auto;
           padding-bottom: 40px;
+
+          @include screen-size("small") {
+            padding: 0;
+            font-size: $FONT_SIZE_MEDIUM;
+          }
         }
       }
+    }
+  }
+
+  .logos-phone {
+    display: none;
+
+    @include screen-size("small") {
+      display: block;
+    }
+
+    .info-text {
+      font-family: $ATLAS_STACK;
+      font-size: $FONT_SIZE_MEDIUM;
+    }
+    .logos {
+      height: 100px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
     }
   }
 

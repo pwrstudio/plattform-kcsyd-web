@@ -119,6 +119,12 @@
     user-select: none;
     cursor: pointer;
 
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_MEDIUM;
+      left: 15px;
+      top: 15px;
+    }
+
     .language-option {
       &.selected {
         border-bottom: 1px solid black;
@@ -129,6 +135,11 @@
       display: inline-block;
       padding-left: 3px;
       padding-right: 3px;
+
+      @include screen-size("small") {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
   }
 
@@ -146,13 +157,19 @@
     z-index: 1000;
 
     @include screen-size("small") {
+      align-items: flex-start;
       top: 70px;
       height: calc(100vh - 70px);
+      padding-top: 70px;
     }
 
     .inner {
       width: calc(100vw - 360px);
       max-width: 95vw;
+
+      @include screen-size("small") {
+        width: calc(100vw - 30px);
+      }
 
       a {
         font-size: $FONT_SIZE_XLARGE;
@@ -165,7 +182,7 @@
         user-select: none;
 
         @include screen-size("small") {
-          font-size: $FONT_SIZE_LARGE;
+          font-size: 36px;
         }
       }
     }

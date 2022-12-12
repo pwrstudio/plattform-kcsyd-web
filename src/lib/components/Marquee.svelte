@@ -66,6 +66,10 @@
       align-items: center;
       height: 100%;
 
+      @include screen-size("small") {
+        animation: marquee 30s linear infinite;
+      }
+
       &:hover {
         animation-play-state: paused;
       }

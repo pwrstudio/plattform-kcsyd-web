@@ -1,8 +1,9 @@
 <script lang="ts">
+  import Metadata from "$lib/components/Metadata.svelte"
+  import Hamburger from "$lib/components/Hamburger.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { urlFor } from "$lib/modules/sanity"
-  import Hamburger from "$lib/components/Hamburger.svelte"
   import { Language, UIColor, type ProjectType } from "$lib/types"
   import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
@@ -30,6 +31,8 @@
     menuActive.set(false)
   })
 </script>
+
+<Metadata title={"Projekt"} />
 
 {#if !$menuActive}
   <span on:click={openMenu}>
@@ -134,12 +137,22 @@
         margin-bottom: 40px;
         border-bottom: 1px solid white;
 
+        @include screen-size("small") {
+          margin-bottom: 10px;
+        }
+
         .section-header {
           border-bottom: 1px solid white;
           width: 100%;
           padding-bottom: 15px;
           margin-bottom: 15px;
           text-transform: uppercase;
+
+          @include screen-size("small") {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: $FONT_SIZE_SMALL;
+          }
         }
 
         .phone-divider {
@@ -147,7 +160,7 @@
           height: 1px;
           background: $white;
           float: left;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           display: none;
 
           @include screen-size("small") {
@@ -180,16 +193,11 @@
           margin-bottom: 20px;
           border-right: 1px solid white;
 
-          // &:nth-of-type(4n) {
-          // }
-
-          // &:last-of-type {
-          //   border-right: 1px solid white;
-          // }
-
           @include screen-size("small") {
+            margin-bottom: 10px;
+            font-size: $FONT_SIZE_SMALL;
             width: 50%;
-            height: 300px;
+            height: 200px;
           }
 
           .category {
@@ -204,7 +212,7 @@
             width: 100%;
 
             @include screen-size("small") {
-              height: 140px;
+              height: 110px;
             }
 
             img {

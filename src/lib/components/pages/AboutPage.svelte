@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { menuActive } from "$lib/stores"
@@ -14,6 +15,8 @@
     menuActive.set(false)
   })
 </script>
+
+<Metadata title={"Om Plattform KcSyd"} />
 
 <a href={urlPrefix + ""}>
   <X />
@@ -52,11 +55,19 @@
     font-family: $BARBARA_STACK;
     font-size: $FONT_SIZE_LARGE;
 
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_MEDIUM;
+    }
+
     .inner {
       width: 720px;
       margin-left: auto;
       margin-right: auto;
       max-width: 90vw;
+
+      @include screen-size("small") {
+        padding-top: 50px;
+      }
     }
   }
 
@@ -68,6 +79,10 @@
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_MEDIUM;
     margin-left: 35px;
+
+    @include screen-size("small") {
+      margin-left: 20px;
+    }
   }
 
   :global(.page h2:first-child) {
@@ -77,6 +92,10 @@
   :global(.page h2) {
     font-size: $FONT_SIZE_LARGE;
     margin-top: 2em;
+
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_MEDIUM;
+    }
   }
 
   :global(.page img) {
@@ -99,6 +118,7 @@
 
     @include screen-size("small") {
       flex-wrap: wrap;
+      min-height: unset;
     }
 
     .text-logotyp {
@@ -109,6 +129,10 @@
       border-right: 1px solid black;
 
       @include screen-size("small") {
+        font-size: $FONT_SIZE_SEMI_EXTRA;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        margin: unset;
         width: 100%;
         border-right: unset;
         border-bottom: 1px solid black;
@@ -124,7 +148,11 @@
       align-items: center;
 
       @include screen-size("small") {
+        padding-bottom: 15px;
+        padding-top: 15px;
+        margin: unset;
         width: 100%;
+        font-size: $FONT_SIZE_LARGE;
       }
     }
   }

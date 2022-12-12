@@ -37,17 +37,33 @@
     color: $black;
     text-decoration: none;
 
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_MEDIUM;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
     &.header {
       font-size: $FONT_SIZE_MEDIUM;
       text-transform: uppercase;
       padding-top: 35px;
       padding-bottom: 10px;
+
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_SMALL;
+        padding-top: 15px;
+      }
     }
 
     .nationality {
       position: relative;
       top: -10px;
       font-size: $FONT_SIZE_MEDIUM;
+
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_SMALL;
+        top: -6px;
+      }
     }
 
     // &:hover {

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { menuActive } from "$lib/stores"
@@ -45,6 +46,8 @@
   })
 </script>
 
+<Metadata />
+
 {#if !$menuActive}
   <span on:click={openMenu}>
     <Hamburger />
@@ -52,7 +55,11 @@
 {/if}
 
 <!-- RIGHT -->
-<div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
+<div
+  class="column right"
+  class:landing={mainPageType === MainPageType.Landing}
+  in:fade={{ easing: quadOut, duration: 400 }}
+>
   <!-- TOP -->
   <div class="row top">
     {#if language == Language.English}
@@ -73,13 +80,20 @@
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   {#if mainPageType === MainPageType.Landing}
     <div class="landing-page-image" on:click={scrollDown}>
-      <img src={urlFor(hemsideBild.mainImage).url()} alt="Plattform KcSyd" />
+      <img
+        src={urlFor(hemsideBild.mainImage).saturation(-100).url()}
+        alt="Plattform KcSyd"
+      />
       <div class="arrow-down">
         <LargeArrowDown />
       </div>
     </div>
   {/if}
-  <div class="artists" bind:this={artistsEl}>
+  <div
+    class="artists"
+    class:solo={mainPageType !== MainPageType.Landing}
+    bind:this={artistsEl}
+  >
     {#if mainPageType === MainPageType.Single}
       <slot />
     {:else if language == Language.English}
@@ -137,12 +151,7 @@
       text-decoration: none;
 
       @include screen-size("small") {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 70px;
-        z-index: 100;
+        display: none;
       }
     }
 
@@ -153,8 +162,12 @@
       flex-direction: column;
 
       @include screen-size("small") {
-        left: unset;
-        width: 100%;
+        display: none;
+        &.landing {
+          display: flex;
+          left: unset;
+          width: 100%;
+        }
       }
     }
   }
@@ -164,11 +177,20 @@
     height: 50%;
     padding: 35px;
 
+    @include screen-size("small") {
+      padding: 15px;
+    }
+
     &.top {
       background: $lime;
       font-family: $BARBARA_STACK;
       font-size: $FONT_SIZE_LARGE;
       overflow-y: auto;
+
+      @include screen-size("small") {
+        padding-top: 85px;
+        font-size: $FONT_SIZE_MEDIUM;
+      }
 
       a {
         color: inherit;
@@ -215,6 +237,14 @@
     min-height: 100vh;
     padding: 35px;
 
+    @include screen-size("small") {
+      padding: 15px;
+
+      &.solo {
+        padding-top: 85px;
+      }
+    }
+
     h2 {
       font-weight: normal;
       font-size: $FONT_SIZE_LARGE;
@@ -223,6 +253,10 @@
       margin-bottom: 0;
       user-select: none;
       padding: 0;
+
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_MEDIUM;
+      }
     }
   }
 
@@ -233,5 +267,11 @@
   :global(.row.top h1, h2, h3) {
     font-size: $FONT_SIZE_LARGE;
     margin-top: 0;
+  }
+
+  @include screen-size("small") {
+    :global(.row.top h1, h2, h3) {
+      font-size: $FONT_SIZE_MEDIUM;
+    }
   }
 </style>

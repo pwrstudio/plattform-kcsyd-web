@@ -1,7 +1,8 @@
 <script lang="ts">
+  import Metadata from "$lib/components/Metadata.svelte"
   import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
   import { urlFor } from "$lib/modules/sanity"
-  import { renderBlockText } from "$lib/modules/sanity.js"
+  import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language, type ArtistType } from "$lib/types"
   export let language: Language
   export let data: ArtistType
@@ -10,12 +11,18 @@
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
+  const description =
+    language === Language.English
+      ? toPlainText(data.content_eng.content)
+      : toPlainText(data.content_sve.content)
   const caption =
     language === Language.English
       ? data.mainImage.bildtext_eng || ""
       : data.mainImage.bildtext_sve || ""
   const urlPrefix = language === Language.English ? "/en/" : "/"
 </script>
+
+<Metadata {title} {description} />
 
 <div class="single-artist">
   <a
@@ -27,7 +34,10 @@
   </a>
 
   <div class="image">
-    <img src={urlFor(data.mainImage).width(800).url()} alt={title} />
+    <img
+      src={urlFor(data.mainImage).width(800).saturation(-100).url()}
+      alt={title}
+    />
   </div>
   <figcaption>{caption}</figcaption>
   <h1>{title}</h1>
