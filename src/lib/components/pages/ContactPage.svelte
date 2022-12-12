@@ -27,7 +27,7 @@
       </div>
       <div class="bottom">
         <div class="info-text">{@html renderBlockText(infoText)}</div>
-        <div class="logos">LOGOS</div>
+        <div class="logos">TODO: logos</div>
       </div>
     </div>
 
@@ -57,25 +57,28 @@
     }
 
     .inner {
-      width: 1020px;
+      width: 1040px;
       max-width: 90vw;
       margin-left: auto;
       margin-right: auto;
 
       .top-bar {
+        padding-top: 35px;
+        padding-bottom: 15px;
         width: 100%;
-        height: 60px;
-        line-height: 60px;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid $black;
         font-family: $ATLAS_STACK;
         font-size: $FONT_SIZE_MEDIUM;
-        margin-bottom: 10px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        height: 70px;
       }
 
       .column {
         width: 50%;
         float: left;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 85px);
+        padding-right: 15px;
 
         @include screen-size("small") {
           width: 100%;
@@ -90,25 +93,29 @@
 
           .top {
             border-left: 1px solid black;
-            padding: 10px;
+
             .logo {
-              font-size: $FONT_SIZE_XLARGE;
+              font-size: 60px;
               line-height: 1em;
-              padding-bottom: 10px;
+              margin: 0 15px;
+              padding: 15px 0;
               border-bottom: 1px solid black;
             }
+
             .tagline {
-              padding: 10px;
+              padding: 15px;
+              font-size: 24px;
             }
           }
 
           .bottom {
+            margin-bottom: 15px;
             .info-text {
               font-family: $ATLAS_STACK;
               font-size: $FONT_SIZE_MEDIUM;
             }
             .logos {
-              height: 60px;
+              height: 100px;
               border-top: 1px solid black;
               border-bottom: 1px solid black;
             }
@@ -116,10 +123,16 @@
         }
 
         &.right {
-          padding: 10px;
+          padding: 0 15px;
           overflow-y: auto;
+          padding-bottom: 40px;
         }
       }
     }
+  }
+
+  :global(.right .small) {
+    font-family: $ATLAS_STACK;
+    font-size: $FONT_SIZE_MEDIUM;
   }
 </style>
