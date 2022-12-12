@@ -185,7 +185,6 @@
   }
 
   .artists {
-    margin-top: 20px;
     padding-bottom: 100px;
     min-height: 100vh;
     padding: 35px;

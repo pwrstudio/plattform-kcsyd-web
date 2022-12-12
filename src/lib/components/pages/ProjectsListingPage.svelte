@@ -12,8 +12,8 @@
     language === Language.English ? "Ongoing" : "Pågående projekt"
   const pastHeader =
     language === Language.English
-      ? "Archive/documentation*"
-      : "Arkiv/dokumentation*"
+      ? "Archive / documentation*"
+      : "Arkiv / dokumentation*"
   const urlPrefix = language === Language.English ? "/en/" : "/"
 </script>
 
@@ -22,7 +22,13 @@
     <!-- ONGOING -->
     <div class="section">
       <div class="section-header">{onGoingHeader}</div>
-      {#each projektPagaende as project (project._id)}
+      {#each projektPagaende as project, i (project._id)}
+        {#if i > 0 && i % 4 === 0}
+          <div class="desktop-divider" />
+        {/if}
+        {#if i > 0 && i % 2 === 0}
+          <div class="phone-divider" />
+        {/if}
         <a class="project" href={urlPrefix + "projekt/" + project.slug.current}>
           <div class="image">
             <img
@@ -42,12 +48,22 @@
     <!-- ARCHIVE -->
     <div class="section">
       <div class="section-header">{pastHeader}</div>
-      {#each projektArkivDokumentation as project (project._id)}
+      {#each projektArkivDokumentation as project, i (project._id)}
         {@const category =
           language === Language.English
             ? project.kategori_eng
             : project.kategori_sve}
-        <a class="project" href={urlPrefix + "projekt/" + project.slug.current}>
+        {#if i > 0 && i % 4 === 0}
+          <div class="desktop-divider" />
+        {/if}
+        {#if i > 0 && i % 2 === 0}
+          <div class="phone-divider" />
+        {/if}
+        <a
+          class="project"
+          data-sveltekit-preload-data
+          href={urlPrefix + "projekt/" + project.slug.current}
+        >
           <div class="image">
             <img
               src={urlFor(project.mainImage)
@@ -79,14 +95,18 @@
     width: 100vw;
     height: 100vh;
     overflow-y: auto;
-    padding: 20px;
     font-size: $FONT_SIZE_MEDIUM;
 
     .inner {
-      width: 1020px;
+      width: 1040px;
       max-width: 90vw;
       margin-left: auto;
       margin-right: auto;
+      padding-top: 35px;
+
+      @include screen-size("small") {
+        padding-top: 90px;
+      }
 
       .section {
         display: inline-block;
@@ -97,9 +117,35 @@
         .section-header {
           border-bottom: 1px solid white;
           width: 100%;
-          padding: 10px;
-          margin-bottom: 20px;
+          padding-bottom: 15px;
+          margin-bottom: 15px;
           text-transform: uppercase;
+        }
+
+        .phone-divider {
+          width: 100%;
+          height: 1px;
+          background: $white;
+          float: left;
+          margin-bottom: 20px;
+          display: none;
+
+          @include screen-size("small") {
+            display: block;
+          }
+        }
+
+        .desktop-divider {
+          width: 100%;
+          height: 1px;
+          background: $white;
+          float: left;
+          margin-bottom: 20px;
+          display: block;
+
+          @include screen-size("small") {
+            display: none;
+          }
         }
 
         .project {
@@ -107,20 +153,24 @@
           border-left: 1px solid white;
           color: white;
           text-decoration: none;
-          padding: 10px;
+          padding: 0 15px;
           display: block;
           float: left;
-          height: 360px;
+          height: 290px;
           margin-bottom: 20px;
+          border-right: 1px solid white;
+
+          // &:nth-of-type(4n) {
+          // }
+
+          // &:last-of-type {
+          //   border-right: 1px solid white;
+          // }
 
           @include screen-size("small") {
             width: 50%;
-            height: 260px;
+            height: 300px;
           }
-
-          // &:nth-child(3) {
-          //   border-right: 1px solid black;
-          // }
 
           .category {
             font-size: $FONT_SIZE_SMALL;
@@ -128,9 +178,20 @@
           }
 
           .image {
-            margin-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            height: 180px;
+            width: 100%;
+
+            @include screen-size("small") {
+              height: 140px;
+            }
+
             img {
-              max-width: 100%;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              margin-top: 0;
             }
           }
         }

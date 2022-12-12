@@ -44,9 +44,6 @@
     align-items: center;
     text-decoration: none;
     color: $white;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
 
     @include screen-size("small") {
       height: auto;

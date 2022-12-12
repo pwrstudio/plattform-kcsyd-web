@@ -9,6 +9,12 @@
   export let data: { project: ProjectType; projectList: ProjectType[] }
   const { project, projectList } = data
 
+  let textColumnEl: HTMLElement
+
+  function scrollDown() {
+    textColumnEl.scrollIntoView({ behavior: "smooth" })
+  }
+
   const title =
     language === Language.English ? project.title_eng : project.title
 
@@ -74,7 +80,7 @@
 
     <div class="content" class:double={project.layout === "alt2"}>
       {#if project.layout === "alt2"}
-        <div class="hero">
+        <div class="hero" on:click={scrollDown}>
           <img
             src={urlFor(project.mainImage).saturation(-100).url()}
             alt={title}
@@ -82,7 +88,7 @@
         </div>
       {/if}
 
-      <div class="column left">
+      <div class="column left" bind:this={textColumnEl}>
         {#if project.layout === "alt1" || project.layout === "alt2"}
           {#if project.bildspel && project.bildspel.length > 0}
             <SingleProjectSlideshow slides={project.bildspel} {language} />
@@ -100,8 +106,10 @@
       </div>
 
       <div class="column right">
-        <div class="category">{category}</div>
-        <h1>{title}</h1>
+        {#if project.layout !== "alt3"}
+          <div class="category">{category}</div>
+          <h1>{title}</h1>
+        {/if}
         <div>{@html renderBlockText(content)}</div>
       </div>
     </div>
@@ -121,15 +129,14 @@
     height: 100vh;
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_LARGE;
-    padding-bottom: 5em;
 
     @include screen-size("small") {
       overflow-y: auto;
     }
 
     .page-navigation {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
@@ -140,51 +147,54 @@
       }
 
       &.next {
-        right: 10px;
+        right: 15px;
       }
 
       &.prev {
-        left: 10px;
+        left: 15px;
       }
     }
 
     .inner {
-      width: 1020px;
+      width: 1040px;
       max-width: 90vw;
       margin-left: auto;
       margin-right: auto;
 
       .top-bar {
+        padding-top: 35px;
+        padding-bottom: 15px;
         width: 100%;
-        height: 60px;
-        line-height: 60px;
         border-bottom: 1px solid $white;
         font-family: $ATLAS_STACK;
         font-size: $FONT_SIZE_MEDIUM;
         text-transform: uppercase;
+        margin-bottom: 15px;
+        height: 70px;
       }
 
       .content {
-        height: calc(100vh - 70px);
+        height: calc(100vh - 85px);
         overflow-y: auto;
 
         .hero {
-          padding-top: 10px;
+          padding-bottom: 15px;
           width: 100%;
-          height: calc(100vh - 70px);
+          height: calc(100vh - 85px);
+          cursor: pointer;
 
           img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
           }
         }
 
         .column {
           width: 50%;
           float: left;
-          height: calc(100vh - 70px);
-          margin-top: 10px;
+          height: calc(100vh - 85px);
+          padding-right: 15px;
 
           @include screen-size("small") {
             height: auto;
@@ -206,13 +216,15 @@
             .rubrik-text {
               font-family: $BARBARA_STACK;
               font-size: $FONT_SIZE_XLARGE;
+              line-height: 1em;
             }
           }
 
           &.right {
             font-size: $FONT_SIZE_MEDIUM;
-            padding: 10px;
+            padding-left: 15px;
             overflow-y: auto;
+            padding-bottom: 40px;
 
             .category {
               font-size: $FONT_SIZE_SMALL;
@@ -229,5 +241,9 @@
 
   :global(.column a) {
     color: inherit;
+  }
+
+  :global(.column p:first-child) {
+    margin-top: 0;
   }
 </style>

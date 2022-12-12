@@ -17,7 +17,10 @@
 </script>
 
 <div class="single-artist">
-  <img src={urlFor(data.mainImage).url()} alt={title} />
+  <div class="image">
+    <img src={urlFor(data.mainImage).width(800).url()} alt={title} />
+  </div>
+
   {#if caption.length > 0}
     <figcaption>{caption}</figcaption>
   {/if}
@@ -37,8 +40,15 @@
       text-transform: uppercase;
     }
 
-    img {
-      max-width: 100%;
+    .image {
+      width: 100%;
+      line-height: 0;
+
+      img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+      }
     }
 
     figcaption {
