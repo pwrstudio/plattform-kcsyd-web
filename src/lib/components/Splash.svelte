@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { urlFor } from "$lib/modules/sanity"
+  import Image from "$lib/components/Image.svelte"
   import { fade } from "svelte/transition"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
@@ -12,7 +12,7 @@
 </script>
 
 <div class="splash" on:click={close} out:fade>
-  <img src={urlFor(splash.mainImage).width(400).saturation(-100).url()} />
+  <Image imageDyad={splash.mainImage} />
 </div>
 
 <style lang="scss">

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Swiper, SwiperSlide } from "swiper/svelte"
   import "swiper/css"
+  import Image from "$lib/components/Image.svelte"
   import { Language } from "$lib/types"
-  import { urlFor } from "$lib/modules/sanity"
   import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
   export let language: Language
@@ -18,7 +18,7 @@
     <SwiperSlide>
       <div class="inner">
         <div class="image">
-          <img src={urlFor(slide).saturation(-100).url()} alt={caption} />
+          <Image imageDyad={slide} {caption} />
         </div>
         <div class="caption">
           <div class="arrow"><SmallArrowLeft /></div>
@@ -70,5 +70,9 @@
 
   :global(.swiper) {
     height: 100%;
+  }
+
+  :global(.inner img) {
+    max-width: 100%;
   }
 </style>

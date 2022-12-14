@@ -18,7 +18,6 @@
       data-sveltekit-preload-data
     >
       {artist.konstnarer.join(", ")}
-      <span class="nationality">[{artist.nationalitet}]</span>
     </a>
   {/each}
 {/if}
@@ -52,17 +51,6 @@
       @include screen-size("small") {
         font-size: $FONT_SIZE_SMALL;
         padding-top: 15px;
-      }
-    }
-
-    .nationality {
-      position: relative;
-      top: -10px;
-      font-size: $FONT_SIZE_MEDIUM;
-
-      @include screen-size("small") {
-        font-size: $FONT_SIZE_SMALL;
-        top: -6px;
       }
     }
 

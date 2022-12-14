@@ -1,6 +1,6 @@
 <script lang="ts">
+  import Image from "$lib/components/Image.svelte"
   import { Language } from "$lib/types"
-  import { urlFor } from "$lib/modules/sanity"
   export let language: Language
   export let project: any
   const caption = Language.English ? project.title_eng : project.title
@@ -8,7 +8,7 @@
 
 <div class="inner">
   <div class="image">
-    <img src={urlFor(project.mainImage).saturation(-100).url()} alt={caption} />
+    <Image imageDyad={project.mainImage} {caption} />
   </div>
   <div class="caption">
     <div>{caption}</div>
@@ -45,5 +45,9 @@
         width: 8px;
       }
     }
+  }
+
+  :global(.inner img) {
+    max-width: 100%;
   }
 </style>

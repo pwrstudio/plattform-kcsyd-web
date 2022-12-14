@@ -5,11 +5,12 @@
   import { onMount } from "svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import X from "$lib/components/X.svelte"
+  import Image from "$lib/components/Image.svelte"
   import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
   import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
-  import { renderBlockText, toPlainText, urlFor } from "$lib/modules/sanity.js"
+  import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language, type ProjectType, UIColor } from "$lib/types"
   export let language: Language
   export let data: { project: ProjectType; projectList: ProjectType[] }
@@ -102,10 +103,7 @@
     <div class="content" class:double={project.layout === "alt2"}>
       {#if project.layout === "alt2"}
         <div class="hero" on:click={scrollDown}>
-          <img
-            src={urlFor(project.mainImage).saturation(-100).url()}
-            alt={title}
-          />
+          <Image imageDyad={project.mainImage} caption={title} />
         </div>
       {/if}
 
@@ -203,12 +201,6 @@
           width: 100%;
           height: calc(100vh - 85px);
           cursor: pointer;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
         }
 
         .column {
@@ -281,5 +273,11 @@
 
   :global(.column p:first-child) {
     margin-top: 0;
+  }
+
+  :global(.hero img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 </style>

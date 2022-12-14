@@ -2,7 +2,7 @@
   import { Swiper, SwiperSlide } from "swiper/svelte"
   import "swiper/css"
   import { Language } from "$lib/types"
-  import { urlFor } from "$lib/modules/sanity"
+  import Image from "$lib/components/Image.svelte"
   import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
   export let language: Language
@@ -18,10 +18,7 @@
         href={urlPrefix + "projekt/"}
         data-sveltekit-preload-data
       >
-        <img
-          src={urlFor(project.mainImage).saturation(-100).url()}
-          alt={project.title}
-        />
+        <Image imageDyad={project.mainImage} caption="{project.title}}" />
         <div class="caption">
           <div class="first-row">PÅGÅENDE PROJEKT</div>
           <div class="second-row">
@@ -77,5 +74,11 @@
 
   :global(.swiper) {
     height: 100%;
+  }
+
+  :global(.swiper .inner img) {
+    max-height: calc(100% - 40px);
+    max-width: 90%;
+    user-select: none;
   }
 </style>

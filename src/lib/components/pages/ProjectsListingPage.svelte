@@ -3,7 +3,7 @@
   import Hamburger from "$lib/components/Hamburger.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { urlFor } from "$lib/modules/sanity"
+  import Image from "$lib/components/Image.svelte"
   import { Language, UIColor, type ProjectType } from "$lib/types"
   import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
@@ -54,14 +54,15 @@
         {/if}
         <a class="project" href={urlPrefix + "projekt/" + project.slug.current}>
           <div class="image">
-            <img
+            <Image imageDyad={project.mainImage} caption={project.title} />
+            <!-- <img
               src={urlFor(project.mainImage)
                 .width(400)
                 .height(300)
                 .saturation(-100)
                 .url()}
-              alt={project.title}
-            />
+              alt={project.title} -->
+            <!-- /> -->
           </div>
           <div class="title">{project.title}</div>
         </a>
@@ -88,14 +89,15 @@
           href={urlPrefix + "projekt/" + project.slug.current}
         >
           <div class="image">
-            <img
+            <Image imageDyad={project.mainImage} caption={project.title} />
+            <!-- <img
               src={urlFor(project.mainImage)
                 .width(400)
                 .height(300)
                 .saturation(-100)
                 .url()}
-              alt={project.title}
-            />
+              alt={project.title} -->
+            <!-- /> -->
           </div>
           <div class="category">{category}</div>
           <div class="title">{project.title}</div>
@@ -214,16 +216,16 @@
             @include screen-size("small") {
               height: 110px;
             }
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              margin-top: 0;
-            }
           }
         }
       }
     }
+  }
+
+  :global(.project .image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-top: 0;
   }
 </style>

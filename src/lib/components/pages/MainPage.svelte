@@ -9,8 +9,9 @@
   import ArtistList from "$lib/components/ArtistList.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
-  import { renderBlockText, urlFor } from "$lib/modules/sanity"
+  import { renderBlockText } from "$lib/modules/sanity"
   import { Language, MainPageType } from "$lib/types"
+  import Image from "$lib/components/Image.svelte"
 
   export let mainPageType: MainPageType
   export let language: Language
@@ -80,10 +81,7 @@
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   {#if mainPageType === MainPageType.Landing}
     <div class="landing-page-image" on:click={scrollDown}>
-      <img
-        src={urlFor(hemsideBild.mainImage).saturation(-100).url()}
-        alt="Plattform KcSyd"
-      />
+      <Image imageDyad={hemsideBild.mainImage} caption={"Plattform KcSyd"} />
       <div class="arrow-down">
         <LargeArrowDown />
       </div>
@@ -208,17 +206,17 @@
     }
   }
 
+  :global(.landing-page-image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .landing-page-image {
     width: 100%;
     height: 100vh;
     position: realtive;
     cursor: pointer;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     @include screen-size("small") {
       display: none;

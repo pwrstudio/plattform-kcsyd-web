@@ -1,7 +1,7 @@
 <script lang="ts">
+  import Image from "$lib/components/Image.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
-  import { urlFor } from "$lib/modules/sanity"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language, type ArtistType } from "$lib/types"
   export let language: Language
@@ -34,10 +34,7 @@
   </a>
 
   <div class="image">
-    <img
-      src={urlFor(data.mainImage).width(800).saturation(-100).url()}
-      alt={title}
-    />
+    <Image imageDyad={data.mainImage} caption={title} />
   </div>
   <figcaption>{caption}</figcaption>
   <h1>{title}</h1>
@@ -68,12 +65,6 @@
       margin-left: auto;
       margin-right: auto;
       line-height: 0;
-
-      img {
-        width: 100%;
-        max-height: 500px;
-        object-fit: contain;
-      }
     }
 
     figcaption {
@@ -83,5 +74,11 @@
       margin-top: 5px;
       margin-bottom: 25px;
     }
+  }
+
+  :global(.image img) {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
   }
 </style>
