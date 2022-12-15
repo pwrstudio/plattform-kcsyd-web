@@ -8,11 +8,13 @@ export async function load({ params }) {
     const projektPagaende = await loadData("*[_type == 'projekt' && tidskategori == 'pagaende-projekt']")
     const konstnarerKommande = await loadData("*[_type == 'konstnar' && tidskategori == 'kommande']")
     const konstnarerTidigare = await loadData("*[_type == 'konstnar' && tidskategori == 'tidigare']")
+    const listor = await loadData("*[_id == 'listor']{konstnarerTidigareList[]->{...}, konstnarerKommandeList[]->{...}, pagaendeList[]->{...}, arkivDokumentationList[]->{...}}[0]")
     return {
         omKcSyd,
         projektPagaende,
         hemsideBild,
         konstnarerKommande,
         konstnarerTidigare,
+        listor,
     };
 }

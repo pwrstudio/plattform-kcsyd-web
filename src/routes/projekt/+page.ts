@@ -5,5 +5,6 @@ import { loadData } from "$lib/modules/sanity.js"
 export async function load({ params }) {
     const projektPagaende = await loadData("*[_type == 'projekt' && tidskategori == 'pagaende-projekt']")
     const projektArkivDokumentation = await loadData("*[_type == 'projekt' && tidskategori == 'arkiv-dokumentation']")
-    return { projektPagaende, projektArkivDokumentation };
+    const listor = await loadData("*[_id == 'listor']{konstnarerTidigareList[]->{...}, konstnarerKommandeList[]->{...}, pagaendeList[]->{...}, arkivDokumentationList[]->{...}}[0]")
+    return { projektPagaende, projektArkivDokumentation, listor };
 }

@@ -22,6 +22,7 @@
     projektPagaende,
     konstnarerKommande,
     konstnarerTidigare,
+    listor,
   } = data
 
   let artistsEl: HTMLElement
@@ -96,12 +97,32 @@
       <slot />
     {:else if language == Language.English}
       <h2>Artists</h2>
-      <ArtistList artists={konstnarerKommande} title="Upcoming" {language} />
-      <ArtistList artists={konstnarerTidigare} title="Previous" {language} />
+      <ArtistList
+        artists={konstnarerKommande}
+        list={listor.konstnarerKommandeList}
+        title="Upcoming"
+        {language}
+      />
+      <ArtistList
+        artists={konstnarerTidigare}
+        list={listor.konstnarerTidigareList}
+        title="Previous"
+        {language}
+      />
     {:else}
       <h2>Konstnärer</h2>
-      <ArtistList artists={konstnarerKommande} title="Kommande" {language} />
-      <ArtistList artists={konstnarerTidigare} title="Tidigare" {language} />
+      <ArtistList
+        artists={konstnarerKommande}
+        list={listor.konstnarerKommandeList}
+        title="Kommande"
+        {language}
+      />
+      <ArtistList
+        artists={konstnarerTidigare}
+        list={listor.konstnarerTidigareList}
+        title="Tidigare"
+        {language}
+      />
     {/if}
   </div>
 </div>

@@ -12,8 +12,9 @@
   export let data: {
     projektPagaende: ProjectType[]
     projektArkivDokumentation: ProjectType[]
+    listor: any[]
   }
-  const { projektPagaende, projektArkivDokumentation } = data
+  const { projektPagaende, projektArkivDokumentation, listor } = data
 
   const onGoingHeader =
     language === Language.English ? "Ongoing" : "Pågående projekt"
@@ -22,6 +23,19 @@
       ? "Archive / documentation*"
       : "Arkiv / dokumentation*"
   const urlPrefix = language === Language.English ? "/en/" : "/"
+
+  const specialIDs = [
+    ...listor.pagaendeList.map(p => p._id),
+    ...listor.arkivDokumentationList.map(p => p._id),
+  ]
+  const projektPagaendeSorted = [
+    ...listor.pagaendeList,
+    ...projektPagaende.filter(p => !specialIDs.includes(p._id)),
+  ]
+  const projektArkivDokumentationSorted = [
+    ...listor.arkivDokumentationList,
+    ...projektArkivDokumentation.filter(p => !specialIDs.includes(p._id)),
+  ]
 
   const openMenu = () => {
     menuActive.set(true)
@@ -45,7 +59,7 @@
     <!-- ONGOING -->
     <div class="section">
       <div class="section-header">{onGoingHeader}</div>
-      {#each projektPagaende as project, i (project._id)}
+      {#each projektPagaendeSorted as project, i (project._id)}
         {#if i > 0 && i % 4 === 0}
           <div class="desktop-divider" />
         {/if}
@@ -69,7 +83,7 @@
     <!-- ARCHIVE -->
     <div class="section">
       <div class="section-header">{pastHeader}</div>
-      {#each projektArkivDokumentation as project, i (project._id)}
+      {#each projektArkivDokumentationSorted as project, i (project._id)}
         {@const category =
           language === Language.English
             ? project.kategori_eng

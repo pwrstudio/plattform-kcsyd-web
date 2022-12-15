@@ -5,8 +5,6 @@
   import Splash from "$lib/components/Splash.svelte"
   import { languageStore, splashOpen } from "$lib/stores"
   import { Language, type MenuItem } from "$lib/types"
-  import { createEventDispatcher } from "svelte"
-  const dispatch = createEventDispatcher()
   export let splash: any
 
   const closeSplash = () => {
@@ -22,10 +20,10 @@
         title: "Plattform KcSyd",
         link: "/om-plattform-kcsyd",
       },
-      {
-        title: "Konstforum",
-        link: "https://www.google.com",
-      },
+      // {
+      //   title: "Konstforum",
+      //   link: "https://www.google.com",
+      // },
       {
         title: "Pågående projekt / Arkiv / Dokumentation",
         link: "/projekt",
@@ -44,10 +42,10 @@
         title: "About KcSyd",
         link: "/en/om-plattform-kcsyd",
       },
-      {
-        title: "Konstforum",
-        link: "https://www.google.com",
-      },
+      // {
+      //   title: "Konstforum",
+      //   link: "https://www.google.com",
+      // },
       {
         title: "Ongoing projects / Archive / Documentation",
         link: "/en/projekt",

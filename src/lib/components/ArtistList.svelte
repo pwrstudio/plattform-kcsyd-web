@@ -2,16 +2,23 @@
   import { type ArtistType, Language } from "$lib/types"
   export let language: Language
   export let artists: ArtistType[]
+  export let list: any[]
   export let title: string
   const urlPrefix = language === Language.English ? "/en/" : "/"
+
+  const specialIDs = list.map(l => l._id)
+  const artistsSorted = [
+    ...list,
+    ...artists.filter(a => !specialIDs.includes(a._id)),
+  ]
 </script>
 
-{#if artists.length > 0}
+{#if artistsSorted.length > 0}
   <div class="item header">
     {title}
   </div>
 
-  {#each artists as artist}
+  {#each artistsSorted as artist}
     <a
       href={urlPrefix + "konstnarer/" + artist.slug.current}
       class="item"
