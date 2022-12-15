@@ -163,7 +163,7 @@
               font-size: $FONT_SIZE_MEDIUM;
             }
             .logos {
-              height: 100px;
+              display: inline-block;
               border-top: 1px solid black;
               border-bottom: 1px solid black;
             }
@@ -196,7 +196,7 @@
       font-size: $FONT_SIZE_MEDIUM;
     }
     .logos {
-      height: 100px;
+      display: inline-block;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
     }
