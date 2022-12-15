@@ -95,11 +95,11 @@
     {#if mainPageType === MainPageType.Single}
       <slot />
     {:else if language == Language.English}
-      <h2>Artists' profiles</h2>
+      <h2>Artists</h2>
       <ArtistList artists={konstnarerKommande} title="Upcoming" {language} />
       <ArtistList artists={konstnarerTidigare} title="Previous" {language} />
     {:else}
-      <h2>Konstnärsprofiler</h2>
+      <h2>Konstnärer</h2>
       <ArtistList artists={konstnarerKommande} title="Kommande" {language} />
       <ArtistList artists={konstnarerTidigare} title="Tidigare" {language} />
     {/if}
