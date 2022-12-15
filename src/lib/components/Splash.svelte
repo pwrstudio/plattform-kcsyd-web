@@ -12,7 +12,7 @@
 </script>
 
 <div class="splash" on:click={close} out:fade>
-  <Image imageDyad={splash.mainImage} />
+  <Image imageDyad={splash.mainImage} width={500} />
 </div>
 
 <style lang="scss">
@@ -29,6 +29,6 @@
   }
 
   :global(.splash img) {
-    width: 400px;
+    width: 500px;
   }
 </style>

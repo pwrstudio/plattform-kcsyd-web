@@ -18,7 +18,11 @@
         href={urlPrefix + "projekt/"}
         data-sveltekit-preload-data
       >
-        <Image imageDyad={project.mainImage} caption="{project.title}}" />
+        <Image
+          imageDyad={project.mainImage}
+          caption="{project.title}}"
+          width={600}
+        />
         <div class="caption">
           <div class="first-row">PÅGÅENDE PROJEKT</div>
           <div class="second-row">

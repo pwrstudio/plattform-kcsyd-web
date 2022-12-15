@@ -4,7 +4,7 @@
   import { quadOut } from "svelte/easing"
   import Splash from "$lib/components/Splash.svelte"
   import { languageStore, splashOpen } from "$lib/stores"
-  import { Language, MenuItem } from "$lib/types"
+  import { Language, type MenuItem } from "$lib/types"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
   export let splash: any
