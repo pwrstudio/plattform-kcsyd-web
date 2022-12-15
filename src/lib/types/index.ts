@@ -70,3 +70,8 @@ export interface ArtistsType {
     [index: number]: ArtistType
 }
 
+export interface MenuItem {
+    title: string
+    link: string
+}
+

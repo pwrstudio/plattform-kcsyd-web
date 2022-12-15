@@ -1,20 +1,16 @@
 <script lang="ts">
+  import { onMount } from "svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import Splash from "$lib/components/Splash.svelte"
-  import { languageStore } from "$lib/stores"
-  import { Language } from "$lib/types"
+  import { languageStore, splashOpen } from "$lib/stores"
+  import { Language, MenuItem } from "$lib/types"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()
   export let splash: any
 
-  let splashOpen = false
   const closeSplash = () => {
-    splashOpen = false
-  }
-  interface MenuItem {
-    title: string
-    link: string
+    splashOpen.set(false)
   }
 
   const menuItems: {
@@ -70,9 +66,13 @@
   let activeMenuItems: MenuItem[]
   $: activeMenuItems =
     $languageStore === Language.English ? menuItems.eng : menuItems.sve
+
+  onMount(async () => {
+    setTimeout(closeSplash, 4000)
+  })
 </script>
 
-{#if splash.mainImage && splashOpen}
+{#if splash.mainImage && $splashOpen}
   <Splash {splash} on:close={closeSplash} />
 {/if}
 

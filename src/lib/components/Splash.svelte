@@ -27,4 +27,8 @@
     background: $lime;
     z-index: 10000;
   }
+
+  :global(.splash img) {
+    width: 400px;
+  }
 </style>

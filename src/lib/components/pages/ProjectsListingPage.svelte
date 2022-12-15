@@ -54,15 +54,12 @@
         {/if}
         <a class="project" href={urlPrefix + "projekt/" + project.slug.current}>
           <div class="image">
-            <Image imageDyad={project.mainImage} caption={project.title} />
-            <!-- <img
-              src={urlFor(project.mainImage)
-                .width(400)
-                .height(300)
-                .saturation(-100)
-                .url()}
-              alt={project.title} -->
-            <!-- /> -->
+            <Image
+              imageDyad={project.mainImage}
+              caption={project.title}
+              width={400}
+              height={300}
+            />
           </div>
           <div class="title">{project.title}</div>
         </a>
@@ -89,15 +86,12 @@
           href={urlPrefix + "projekt/" + project.slug.current}
         >
           <div class="image">
-            <Image imageDyad={project.mainImage} caption={project.title} />
-            <!-- <img
-              src={urlFor(project.mainImage)
-                .width(400)
-                .height(300)
-                .saturation(-100)
-                .url()}
-              alt={project.title} -->
-            <!-- /> -->
+            <Image
+              imageDyad={project.mainImage}
+              caption={project.title}
+              width={400}
+              height={300}
+            />
           </div>
           <div class="category">{category}</div>
           <div class="title">{project.title}</div>
