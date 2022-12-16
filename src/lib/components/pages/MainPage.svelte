@@ -2,7 +2,7 @@
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive, miljopolicyOpen } from "$lib/stores"
   import { onMount } from "svelte"
   import Marquee from "$lib/components/Marquee.svelte"
   import Slideshow from "$lib/components/Slideshow.svelte"
@@ -12,6 +12,7 @@
   import { renderBlockText } from "$lib/modules/sanity"
   import { Language, MainPageType } from "$lib/types"
   import Image from "$lib/components/Image.svelte"
+  import MiljoPolicyPopUp from "../MiljoPolicyPopUp.svelte"
 
   export let mainPageType: MainPageType
   export let language: Language
@@ -23,6 +24,7 @@
     konstnarerKommande,
     konstnarerTidigare,
     listor,
+    miljopolicy,
   } = data
 
   let artistsEl: HTMLElement
@@ -33,6 +35,10 @@
 
   const openMenu = () => {
     menuActive.set(true)
+  }
+
+  const closeMiljopolicy = () => {
+    miljopolicyOpen.set(false)
   }
 
   const urlPrefix = language === Language.English ? "/en/" : "/"
@@ -54,6 +60,10 @@
   <span on:click={openMenu}>
     <Hamburger />
   </span>
+{/if}
+
+{#if mainPageType === MainPageType.Landing && miljopolicy && $miljopolicyOpen}
+  <MiljoPolicyPopUp {miljopolicy} {language} on:close={closeMiljopolicy} />
 {/if}
 
 <!-- RIGHT -->

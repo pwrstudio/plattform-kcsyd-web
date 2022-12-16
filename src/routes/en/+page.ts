@@ -9,6 +9,7 @@ export async function load({ params }) {
     const konstnarerKommande = await loadData("*[_type == 'konstnar' && tidskategori == 'kommande'] | order(_createdAt desc)")
     const konstnarerTidigare = await loadData("*[_type == 'konstnar' && tidskategori == 'tidigare'] | order(_createdAt desc)")
     const listor = await loadData("*[_id == 'listor']{konstnarerTidigareList[]->{...}, konstnarerKommandeList[]->{...}, pagaendeList[]->{...}, arkivDokumentationList[]->{...}}[0]")
+    const miljopolicy = await loadData("*[_id == 'miljopolicy'][0]")
     return {
         omKcSyd,
         projektPagaende,
@@ -16,5 +17,6 @@ export async function load({ params }) {
         konstnarerKommande,
         konstnarerTidigare,
         listor,
+        miljopolicy
     };
 }
