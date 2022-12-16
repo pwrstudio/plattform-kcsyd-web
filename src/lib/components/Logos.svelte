@@ -5,8 +5,8 @@
       url: "/images/rs.png",
     },
     {
-      name: "Statens konstråd",
-      url: "/images/sk.png",
+      name: "Kulturrådet",
+      url: "/images/kr.png",
     },
     {
       name: "Malmö Stad",
