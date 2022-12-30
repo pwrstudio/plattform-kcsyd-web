@@ -81,8 +81,8 @@
   }
 
   :global(.swiper .inner img) {
-    max-height: calc(100% - 40px);
-    max-width: 90%;
+    max-height: calc(100vh - 200px);
+    max-width: 100%;
     user-select: none;
   }
 </style>
