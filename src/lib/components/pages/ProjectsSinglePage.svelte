@@ -85,7 +85,6 @@
     href={prevProjectLink}
     class="page-navigation prev"
     data-sveltekit-preload-data
-    data-sveltekit-reload
   >
     <LargeArrowLeft />
   </a>
@@ -93,7 +92,6 @@
     href={nextProjectLink}
     class="page-navigation next"
     data-sveltekit-preload-data
-    data-sveltekit-reload
   >
     <LargeArrowRight />
   </a>

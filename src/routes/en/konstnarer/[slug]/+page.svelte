@@ -9,10 +9,12 @@
   const { mainPage, artist } = data
 </script>
 
-<MainPage
-  data={mainPage}
-  language={Language.English}
-  mainPageType={MainPageType.Single}
->
-  <ArtistsSinglePage data={artist} language={Language.English} />
-</MainPage>
+{#key artist}
+  <MainPage
+    data={mainPage}
+    language={Language.English}
+    mainPageType={MainPageType.Single}
+  >
+    <ArtistsSinglePage data={artist} language={Language.English} />
+  </MainPage>
+{/key}
