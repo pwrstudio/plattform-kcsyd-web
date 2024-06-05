@@ -5,8 +5,8 @@
       url: "/images/kcs.png",
     },
     {
-      name: "Malmö Stad",
-      url: "/images/ms.png",
+      name: "Region Skåne",
+      url: "/images/rs.png",
     },
   ]
 </script>
