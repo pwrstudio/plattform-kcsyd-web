@@ -75,7 +75,9 @@
               height={300}
             />
           </div>
-          <div class="title">{project.title}</div>
+          <div class="title">
+            {language === Language.English ? project.title_eng : project.title}
+          </div>
         </a>
       {/each}
     </div>
@@ -107,8 +109,14 @@
               height={300}
             />
           </div>
-          <div class="category">{category}</div>
-          <div class="title">{project.title}</div>
+          <div class="category">
+            {language === Language.English && project.kategori_eng
+              ? project.kategori_eng
+              : project.kategori}
+          </div>
+          <div class="title">
+            {language === Language.English ? project.title_eng : project.title}
+          </div>
         </a>
       {/each}
     </div>

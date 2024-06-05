@@ -1,20 +1,12 @@
 <script lang="ts">
   const logos = [
     {
-      name: "Region Skåne",
-      url: "/images/rs.png",
-    },
-    {
-      name: "Kulturrådet",
-      url: "/images/kr.png",
+      name: "Konstnärscentrum Syd",
+      url: "/images/kcs.png",
     },
     {
       name: "Malmö Stad",
       url: "/images/ms.png",
-    },
-    {
-      name: "Konstfrämjandet Skåne",
-      url: "/images/kf.png",
     },
   ]
 </script>
@@ -29,7 +21,7 @@
   @import "src/lib/style/variables.scss";
 
   .logo {
-    width: calc(25% - 10px);
+    width: calc(50% - 10px);
     height: 100px;
     border-right: 1px solid $black;
     float: left;

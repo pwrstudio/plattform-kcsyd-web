@@ -24,11 +24,17 @@
           width={600}
         />
         <div class="caption">
-          <div class="first-row">PÅGÅENDE PROJEKT</div>
+          <div class="first-row">
+            {language === Language.English
+              ? "ONGOING PROJECT"
+              : "PÅGÅENDE PROJEKT"}
+          </div>
           <div class="second-row">
             <div class="arrow"><SmallArrowLeft /></div>
             <div>
-              {project.title}
+              {language === Language.English
+                ? project.title_eng
+                : project.title}
             </div>
             <div class="arrow"><SmallArrowRight /></div>
           </div>

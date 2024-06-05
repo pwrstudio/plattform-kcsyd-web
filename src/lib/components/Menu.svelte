@@ -39,7 +39,7 @@
     ],
     eng: [
       {
-        title: "About KcSyd",
+        title: "About Plattform KcSyd",
         link: "/en/om-plattform-kcsyd",
       },
       // {

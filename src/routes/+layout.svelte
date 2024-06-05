@@ -3,6 +3,7 @@
   import Menu from "$lib/components/Menu.svelte"
   import Marquee from "$lib/components/Marquee.svelte"
   import { menuActive } from "$lib/stores"
+  import { languageStore } from "$lib/stores"
 
   export let data
   const { splash } = data
@@ -10,6 +11,8 @@
   const closeMenu = () => {
     menuActive.set(false)
   }
+
+  $: console.log("$languageStore", $languageStore)
 </script>
 
 <div class="phone-marquee">

@@ -162,7 +162,9 @@
               font-family: $ATLAS_STACK;
               font-size: $FONT_SIZE_MEDIUM;
             }
+
             .logos {
+              width: 100%;
               display: inline-block;
               border-top: 1px solid black;
               border-bottom: 1px solid black;
