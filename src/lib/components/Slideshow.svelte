@@ -67,12 +67,6 @@
     text-decoration: none;
     color: $white;
 
-    img {
-      max-height: calc(100% - 40px);
-      max-width: 90%;
-      user-select: none;
-    }
-
     .caption {
       width: 100%;
       text-align: center;

@@ -78,10 +78,6 @@
     }
   }
 
-  h1 {
-    text-transform: uppercase;
-  }
-
   :global(.page .small) {
     font-family: $ATLAS_STACK;
     font-size: $FONT_SIZE_MEDIUM;

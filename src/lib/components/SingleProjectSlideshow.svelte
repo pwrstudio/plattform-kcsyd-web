@@ -58,10 +58,6 @@
       padding-bottom: 10px;
     }
 
-    img {
-      max-width: 100%;
-    }
-
     .caption {
       margin-top: 20px;
       width: 100%;

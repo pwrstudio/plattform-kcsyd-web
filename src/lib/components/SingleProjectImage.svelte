@@ -36,20 +36,12 @@
     text-decoration: none;
     color: $white;
 
-    img {
-      max-width: 100%;
-    }
-
     .caption {
       width: 100%;
       text-align: center;
       padding: 0 10px;
       display: flex;
       justify-content: center;
-      .arrow {
-        height: 8px;
-        width: 8px;
-      }
     }
   }
 

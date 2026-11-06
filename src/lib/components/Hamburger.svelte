@@ -26,11 +26,6 @@
     z-index: 1000;
     cursor: pointer;
 
-    &.x {
-      top: 25px;
-      right: 20px;
-    }
-
     @include screen-size("small") {
       top: 80px;
     }
