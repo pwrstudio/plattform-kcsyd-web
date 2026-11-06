@@ -1,35 +1,37 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
-  import { Language } from "$lib/types"
-  import { createEventDispatcher } from "svelte"
-  import { renderBlockText } from "$lib/modules/sanity"
-  const dispatch = createEventDispatcher()
-
-  const close = () => {
-    dispatch("close")
+  import { Language } from "#lib/types/index.ts"
+  import { renderBlockText } from "#lib/modules/sanity.js"
+  interface Props {
+    language: Language
+    miljopolicy: any
+    onclose?: () => void
   }
 
-  export let language: Language
-  export let miljopolicy: any
+  let { language, miljopolicy, onclose }: Props = $props()
 
-  const content =
+  const close = () => onclose?.()
+
+  const content = $derived(
     language === Language.English
       ? miljopolicy.content_eng.content
       : miljopolicy.content_sve.content
+  )
 
-  const buttonText =
+  const buttonText = $derived(
     language === Language.English ? "ok, got it" : "ok, jag förstår"
+  )
 </script>
 
 <div class="miljopolicy" transition:fade>
-  <div class="inner" on:click={close}>
+  <div class="inner" onclick={close}>
     <div class="close">{buttonText}</div>
     {@html renderBlockText(content)}
   </div>
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .miljopolicy {
     position: fixed;

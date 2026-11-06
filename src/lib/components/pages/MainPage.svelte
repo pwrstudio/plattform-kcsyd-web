@@ -1,22 +1,27 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive, miljopolicyOpen } from "$lib/stores"
+  import { menuActive, miljopolicyOpen } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import Marquee from "$lib/components/Marquee.svelte"
-  import Slideshow from "$lib/components/Slideshow.svelte"
-  import ArtistList from "$lib/components/ArtistList.svelte"
-  import Hamburger from "$lib/components/Hamburger.svelte"
-  import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
-  import { renderBlockText } from "$lib/modules/sanity"
-  import { Language, MainPageType } from "$lib/types"
-  import Image from "$lib/components/Image.svelte"
+  import Marquee from "#lib/components/Marquee.svelte"
+  import Slideshow from "#lib/components/Slideshow.svelte"
+  import ArtistList from "#lib/components/ArtistList.svelte"
+  import Hamburger from "#lib/components/Hamburger.svelte"
+  import LargeArrowDown from "#lib/graphics/LargeArrowDown.svelte"
+  import { renderBlockText } from "#lib/modules/sanity.js"
+  import { Language, MainPageType } from "#lib/types/index.ts"
+  import Image from "#lib/components/Image.svelte"
   import MiljoPolicyPopUp from "../MiljoPolicyPopUp.svelte"
 
-  export let mainPageType: MainPageType
-  export let language: Language
-  export let data
+  interface Props {
+    mainPageType: MainPageType
+    language: Language
+    data: any
+    children?: import("svelte").Snippet
+  }
+
+  let { mainPageType, language, data, children }: Props = $props()
   const {
     omKcSyd,
     hemsideBild,
@@ -25,12 +30,12 @@
     konstnarerTidigare,
     listor,
     miljopolicy,
-  } = data
+  } = $derived(data)
 
-  let artistsEl: HTMLElement
+  let artistsEl: HTMLElement | undefined = $state()
 
   function scrollDown() {
-    artistsEl.scrollIntoView({ behavior: "smooth" })
+    artistsEl?.scrollIntoView({ behavior: "smooth" })
   }
 
   const openMenu = () => {
@@ -41,14 +46,14 @@
     miljopolicyOpen.set(false)
   }
 
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {
     if (
       mainPageType === MainPageType.Listing ||
       mainPageType === MainPageType.Single
     ) {
-      artistsEl.scrollIntoView()
+      artistsEl?.scrollIntoView()
     }
     menuActive.set(false)
   })
@@ -57,13 +62,13 @@
 <Metadata />
 
 {#if !$menuActive}
-  <span on:click={openMenu}>
+  <span onclick={openMenu}>
     <Hamburger />
   </span>
 {/if}
 
 {#if mainPageType === MainPageType.Landing && miljopolicy && $miljopolicyOpen}
-  <MiljoPolicyPopUp {miljopolicy} {language} on:close={closeMiljopolicy} />
+  <MiljoPolicyPopUp {miljopolicy} {language} onclose={closeMiljopolicy} />
 {/if}
 
 <!-- RIGHT -->
@@ -91,7 +96,7 @@
 <!-- LEFT -->
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   {#if mainPageType === MainPageType.Landing}
-    <div class="landing-page-image" on:click={scrollDown}>
+    <div class="landing-page-image" onclick={scrollDown}>
       <Image imageDyad={hemsideBild.mainImage} caption={"Plattform KcSyd"} />
       <div class="arrow-down">
         <LargeArrowDown />
@@ -104,7 +109,7 @@
     bind:this={artistsEl}
   >
     {#if mainPageType === MainPageType.Single}
-      <slot />
+      {@render children?.()}
     {:else if language == Language.English}
       <h2>Artists</h2>
       <ArtistList
@@ -148,7 +153,7 @@
 </a>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .column {
     height: 100vh;

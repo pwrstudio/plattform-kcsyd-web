@@ -1,69 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Plattform KcSyd</title>
+    %sveltekit.head%
 
-<head>
-	<meta charset="utf-8" />
-	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-	<meta name="viewport" content="width=device-width" />
-	<title>Plattform KcSyd</title>
-	%sveltekit.head%
+    <style>
+      @font-face {
+        font-family: "Atlas Grotesk";
+        src:
+          url("/fonts/AtlasGrotesk-Medium.woff2") format("woff2"),
+          url("/fonts/AtlasGrotesk-Medium.woff") format("woff");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
 
-	<style>
-		@font-face {
-			font-family: "Atlas Grotesk";
-			src: url("/fonts/AtlasGrotesk-Medium.woff2") format("woff2"),
-				url("/fonts/AtlasGrotesk-Medium.woff") format("woff");
-			font-weight: 500;
-			font-style: normal;
-			font-display: swap;
-		}
+      @font-face {
+        font-family: "BT Barbara";
+        src:
+          url("/fonts/BTBarbara-Regular.woff2") format("woff2"),
+          url("/fonts/BTBarbara-Regular.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
 
-		@font-face {
-			font-family: "BT Barbara";
-			src: url("/fonts/BTBarbara-Regular.woff2") format("woff2"),
-				url("/fonts/BTBarbara-Regular.woff") format("woff");
-			font-weight: normal;
-			font-style: normal;
-			font-display: swap;
-		}
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+      }
 
-		body,
-		html {
-			margin: 0;
-			padding: 0;
-		}
+      * {
+        box-sizing: border-box;
+        -webkit-font-feature-settings:
+          "liga" on,
+          "calt" on;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
 
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+      }
 
-		* {
-			box-sizing: border-box;
-			-webkit-font-feature-settings: "liga" on, "calt" on;
-			-webkit-font-smoothing: antialiased;
-			text-rendering: geometricPrecision;
+      *::-webkit-scrollbar {
+        display: none;
+      }
 
-			-ms-overflow-style: none;
-			/* IE and Edge */
-			scrollbar-width: none;
-			/* Firefox */
-		}
+      a {
+        color: inherit;
+      }
 
-		*::-webkit-scrollbar {
-			display: none;
-		}
+      h1,
+      h2,
+      h3 {
+        font-weight: normal;
+      }
+    </style>
+  </head>
 
-		a {
-			color: inherit;
-		}
-
-		h1,
-		h2,
-		h3 {
-			font-weight: normal;
-		}
-	</style>
-</head>
-
-<body>
-	<div style="display: contents">%sveltekit.body%</div>
-</body>
-
+  <body>
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
 </html>

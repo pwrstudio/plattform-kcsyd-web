@@ -1,15 +1,19 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import { renderBlockText } from "$lib/modules/sanity.js"
-  import X from "$lib/components/X.svelte"
-  import { Language, type AboutPageType } from "$lib/types"
-  export let language: Language
-  export let data: AboutPageType
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  import { renderBlockText } from "#lib/modules/sanity.js"
+  import X from "#lib/components/X.svelte"
+  import { Language, type AboutPageType } from "#lib/types/index.ts"
+  interface Props {
+    language: Language
+    data: AboutPageType
+  }
+
+  let { language, data }: Props = $props()
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {
     menuActive.set(false)
@@ -41,7 +45,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .page {
     background: $lime;

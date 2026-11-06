@@ -18,7 +18,7 @@
 {/each}
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .logo {
     width: calc(50% - 10px);

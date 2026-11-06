@@ -1,37 +1,45 @@
 <script lang="ts">
-  import { Swiper, SwiperSlide } from "swiper/svelte"
-  import "swiper/css"
-  import Image from "$lib/components/Image.svelte"
-  import { Language } from "$lib/types"
-  import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
-  import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
-  export let language: Language
-  export let slides: any[]
+  import { swiper } from "#lib/actions/swiper.ts"
+  import Image from "#lib/components/Image.svelte"
+  import { Language } from "#lib/types/index.ts"
+  import SmallArrowLeft from "#lib/graphics/SmallArrowLeft.svelte"
+  import SmallArrowRight from "#lib/graphics/SmallArrowRight.svelte"
+  interface Props {
+    language: Language
+    slides: any[]
+  }
+
+  let { language, slides }: Props = $props()
 </script>
 
-<Swiper spaceBetween={50} slidesPerView={1} loop={true}>
-  {#each slides as slide}
-    {@const caption =
-      (language === Language.English
-        ? slide.bildtext_eng
-        : slide.bildtext_sve) || ""}
-    <SwiperSlide>
-      <div class="inner">
-        <div class="image">
-          <Image imageDyad={slide} {caption} />
-        </div>
-        <div class="caption">
-          <div class="arrow"><SmallArrowLeft /></div>
-          <div>{caption}</div>
-          <div class="arrow"><SmallArrowRight /></div>
+<div
+  class="swiper"
+  use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}
+>
+  <div class="swiper-wrapper">
+    {#each slides as slide}
+      {@const caption =
+        (language === Language.English
+          ? slide.bildtext_eng
+          : slide.bildtext_sve) || ""}
+      <div class="swiper-slide">
+        <div class="inner">
+          <div class="image">
+            <Image imageDyad={slide} {caption} />
+          </div>
+          <div class="caption">
+            <div class="arrow"><SmallArrowLeft /></div>
+            <div>{caption}</div>
+            <div class="arrow"><SmallArrowRight /></div>
+          </div>
         </div>
       </div>
-    </SwiperSlide>
-  {/each}
-</Swiper>
+    {/each}
+  </div>
+</div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .inner {
     width: 100%;

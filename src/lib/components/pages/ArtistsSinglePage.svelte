@@ -1,25 +1,34 @@
 <script lang="ts">
-  import Image from "$lib/components/Image.svelte"
-  import Metadata from "$lib/components/Metadata.svelte"
-  import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
-  import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
-  import { Language, type ArtistType } from "$lib/types"
-  export let language: Language
-  export let data: ArtistType
-  const title = language === Language.English ? data.title_eng : data.title
-  const content =
+  import Image from "#lib/components/Image.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
+  import LargeArrowLeft from "#lib/graphics/LargeArrowLeft.svelte"
+  import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
+  import { Language, type ArtistType } from "#lib/types/index.ts"
+  interface Props {
+    language: Language
+    data: ArtistType
+  }
+
+  let { language, data }: Props = $props()
+  const title = $derived(
+    language === Language.English ? data.title_eng : data.title
+  )
+  const content = $derived(
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
-  const description =
+  )
+  const description = $derived(
     language === Language.English
       ? toPlainText(data.content_eng.content)
       : toPlainText(data.content_sve.content)
-  const caption =
+  )
+  const caption = $derived(
     language === Language.English
       ? data.mainImage.bildtext_eng || ""
       : data.mainImage.bildtext_sve || ""
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  )
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 </script>
 
 <Metadata {title} {description} />
@@ -42,7 +51,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .single-artist {
     font-family: $ATLAS_STACK;

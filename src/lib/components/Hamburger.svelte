@@ -1,7 +1,11 @@
 <script lang="ts">
-  import Hamburger from "$lib/graphics/Hamburger.svelte"
-  import { UIColor } from "$lib/types"
-  export let color: UIColor = UIColor.Black
+  import Hamburger from "#lib/graphics/Hamburger.svelte"
+  import { UIColor } from "#lib/types/index.ts"
+  interface Props {
+    color?: UIColor
+  }
+
+  let { color = UIColor.Black }: Props = $props()
 </script>
 
 <div class="menu-toggle">
@@ -9,7 +13,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .menu-toggle {
     position: fixed;

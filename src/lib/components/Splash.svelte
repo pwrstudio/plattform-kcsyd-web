@@ -1,22 +1,22 @@
 <script lang="ts">
-  import Image from "$lib/components/Image.svelte"
+  import Image from "#lib/components/Image.svelte"
   import { fade } from "svelte/transition"
-  import { createEventDispatcher } from "svelte"
-  const dispatch = createEventDispatcher()
-
-  const close = () => {
-    dispatch("close")
+  interface Props {
+    splash: any
+    onclose?: () => void
   }
 
-  export let splash: any
+  let { splash, onclose }: Props = $props()
+
+  const close = () => onclose?.()
 </script>
 
-<div class="splash" on:click={close} out:fade>
+<div class="splash" onclick={close} out:fade>
   <Image imageDyad={splash.mainImage} width={500} />
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .splash {
     position: fixed;

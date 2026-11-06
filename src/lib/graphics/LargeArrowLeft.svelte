@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let black = false
+  interface Props {
+    black?: boolean
+  }
+
+  let { black = false }: Props = $props()
 </script>
 
 <svg
@@ -14,7 +18,7 @@
 </svg>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   svg {
     height: 50px;

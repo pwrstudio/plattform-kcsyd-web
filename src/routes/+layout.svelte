@@ -1,11 +1,13 @@
 <script lang="ts">
-  import X from "$lib/components/X.svelte"
-  import Menu from "$lib/components/Menu.svelte"
-  import Marquee from "$lib/components/Marquee.svelte"
-  import { menuActive } from "$lib/stores"
+  import X from "#lib/components/X.svelte"
+  import Menu from "#lib/components/Menu.svelte"
+  import Marquee from "#lib/components/Marquee.svelte"
+  import { menuActive } from "#lib/stores/index.ts"
 
-  export let data
-  const { splash } = data
+  import type { LayoutProps } from "./$types"
+
+  let { data, children }: LayoutProps = $props()
+  const splash = $derived(data.splash)
 
   const closeMenu = () => {
     menuActive.set(false)
@@ -17,16 +19,16 @@
 </div>
 
 {#if $menuActive}
-  <span on:click={closeMenu}>
+  <span onclick={closeMenu}>
     <X />
   </span>
   <Menu {splash} />
 {/if}
 
-<slot />
+{@render children?.()}
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .phone-marquee {
     display: none;

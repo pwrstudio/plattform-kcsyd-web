@@ -2,10 +2,14 @@
   import { onMount } from "svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import Splash from "$lib/components/Splash.svelte"
-  import { languageStore, splashOpen } from "$lib/stores"
-  import { Language, type MenuItem } from "$lib/types"
-  export let splash: any
+  import Splash from "#lib/components/Splash.svelte"
+  import { languageStore, splashOpen } from "#lib/stores/index.ts"
+  import { Language, type MenuItem } from "#lib/types/index.ts"
+  interface Props {
+    splash: any
+  }
+
+  let { splash }: Props = $props()
 
   const closeSplash = () => {
     splashOpen.set(false)
@@ -61,9 +65,9 @@
     ],
   }
 
-  let activeMenuItems: MenuItem[]
-  $: activeMenuItems =
+  let activeMenuItems: MenuItem[] = $derived(
     $languageStore === Language.English ? menuItems.eng : menuItems.sve
+  )
 
   onMount(async () => {
     setTimeout(closeSplash, 4000)
@@ -71,7 +75,7 @@
 </script>
 
 {#if splash.mainImage && $splashOpen}
-  <Splash {splash} on:close={closeSplash} />
+  <Splash {splash} onclose={closeSplash} />
 {/if}
 
 <div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>
@@ -79,7 +83,7 @@
     <span
       class="language-option"
       class:selected={$languageStore === Language.Swedish}
-      on:click={() => {
+      onclick={() => {
         languageStore.set(Language.Swedish)
       }}
     >
@@ -89,7 +93,7 @@
     <span
       class="language-option"
       class:selected={$languageStore === Language.English}
-      on:click={() => {
+      onclick={() => {
         languageStore.set(Language.English)
       }}
     >
@@ -107,7 +111,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .language-switch {
     position: absolute;

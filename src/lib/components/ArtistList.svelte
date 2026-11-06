@@ -1,16 +1,19 @@
 <script lang="ts">
-  import { type ArtistType, Language } from "$lib/types"
-  export let language: Language
-  export let artists: ArtistType[]
-  export let list: any[]
-  export let title: string
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  import { type ArtistType, Language } from "#lib/types/index.ts"
+  interface Props {
+    language: Language
+    artists: ArtistType[]
+    list: any[]
+    title: string
+  }
 
-  const specialIDs = list.map(l => l._id)
-  const artistsSorted = [
-    ...list,
-    ...artists.filter(a => !specialIDs.includes(a._id)),
-  ]
+  let { language, artists, list, title }: Props = $props()
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
+
+  const artistsSorted = $derived.by(() => {
+    const specialIDs = list.map(l => l._id)
+    return [...list, ...artists.filter(a => !specialIDs.includes(a._id))]
+  })
 </script>
 
 {#if artistsSorted.length > 0}
@@ -30,7 +33,7 @@
 {/if}
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .item {
     padding-top: 15px;

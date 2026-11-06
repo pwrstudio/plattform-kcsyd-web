@@ -2,41 +2,41 @@
   <div class="marquee-inner" aria-hidden="true">
     <div class="marquee-content">
       <div class="text-section">Plattform KcSyd</div>
-      <div class="divider" />
+      <div class="divider"></div>
       <div class="text-section">
         En konstnärsdriven plattform för offentlig konst i södra sverige
       </div>
-      <div class="divider" />
+      <div class="divider"></div>
     </div>
     <div class="marquee-content">
       <div class="text-section">Plattform KcSyd</div>
-      <div class="divider" />
+      <div class="divider"></div>
       <div class="text-section">
         En konstnärsdriven plattform för offentlig konst i södra sverige
       </div>
-      <div class="divider" />
+      <div class="divider"></div>
     </div>
     <div class="marquee-content">
       <div class="text-section">Plattform KcSyd</div>
-      <div class="divider" />
+      <div class="divider"></div>
       <div class="text-section">
         En konstnärsdriven plattform för offentlig konst i södra sverige
       </div>
-      <div class="divider" />
+      <div class="divider"></div>
     </div>
     <div class="marquee-content">
       <div class="text-section">Plattform KcSyd</div>
-      <div class="divider" />
+      <div class="divider"></div>
       <div class="text-section">
         En konstnärsdriven plattform för offentlig konst i södra sverige
       </div>
-      <div class="divider" />
+      <div class="divider"></div>
     </div>
   </div>
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .marquee {
     user-select: none;

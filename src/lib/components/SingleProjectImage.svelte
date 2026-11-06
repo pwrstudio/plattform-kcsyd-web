@@ -1,9 +1,15 @@
 <script lang="ts">
-  import Image from "$lib/components/Image.svelte"
-  import { Language } from "$lib/types"
-  export let language: Language
-  export let project: any
-  const caption = Language.English ? project.title_eng : project.title
+  import Image from "#lib/components/Image.svelte"
+  import { Language } from "#lib/types/index.ts"
+  interface Props {
+    language: Language
+    project: any
+  }
+
+  let { language, project }: Props = $props()
+  const caption = $derived(
+    language === Language.English ? project.title_eng : project.title
+  )
 </script>
 
 <div class="inner">
@@ -16,7 +22,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .inner {
     width: 100%;

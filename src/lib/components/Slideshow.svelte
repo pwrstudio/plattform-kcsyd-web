@@ -1,51 +1,59 @@
 <script lang="ts">
-  import { Swiper, SwiperSlide } from "swiper/svelte"
-  import "swiper/css"
-  import { Language } from "$lib/types"
-  import Image from "$lib/components/Image.svelte"
-  import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
-  import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
-  export let language: Language
-  export let projects: any[]
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  import { swiper } from "#lib/actions/swiper.ts"
+  import { Language } from "#lib/types/index.ts"
+  import Image from "#lib/components/Image.svelte"
+  import SmallArrowLeft from "#lib/graphics/SmallArrowLeft.svelte"
+  import SmallArrowRight from "#lib/graphics/SmallArrowRight.svelte"
+  interface Props {
+    language: Language
+    projects: any[]
+  }
+
+  let { language, projects }: Props = $props()
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 </script>
 
-<Swiper spaceBetween={50} slidesPerView={1} loop={true}>
-  {#each projects as project}
-    <SwiperSlide>
-      <a
-        class="inner"
-        href={urlPrefix + "projekt/"}
-        data-sveltekit-preload-data
-      >
-        <Image
-          imageDyad={project.mainImage}
-          caption="{project.title}}"
-          width={600}
-        />
-        <div class="caption">
-          <div class="first-row">
-            {language === Language.English
-              ? "ONGOING PROJECT"
-              : "PÅGÅENDE PROJEKT"}
-          </div>
-          <div class="second-row">
-            <div class="arrow"><SmallArrowLeft /></div>
-            <div>
+<div
+  class="swiper"
+  use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}
+>
+  <div class="swiper-wrapper">
+    {#each projects as project}
+      <div class="swiper-slide">
+        <a
+          class="inner"
+          href={urlPrefix + "projekt/"}
+          data-sveltekit-preload-data
+        >
+          <Image
+            imageDyad={project.mainImage}
+            caption="{project.title}}"
+            width={600}
+          />
+          <div class="caption">
+            <div class="first-row">
               {language === Language.English
-                ? project.title_eng
-                : project.title}
+                ? "ONGOING PROJECT"
+                : "PÅGÅENDE PROJEKT"}
             </div>
-            <div class="arrow"><SmallArrowRight /></div>
+            <div class="second-row">
+              <div class="arrow"><SmallArrowLeft /></div>
+              <div>
+                {language === Language.English
+                  ? project.title_eng
+                  : project.title}
+              </div>
+              <div class="arrow"><SmallArrowRight /></div>
+            </div>
           </div>
-        </div>
-      </a>
-    </SwiperSlide>
-  {/each}
-</Swiper>
+        </a>
+      </div>
+    {/each}
+  </div>
+</div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .inner {
     width: 100%;

@@ -1,25 +1,31 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import X from "$lib/components/X.svelte"
-  import Logos from "$lib/components/Logos.svelte"
-  import { renderBlockText } from "$lib/modules/sanity.js"
-  import { Language, type ContactPageType } from "$lib/types"
-  export let language: Language
-  export let data: ContactPageType
+  import X from "#lib/components/X.svelte"
+  import Logos from "#lib/components/Logos.svelte"
+  import { renderBlockText } from "#lib/modules/sanity.js"
+  import { Language, type ContactPageType } from "#lib/types/index.ts"
+  interface Props {
+    language: Language
+    data: ContactPageType
+  }
 
-  const infoText =
+  let { language, data }: Props = $props()
+
+  const infoText = $derived(
     language === Language.English
       ? data.info_eng.content
       : data.info_sve.content
-  const content =
+  )
+  const content = $derived(
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  )
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {
     menuActive.set(false)
@@ -65,7 +71,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .page {
     position: fixed;

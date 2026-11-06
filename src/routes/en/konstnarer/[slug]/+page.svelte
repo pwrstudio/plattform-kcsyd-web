@@ -1,12 +1,11 @@
 <script lang="ts">
-  import MainPage from "$lib/components/pages/MainPage.svelte"
-  import ArtistsSinglePage from "$lib/components/pages/ArtistsSinglePage.svelte"
-  import { Language, MainPageType, type ArtistType } from "$lib/types"
-  export let data: {
-    mainPage: any
-    artist: ArtistType
-  }
-  const { mainPage, artist } = data
+  import MainPage from "#lib/components/pages/MainPage.svelte"
+  import ArtistsSinglePage from "#lib/components/pages/ArtistsSinglePage.svelte"
+  import { Language, MainPageType } from "#lib/types/index.ts"
+  import type { PageProps } from "./$types"
+
+  let { data }: PageProps = $props()
+  const { mainPage, artist } = $derived(data)
 </script>
 
 {#key artist}

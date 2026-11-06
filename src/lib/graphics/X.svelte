@@ -1,7 +1,11 @@
 <script lang="ts">
-  import { UIColor } from "$lib/types"
-  export let color: UIColor
-  const colorClass = color === UIColor.White ? "white" : ""
+  import { UIColor } from "#lib/types/index.ts"
+  interface Props {
+    color: UIColor
+  }
+
+  let { color }: Props = $props()
+  const colorClass = $derived(color === UIColor.White ? "white" : "")
 </script>
 
 <svg
@@ -26,7 +30,7 @@
 </svg>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   svg {
     height: 30px;

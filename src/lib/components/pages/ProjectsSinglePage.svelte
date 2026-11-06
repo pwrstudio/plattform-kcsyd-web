@@ -1,44 +1,52 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import Metadata from "$lib/components/Metadata.svelte"
-  import X from "$lib/components/X.svelte"
-  import Image from "$lib/components/Image.svelte"
-  import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
-  import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
-  import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
-  import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
-  import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
-  import { Language, type ProjectType, UIColor } from "$lib/types"
-  export let language: Language
-  export let data: { project: ProjectType; projectList: ProjectType[] }
-  const { project, projectList } = data
-
-  let textColumnEl: HTMLElement
-
-  function scrollDown() {
-    textColumnEl.scrollIntoView({ behavior: "smooth" })
+  import Metadata from "#lib/components/Metadata.svelte"
+  import X from "#lib/components/X.svelte"
+  import Image from "#lib/components/Image.svelte"
+  import LargeArrowLeft from "#lib/graphics/LargeArrowLeft.svelte"
+  import LargeArrowRight from "#lib/graphics/LargeArrowRight.svelte"
+  import SingleProjectSlideshow from "#lib/components/SingleProjectSlideshow.svelte"
+  import SingleProjectImage from "#lib/components/SingleProjectImage.svelte"
+  import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
+  import { Language, type ProjectType, UIColor } from "#lib/types/index.ts"
+  interface Props {
+    language: Language
+    data: { project: ProjectType; projectList: ProjectType[] }
   }
 
-  const title =
-    language === Language.English ? project.title_eng : project.title
+  let { language, data }: Props = $props()
+  const { project, projectList } = $derived(data)
 
-  const content =
+  let textColumnEl: HTMLElement | undefined = $state()
+
+  function scrollDown() {
+    textColumnEl?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const title = $derived(
+    language === Language.English ? project.title_eng : project.title
+  )
+
+  const content = $derived(
     language === Language.English
       ? project.content_eng.content
       : project.content_sve.content
+  )
 
-  const description =
+  const description = $derived(
     language === Language.English
       ? toPlainText(project.content_eng.content)
       : toPlainText(project.content_sve.content)
+  )
 
-  const category =
+  const category = $derived(
     language === Language.English ? project.kategori_eng : project.kategori_sve
+  )
 
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   const timeCategoryHeader = () => {
     if (language === Language.English) {
@@ -51,23 +59,25 @@
     }
   }
 
-  const projectIndex = projectList.findIndex(
-    (p: ProjectType) => p._id === project._id
+  const projectIndex = $derived(
+    projectList.findIndex((p: ProjectType) => p._id === project._id)
   )
 
-  let prevProjectLink =
+  const prevProjectLink = $derived(
     urlPrefix +
-    "projekt/" +
-    (projectIndex === 0
-      ? projectList[projectList.length - 1].slug.current
-      : projectList[projectIndex - 1].slug.current)
+      "projekt/" +
+      (projectIndex === 0
+        ? projectList[projectList.length - 1].slug.current
+        : projectList[projectIndex - 1].slug.current)
+  )
 
-  let nextProjectLink =
+  const nextProjectLink = $derived(
     urlPrefix +
-    "projekt/" +
-    (projectIndex === projectList.length - 1
-      ? projectList[0].slug.current
-      : projectList[projectIndex + 1].slug.current)
+      "projekt/" +
+      (projectIndex === projectList.length - 1
+        ? projectList[0].slug.current
+        : projectList[projectIndex + 1].slug.current)
+  )
 
   onMount(async () => {
     menuActive.set(false)
@@ -100,7 +110,7 @@
 
     <div class="content" class:double={project.layout === "alt2"}>
       {#if project.layout === "alt2"}
-        <div class="hero" on:click={scrollDown}>
+        <div class="hero" onclick={scrollDown}>
           <Image imageDyad={project.mainImage} caption={title} />
         </div>
       {/if}
@@ -134,7 +144,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .page {
     position: fixed;
