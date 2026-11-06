@@ -3,8 +3,8 @@
 @use "sass:string";
 
 // COLORS
-$lime: rgb(234,253,175);
-$grey: rgb(242,242,242);
+$lime: rgb(234, 253, 175);
+$grey: rgb(242, 242, 242);
 $white: #ffffff;
 $black: #000000;
 
@@ -26,7 +26,6 @@ $MARGIN: 15px;
 
 // TRANSITIONS
 $transition: cubic-bezier(0.23, 1, 0.32, 1);
-
 
 // RESPONSIVE
 $breakpoints: (

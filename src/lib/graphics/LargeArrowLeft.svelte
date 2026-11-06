@@ -1,9 +1,9 @@
 <script lang="ts">
   interface Props {
-    black?: boolean;
+    black?: boolean
   }
 
-  let { black = false }: Props = $props();
+  let { black = false }: Props = $props()
 </script>
 
 <svg

@@ -5,14 +5,17 @@
   import SmallArrowLeft from "#lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "#lib/graphics/SmallArrowRight.svelte"
   interface Props {
-    language: Language;
-    slides: any[];
+    language: Language
+    slides: any[]
   }
 
-  let { language, slides }: Props = $props();
+  let { language, slides }: Props = $props()
 </script>
 
-<div class="swiper" use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}>
+<div
+  class="swiper"
+  use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}
+>
   <div class="swiper-wrapper">
     {#each slides as slide}
       {@const caption =

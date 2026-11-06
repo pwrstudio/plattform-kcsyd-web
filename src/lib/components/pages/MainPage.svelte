@@ -15,18 +15,13 @@
   import MiljoPolicyPopUp from "../MiljoPolicyPopUp.svelte"
 
   interface Props {
-    mainPageType: MainPageType;
-    language: Language;
-    data: any;
-    children?: import('svelte').Snippet;
+    mainPageType: MainPageType
+    language: Language
+    data: any
+    children?: import("svelte").Snippet
   }
 
-  let {
-    mainPageType,
-    language,
-    data,
-    children
-  }: Props = $props();
+  let { mainPageType, language, data, children }: Props = $props()
   const {
     omKcSyd,
     hemsideBild,

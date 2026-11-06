@@ -4,6 +4,6 @@ import type { ContactPageType } from "#lib/types/index.ts"
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
-    const data = await loadData("*[_id == 'information-kontakt'][0]")
-    return data as ContactPageType;
+  const data = await loadData("*[_id == 'information-kontakt'][0]")
+  return data as ContactPageType
 }

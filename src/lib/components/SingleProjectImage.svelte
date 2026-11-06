@@ -2,12 +2,14 @@
   import Image from "#lib/components/Image.svelte"
   import { Language } from "#lib/types/index.ts"
   interface Props {
-    language: Language;
-    project: any;
+    language: Language
+    project: any
   }
 
-  let { language, project }: Props = $props();
-  const caption = $derived(language === Language.English ? project.title_eng : project.title)
+  let { language, project }: Props = $props()
+  const caption = $derived(
+    language === Language.English ? project.title_eng : project.title
+  )
 </script>
 
 <div class="inner">

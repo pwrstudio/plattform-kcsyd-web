@@ -9,18 +9,18 @@
   import { onMount } from "svelte"
 
   interface Props {
-    language: Language;
+    language: Language
     data: {
-    projektPagaende: ProjectType[]
-    projektArkivDokumentation: ProjectType[]
-    listor: {
-      pagaendeList: ProjectType[]
-      arkivDokumentationList: ProjectType[]
+      projektPagaende: ProjectType[]
+      projektArkivDokumentation: ProjectType[]
+      listor: {
+        pagaendeList: ProjectType[]
+        arkivDokumentationList: ProjectType[]
+      }
     }
-  };
   }
 
-  let { language, data }: Props = $props();
+  let { language, data }: Props = $props()
   const { projektPagaende, projektArkivDokumentation, listor } = $derived(data)
 
   const onGoingHeader = $derived(

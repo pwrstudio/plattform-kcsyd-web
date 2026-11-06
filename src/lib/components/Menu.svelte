@@ -6,10 +6,10 @@
   import { languageStore, splashOpen } from "#lib/stores/index.ts"
   import { Language, type MenuItem } from "#lib/types/index.ts"
   interface Props {
-    splash: any;
+    splash: any
   }
 
-  let { splash }: Props = $props();
+  let { splash }: Props = $props()
 
   const closeSplash = () => {
     splashOpen.set(false)
@@ -65,8 +65,9 @@
     ],
   }
 
-  let activeMenuItems: MenuItem[] = $derived($languageStore === Language.English ? menuItems.eng : menuItems.sve)
-  
+  let activeMenuItems: MenuItem[] = $derived(
+    $languageStore === Language.English ? menuItems.eng : menuItems.sve
+  )
 
   onMount(async () => {
     setTimeout(closeSplash, 4000)

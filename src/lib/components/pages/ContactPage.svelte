@@ -9,11 +9,11 @@
   import { renderBlockText } from "#lib/modules/sanity.js"
   import { Language, type ContactPageType } from "#lib/types/index.ts"
   interface Props {
-    language: Language;
-    data: ContactPageType;
+    language: Language
+    data: ContactPageType
   }
 
-  let { language, data }: Props = $props();
+  let { language, data }: Props = $props()
 
   const infoText = $derived(
     language === Language.English

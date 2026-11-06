@@ -1,10 +1,10 @@
 <script lang="ts">
   import { UIColor } from "#lib/types/index.ts"
   interface Props {
-    color: UIColor;
+    color: UIColor
   }
 
-  let { color }: Props = $props();
+  let { color }: Props = $props()
   const colorClass = $derived(color === UIColor.White ? "white" : "")
 </script>
 

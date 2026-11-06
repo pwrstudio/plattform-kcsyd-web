@@ -8,11 +8,11 @@
   import X from "#lib/components/X.svelte"
   import { Language, type AboutPageType } from "#lib/types/index.ts"
   interface Props {
-    language: Language;
-    data: AboutPageType;
+    language: Language
+    data: AboutPageType
   }
 
-  let { language, data }: Props = $props();
+  let { language, data }: Props = $props()
   const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {

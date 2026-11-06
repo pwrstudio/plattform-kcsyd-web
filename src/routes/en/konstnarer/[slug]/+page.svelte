@@ -4,7 +4,7 @@
   import { Language, MainPageType } from "#lib/types/index.ts"
   import type { PageProps } from "./$types"
 
-  let { data }: PageProps = $props();
+  let { data }: PageProps = $props()
   const { mainPage, artist } = $derived(data)
 </script>
 

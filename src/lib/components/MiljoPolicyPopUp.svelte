@@ -3,12 +3,12 @@
   import { Language } from "#lib/types/index.ts"
   import { renderBlockText } from "#lib/modules/sanity.js"
   interface Props {
-    language: Language;
-    miljopolicy: any;
-    onclose?: () => void;
+    language: Language
+    miljopolicy: any
+    onclose?: () => void
   }
 
-  let { language, miljopolicy, onclose }: Props = $props();
+  let { language, miljopolicy, onclose }: Props = $props()
 
   const close = () => onclose?.()
 

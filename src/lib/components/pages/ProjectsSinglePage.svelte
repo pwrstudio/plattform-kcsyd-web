@@ -13,11 +13,11 @@
   import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
   import { Language, type ProjectType, UIColor } from "#lib/types/index.ts"
   interface Props {
-    language: Language;
-    data: { project: ProjectType; projectList: ProjectType[] };
+    language: Language
+    data: { project: ProjectType; projectList: ProjectType[] }
   }
 
-  let { language, data }: Props = $props();
+  let { language, data }: Props = $props()
   const { project, projectList } = $derived(data)
 
   let textColumnEl: HTMLElement | undefined = $state()

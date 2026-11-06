@@ -3,7 +3,7 @@
   import { Language } from "#lib/types/index.ts"
   import type { PageProps } from "./$types"
 
-  let { data }: PageProps = $props();
+  let { data }: PageProps = $props()
 </script>
 
 {#key data}

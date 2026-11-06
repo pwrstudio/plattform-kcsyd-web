@@ -2,10 +2,10 @@
   import Hamburger from "#lib/graphics/Hamburger.svelte"
   import { UIColor } from "#lib/types/index.ts"
   interface Props {
-    color?: UIColor;
+    color?: UIColor
   }
 
-  let { color = UIColor.Black }: Props = $props();
+  let { color = UIColor.Black }: Props = $props()
 </script>
 
 <div class="menu-toggle">

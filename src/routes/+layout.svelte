@@ -6,7 +6,7 @@
 
   import type { LayoutProps } from "./$types"
 
-  let { data, children }: LayoutProps = $props();
+  let { data, children }: LayoutProps = $props()
   const splash = $derived(data.splash)
 
   const closeMenu = () => {

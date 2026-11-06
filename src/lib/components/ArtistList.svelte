@@ -1,18 +1,13 @@
 <script lang="ts">
   import { type ArtistType, Language } from "#lib/types/index.ts"
   interface Props {
-    language: Language;
-    artists: ArtistType[];
-    list: any[];
-    title: string;
+    language: Language
+    artists: ArtistType[]
+    list: any[]
+    title: string
   }
 
-  let {
-    language,
-    artists,
-    list,
-    title
-  }: Props = $props();
+  let { language, artists, list, title }: Props = $props()
   const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   const artistsSorted = $derived.by(() => {

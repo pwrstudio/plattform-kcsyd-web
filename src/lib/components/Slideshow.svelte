@@ -5,15 +5,18 @@
   import SmallArrowLeft from "#lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "#lib/graphics/SmallArrowRight.svelte"
   interface Props {
-    language: Language;
-    projects: any[];
+    language: Language
+    projects: any[]
   }
 
-  let { language, projects }: Props = $props();
+  let { language, projects }: Props = $props()
   const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 </script>
 
-<div class="swiper" use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}>
+<div
+  class="swiper"
+  use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}
+>
   <div class="swiper-wrapper">
     {#each projects as project}
       <div class="swiper-slide">

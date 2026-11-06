@@ -1,18 +1,13 @@
 <script lang="ts">
   import { urlFor } from "#lib/modules/sanity.js"
   interface Props {
-    imageDyad?: any;
-    caption?: string;
-    width?: number;
-    height?: number;
+    imageDyad?: any
+    caption?: string
+    width?: number
+    height?: number
   }
 
-  let {
-    imageDyad = {},
-    caption = "",
-    width = 0,
-    height = 0
-  }: Props = $props();
+  let { imageDyad = {}, caption = "", width = 0, height = 0 }: Props = $props()
 
   const url = $derived.by(() => {
     let builder = urlFor(imageDyad.dither ? imageDyad.dither : imageDyad.bild)

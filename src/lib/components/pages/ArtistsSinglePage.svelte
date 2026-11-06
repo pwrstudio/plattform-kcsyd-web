@@ -5,12 +5,14 @@
   import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
   import { Language, type ArtistType } from "#lib/types/index.ts"
   interface Props {
-    language: Language;
-    data: ArtistType;
+    language: Language
+    data: ArtistType
   }
 
-  let { language, data }: Props = $props();
-  const title = $derived(language === Language.English ? data.title_eng : data.title)
+  let { language, data }: Props = $props()
+  const title = $derived(
+    language === Language.English ? data.title_eng : data.title
+  )
   const content = $derived(
     language === Language.English
       ? data.content_eng.content

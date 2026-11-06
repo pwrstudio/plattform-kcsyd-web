@@ -2,11 +2,11 @@
   import Image from "#lib/components/Image.svelte"
   import { fade } from "svelte/transition"
   interface Props {
-    splash: any;
-    onclose?: () => void;
+    splash: any
+    onclose?: () => void
   }
 
-  let { splash, onclose }: Props = $props();
+  let { splash, onclose }: Props = $props()
 
   const close = () => onclose?.()
 </script>
