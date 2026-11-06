@@ -1,28 +1,26 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { Language } from "#lib/types/index.ts"
-  import { createEventDispatcher } from "svelte"
   import { renderBlockText } from "#lib/modules/sanity.js"
-  const dispatch = createEventDispatcher()
-
-  const close = () => {
-    dispatch("close")
-  }
-
   interface Props {
     language: Language;
     miljopolicy: any;
+    onclose?: () => void;
   }
 
-  let { language, miljopolicy }: Props = $props();
+  let { language, miljopolicy, onclose }: Props = $props();
 
-  const content =
+  const close = () => onclose?.()
+
+  const content = $derived(
     language === Language.English
       ? miljopolicy.content_eng.content
       : miljopolicy.content_sve.content
+  )
 
-  const buttonText =
+  const buttonText = $derived(
     language === Language.English ? "ok, got it" : "ok, jag förstår"
+  )
 </script>
 
 <div class="miljopolicy" transition:fade>

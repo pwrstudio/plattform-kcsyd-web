@@ -18,31 +18,35 @@
   }
 
   let { language, data }: Props = $props();
-  const { project, projectList } = data
+  const { project, projectList } = $derived(data)
 
-  let textColumnEl: HTMLElement = $state()
+  let textColumnEl: HTMLElement | undefined = $state()
 
   function scrollDown() {
-    textColumnEl.scrollIntoView({ behavior: "smooth" })
+    textColumnEl?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const title =
+  const title = $derived(
     language === Language.English ? project.title_eng : project.title
+  )
 
-  const content =
+  const content = $derived(
     language === Language.English
       ? project.content_eng.content
       : project.content_sve.content
+  )
 
-  const description =
+  const description = $derived(
     language === Language.English
       ? toPlainText(project.content_eng.content)
       : toPlainText(project.content_sve.content)
+  )
 
-  const category =
+  const category = $derived(
     language === Language.English ? project.kategori_eng : project.kategori_sve
+  )
 
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   const timeCategoryHeader = () => {
     if (language === Language.English) {
@@ -55,23 +59,25 @@
     }
   }
 
-  const projectIndex = projectList.findIndex(
-    (p: ProjectType) => p._id === project._id
+  const projectIndex = $derived(
+    projectList.findIndex((p: ProjectType) => p._id === project._id)
   )
 
-  let prevProjectLink =
+  const prevProjectLink = $derived(
     urlPrefix +
-    "projekt/" +
-    (projectIndex === 0
-      ? projectList[projectList.length - 1].slug.current
-      : projectList[projectIndex - 1].slug.current)
+      "projekt/" +
+      (projectIndex === 0
+        ? projectList[projectList.length - 1].slug.current
+        : projectList[projectIndex - 1].slug.current)
+  )
 
-  let nextProjectLink =
+  const nextProjectLink = $derived(
     urlPrefix +
-    "projekt/" +
-    (projectIndex === projectList.length - 1
-      ? projectList[0].slug.current
-      : projectList[projectIndex + 1].slug.current)
+      "projekt/" +
+      (projectIndex === projectList.length - 1
+        ? projectList[0].slug.current
+        : projectList[projectIndex + 1].slug.current)
+  )
 
   onMount(async () => {
     menuActive.set(false)

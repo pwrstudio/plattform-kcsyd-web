@@ -1,5 +1,5 @@
 <script lang="ts">
-  import truncate from "lodash/truncate"
+  import truncate from "lodash/truncate.js"
 
   interface Props {
     title?: string;
@@ -13,15 +13,16 @@
     "Plattform KcSyd arbetar for att stärka och bredda konsten och konstnärens roll i de offentliga rummen. Med konsten och samtalet som metod skapar Plattform KcSyd rum för nya perspektiv som berikar diskursen kring våra gemensamma rum, och bidrar till att hålla detta samtal aktivt, kreativt och relevant."
   const DEFAULT_IMAGE = "https://www.plattform.kcsyd.se/"
 
-  const t = (title.length > 0 ? title + " | " : "") + "Plattform KcSyd"
+  const t = $derived((title.length > 0 ? title + " | " : "") + "Plattform KcSyd")
 
-  const d =
+  const d = $derived(
     description.length > 0
       ? truncate(description, {
           length: 240,
           separator: /.? +/,
         })
       : DEFAULT_DESCRIPTION
+  )
 
   // const image = has(post, "featuredImage")
   //   ? BASE_IMAGE + post.featuredImage

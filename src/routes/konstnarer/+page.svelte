@@ -1,11 +1,9 @@
 <script lang="ts">
   import MainPage from "#lib/components/pages/MainPage.svelte"
   import { Language, MainPageType } from "#lib/types/index.ts"
-  interface Props {
-    data: any;
-  }
+  import type { PageProps } from "./$types"
 
-  let { data }: Props = $props();
+  let { data }: PageProps = $props();
 </script>
 
 <MainPage

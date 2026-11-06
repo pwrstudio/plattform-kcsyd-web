@@ -1,11 +1,9 @@
 <script lang="ts">
   import ContactPage from "#lib/components/pages/ContactPage.svelte"
-  import { type ContactPageType, Language } from "#lib/types/index.ts"
-  interface Props {
-    data: ContactPageType;
-  }
+  import { Language } from "#lib/types/index.ts"
+  import type { PageProps } from "./$types"
 
-  let { data }: Props = $props();
+  let { data }: PageProps = $props();
 </script>
 
 <ContactPage {data} language={Language.Swedish} />

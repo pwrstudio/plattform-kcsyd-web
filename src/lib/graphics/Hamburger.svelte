@@ -5,7 +5,7 @@
   }
 
   let { color }: Props = $props();
-  const colorClass = color === UIColor.White ? "white" : ""
+  const colorClass = $derived(color === UIColor.White ? "white" : "")
 </script>
 
 <svg

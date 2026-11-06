@@ -15,15 +15,17 @@
 
   let { language, data }: Props = $props();
 
-  const infoText =
+  const infoText = $derived(
     language === Language.English
       ? data.info_eng.content
       : data.info_sve.content
-  const content =
+  )
+  const content = $derived(
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  )
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {
     menuActive.set(false)

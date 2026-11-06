@@ -35,12 +35,12 @@
     konstnarerTidigare,
     listor,
     miljopolicy,
-  } = data
+  } = $derived(data)
 
-  let artistsEl: HTMLElement = $state()
+  let artistsEl: HTMLElement | undefined = $state()
 
   function scrollDown() {
-    artistsEl.scrollIntoView({ behavior: "smooth" })
+    artistsEl?.scrollIntoView({ behavior: "smooth" })
   }
 
   const openMenu = () => {
@@ -51,14 +51,14 @@
     miljopolicyOpen.set(false)
   }
 
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {
     if (
       mainPageType === MainPageType.Listing ||
       mainPageType === MainPageType.Single
     ) {
-      artistsEl.scrollIntoView()
+      artistsEl?.scrollIntoView()
     }
     menuActive.set(false)
   })
@@ -73,7 +73,7 @@
 {/if}
 
 {#if mainPageType === MainPageType.Landing && miljopolicy && $miljopolicyOpen}
-  <MiljoPolicyPopUp {miljopolicy} {language} on:close={closeMiljopolicy} />
+  <MiljoPolicyPopUp {miljopolicy} {language} onclose={closeMiljopolicy} />
 {/if}
 
 <!-- RIGHT -->

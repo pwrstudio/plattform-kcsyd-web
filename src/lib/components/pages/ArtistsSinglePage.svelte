@@ -10,20 +10,23 @@
   }
 
   let { language, data }: Props = $props();
-  const title = language === Language.English ? data.title_eng : data.title
-  const content =
+  const title = $derived(language === Language.English ? data.title_eng : data.title)
+  const content = $derived(
     language === Language.English
       ? data.content_eng.content
       : data.content_sve.content
-  const description =
+  )
+  const description = $derived(
     language === Language.English
       ? toPlainText(data.content_eng.content)
       : toPlainText(data.content_sve.content)
-  const caption =
+  )
+  const caption = $derived(
     language === Language.English
       ? data.mainImage.bildtext_eng || ""
       : data.mainImage.bildtext_sve || ""
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  )
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 </script>
 
 <Metadata {title} {description} />

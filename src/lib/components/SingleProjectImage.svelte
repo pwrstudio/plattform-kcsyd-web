@@ -7,7 +7,7 @@
   }
 
   let { language, project }: Props = $props();
-  const caption = Language.English ? project.title_eng : project.title
+  const caption = $derived(language === Language.English ? project.title_eng : project.title)
 </script>
 
 <div class="inner">

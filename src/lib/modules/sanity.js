@@ -25,6 +25,7 @@ export const client = createClient({
 
 const h = blocksToHtml.h
 
+/** @param {any} props */
 const prepareTextElements = props => {
     let textElements = []
     if (has(props, "node.caption.content"))
@@ -42,6 +43,7 @@ const prepareTextElements = props => {
     return textElements
 }
 
+/** @param {any[]} text */
 export const renderBlockText = text =>
     blocksToHtml({
         blocks: text,
@@ -50,21 +52,24 @@ export const renderBlockText = text =>
         dataset: "production",
     })
 
+/** @param {any[]} [blocks] */
 export const toPlainText = (blocks = []) => {
     return blocks
         .map(block => {
             if (block._type !== "block" || !block.children) {
                 return ""
             }
-            return block.children.map(child => child.text).join("")
+            return block.children.map((/** @type {any} */ child) => child.text).join("")
         })
         .join("\n\n")
 }
 
 const builder = createImageUrlBuilder(client)
 
+/** @param {any} source */
 export const urlFor = source => builder.image(source)
 
+/** @type {Record<string, Record<string, (props: any) => any>>} */
 const serializers = {
     marks: {
         link: props => {
@@ -167,7 +172,12 @@ const serializers = {
     },
 }
 
-export const loadData = async (query, params) => {
+/**
+ * @param {string} query
+ * @param {Record<string, any>} [params]
+ * @returns {Promise<any>}
+ */
+export const loadData = async (query, params = {}) => {
     try {
         const res = await client.fetch(query, params)
         if (res === null) {

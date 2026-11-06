@@ -13,33 +13,38 @@
     data: {
     projektPagaende: ProjectType[]
     projektArkivDokumentation: ProjectType[]
-    listor: any[]
+    listor: {
+      pagaendeList: ProjectType[]
+      arkivDokumentationList: ProjectType[]
+    }
   };
   }
 
   let { language, data }: Props = $props();
-  const { projektPagaende, projektArkivDokumentation, listor } = data
+  const { projektPagaende, projektArkivDokumentation, listor } = $derived(data)
 
-  const onGoingHeader =
+  const onGoingHeader = $derived(
     language === Language.English ? "Ongoing" : "Pågående projekt"
-  const pastHeader =
+  )
+  const pastHeader = $derived(
     language === Language.English
       ? "Archive / documentation*"
       : "Arkiv / dokumentation*"
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  )
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
-  const specialIDs = [
+  const specialIDs = $derived([
     ...listor.pagaendeList.map(p => p._id),
     ...listor.arkivDokumentationList.map(p => p._id),
-  ]
-  const projektPagaendeSorted = [
+  ])
+  const projektPagaendeSorted = $derived([
     ...listor.pagaendeList,
     ...projektPagaende.filter(p => !specialIDs.includes(p._id)),
-  ]
-  const projektArkivDokumentationSorted = [
+  ])
+  const projektArkivDokumentationSorted = $derived([
     ...listor.arkivDokumentationList,
     ...projektArkivDokumentation.filter(p => !specialIDs.includes(p._id)),
-  ]
+  ])
 
   const openMenu = () => {
     menuActive.set(true)
@@ -116,7 +121,7 @@
           <div class="category">
             {language === Language.English && project.kategori_eng
               ? project.kategori_eng
-              : project.kategori}
+              : project.kategori_sve}
           </div>
           <div class="title">
             {language === Language.English ? project.title_eng : project.title}

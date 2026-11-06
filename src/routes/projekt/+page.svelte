@@ -1,14 +1,9 @@
 <script lang="ts">
   import ProjectsListingPage from "#lib/components/pages/ProjectsListingPage.svelte"
-  import { Language, type ProjectType } from "#lib/types/index.ts"
-  interface Props {
-    data: {
-    projektPagaende: ProjectType[]
-    projektArkivDokumentation: ProjectType[]
-  };
-  }
+  import { Language } from "#lib/types/index.ts"
+  import type { PageProps } from "./$types"
 
-  let { data }: Props = $props();
+  let { data }: PageProps = $props();
 </script>
 
 <ProjectsListingPage {data} language={Language.Swedish} />

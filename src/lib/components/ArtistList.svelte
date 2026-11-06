@@ -13,13 +13,12 @@
     list,
     title
   }: Props = $props();
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
-  const specialIDs = list.map(l => l._id)
-  const artistsSorted = [
-    ...list,
-    ...artists.filter(a => !specialIDs.includes(a._id)),
-  ]
+  const artistsSorted = $derived.by(() => {
+    const specialIDs = list.map(l => l._id)
+    return [...list, ...artists.filter(a => !specialIDs.includes(a._id))]
+  })
 </script>
 
 {#if artistsSorted.length > 0}

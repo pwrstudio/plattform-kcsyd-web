@@ -10,7 +10,7 @@
   }
 
   let { language, projects }: Props = $props();
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 </script>
 
 <div class="swiper" use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}>

@@ -1,11 +1,9 @@
 <script lang="ts">
   import AboutPage from "#lib/components/pages/AboutPage.svelte"
   import { Language, type AboutPageType } from "#lib/types/index.ts"
-  interface Props {
-    data: AboutPageType;
-  }
+  import type { PageProps } from "./$types"
 
-  let { data }: Props = $props();
+  let { data }: PageProps = $props();
 </script>
 
 <AboutPage {data} language={Language.Swedish} />

@@ -74,7 +74,7 @@
 </script>
 
 {#if splash.mainImage && $splashOpen}
-  <Splash {splash} on:close={closeSplash} />
+  <Splash {splash} onclose={closeSplash} />
 {/if}
 
 <div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>

@@ -13,7 +13,7 @@
   }
 
   let { language, data }: Props = $props();
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const urlPrefix = $derived(language === Language.English ? "/en/" : "/")
 
   onMount(async () => {
     menuActive.set(false)

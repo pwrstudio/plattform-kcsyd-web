@@ -1,11 +1,9 @@
 <script lang="ts">
   import ProjectsSinglePage from "#lib/components/pages/ProjectsSinglePage.svelte"
-  import { Language, type ProjectType } from "#lib/types/index.ts"
-  interface Props {
-    data: { project: ProjectType };
-  }
+  import { Language } from "#lib/types/index.ts"
+  import type { PageProps } from "./$types"
 
-  let { data }: Props = $props();
+  let { data }: PageProps = $props();
 </script>
 
 {#key data}

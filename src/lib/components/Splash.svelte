@@ -1,18 +1,14 @@
 <script lang="ts">
   import Image from "#lib/components/Image.svelte"
   import { fade } from "svelte/transition"
-  import { createEventDispatcher } from "svelte"
-  const dispatch = createEventDispatcher()
-
-  const close = () => {
-    dispatch("close")
-  }
-
   interface Props {
     splash: any;
+    onclose?: () => void;
   }
 
-  let { splash }: Props = $props();
+  let { splash, onclose }: Props = $props();
+
+  const close = () => onclose?.()
 </script>
 
 <div class="splash" onclick={close} out:fade>

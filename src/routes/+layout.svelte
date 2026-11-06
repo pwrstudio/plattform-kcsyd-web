@@ -4,8 +4,10 @@
   import Marquee from "#lib/components/Marquee.svelte"
   import { menuActive } from "#lib/stores/index.ts"
 
-  let { data, children } = $props();
-  const { splash } = data
+  import type { LayoutProps } from "./$types"
+
+  let { data, children }: LayoutProps = $props();
+  const splash = $derived(data.splash)
 
   const closeMenu = () => {
     menuActive.set(false)
