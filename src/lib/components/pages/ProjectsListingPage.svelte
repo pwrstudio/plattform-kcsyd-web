@@ -8,12 +8,16 @@
   import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
 
-  export let language: Language
-  export let data: {
+  interface Props {
+    language: Language;
+    data: {
     projektPagaende: ProjectType[]
     projektArkivDokumentation: ProjectType[]
     listor: any[]
+  };
   }
+
+  let { language, data }: Props = $props();
   const { projektPagaende, projektArkivDokumentation, listor } = data
 
   const onGoingHeader =
@@ -49,7 +53,7 @@
 <Metadata title={"Projekt"} />
 
 {#if !$menuActive}
-  <span on:click={openMenu}>
+  <span onclick={openMenu}>
     <Hamburger color={UIColor.White} />
   </span>
 {/if}
@@ -61,10 +65,10 @@
       <div class="section-header">{onGoingHeader}</div>
       {#each projektPagaendeSorted as project, i (project._id)}
         {#if i > 0 && i % 4 === 0}
-          <div class="desktop-divider" />
+          <div class="desktop-divider"></div>
         {/if}
         {#if i > 0 && i % 2 === 0}
-          <div class="phone-divider" />
+          <div class="phone-divider"></div>
         {/if}
         <a class="project" href={urlPrefix + "projekt/" + project.slug.current}>
           <div class="image">
@@ -91,10 +95,10 @@
             ? project.kategori_eng
             : project.kategori_sve}
         {#if i > 0 && i % 4 === 0}
-          <div class="desktop-divider" />
+          <div class="desktop-divider"></div>
         {/if}
         {#if i > 0 && i % 2 === 0}
-          <div class="phone-divider" />
+          <div class="phone-divider"></div>
         {/if}
         <a
           class="project"

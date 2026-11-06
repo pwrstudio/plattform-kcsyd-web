@@ -1,11 +1,20 @@
 <script lang="ts">
   import { urlFor } from "#lib/modules/sanity.js"
-  export let imageDyad: any = {}
-  export let caption: string = ""
-  export let width: number = 0
-  export let height: number = 0
+  interface Props {
+    imageDyad?: any;
+    caption?: string;
+    width?: number;
+    height?: number;
+  }
 
-  let url = ""
+  let {
+    imageDyad = {},
+    caption = "",
+    width = 0,
+    height = 0
+  }: Props = $props();
+
+  let url = $state("")
   let imageObj = imageDyad.dither ? imageDyad.dither : imageDyad.bild
 
   if (width > 0 && height > 0) {

@@ -14,9 +14,19 @@
   import Image from "#lib/components/Image.svelte"
   import MiljoPolicyPopUp from "../MiljoPolicyPopUp.svelte"
 
-  export let mainPageType: MainPageType
-  export let language: Language
-  export let data
+  interface Props {
+    mainPageType: MainPageType;
+    language: Language;
+    data: any;
+    children?: import('svelte').Snippet;
+  }
+
+  let {
+    mainPageType,
+    language,
+    data,
+    children
+  }: Props = $props();
   const {
     omKcSyd,
     hemsideBild,
@@ -27,7 +37,7 @@
     miljopolicy,
   } = data
 
-  let artistsEl: HTMLElement
+  let artistsEl: HTMLElement = $state()
 
   function scrollDown() {
     artistsEl.scrollIntoView({ behavior: "smooth" })
@@ -57,7 +67,7 @@
 <Metadata />
 
 {#if !$menuActive}
-  <span on:click={openMenu}>
+  <span onclick={openMenu}>
     <Hamburger />
   </span>
 {/if}
@@ -91,7 +101,7 @@
 <!-- LEFT -->
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   {#if mainPageType === MainPageType.Landing}
-    <div class="landing-page-image" on:click={scrollDown}>
+    <div class="landing-page-image" onclick={scrollDown}>
       <Image imageDyad={hemsideBild.mainImage} caption={"Plattform KcSyd"} />
       <div class="arrow-down">
         <LargeArrowDown />
@@ -104,7 +114,7 @@
     bind:this={artistsEl}
   >
     {#if mainPageType === MainPageType.Single}
-      <slot />
+      {@render children?.()}
     {:else if language == Language.English}
       <h2>Artists</h2>
       <ArtistList

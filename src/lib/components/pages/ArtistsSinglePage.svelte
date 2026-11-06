@@ -4,8 +4,12 @@
   import LargeArrowLeft from "#lib/graphics/LargeArrowLeft.svelte"
   import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
   import { Language, type ArtistType } from "#lib/types/index.ts"
-  export let language: Language
-  export let data: ArtistType
+  interface Props {
+    language: Language;
+    data: ArtistType;
+  }
+
+  let { language, data }: Props = $props();
   const title = language === Language.English ? data.title_eng : data.title
   const content =
     language === Language.English

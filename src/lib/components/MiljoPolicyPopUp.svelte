@@ -9,8 +9,12 @@
     dispatch("close")
   }
 
-  export let language: Language
-  export let miljopolicy: any
+  interface Props {
+    language: Language;
+    miljopolicy: any;
+  }
+
+  let { language, miljopolicy }: Props = $props();
 
   const content =
     language === Language.English
@@ -22,7 +26,7 @@
 </script>
 
 <div class="miljopolicy" transition:fade>
-  <div class="inner" on:click={close}>
+  <div class="inner" onclick={close}>
     <div class="close">{buttonText}</div>
     {@html renderBlockText(content)}
   </div>

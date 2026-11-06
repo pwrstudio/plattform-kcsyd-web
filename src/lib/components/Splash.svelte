@@ -8,10 +8,14 @@
     dispatch("close")
   }
 
-  export let splash: any
+  interface Props {
+    splash: any;
+  }
+
+  let { splash }: Props = $props();
 </script>
 
-<div class="splash" on:click={close} out:fade>
+<div class="splash" onclick={close} out:fade>
   <Image imageDyad={splash.mainImage} width={500} />
 </div>
 

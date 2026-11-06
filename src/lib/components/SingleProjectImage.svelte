@@ -1,8 +1,12 @@
 <script lang="ts">
   import Image from "#lib/components/Image.svelte"
   import { Language } from "#lib/types/index.ts"
-  export let language: Language
-  export let project: any
+  interface Props {
+    language: Language;
+    project: any;
+  }
+
+  let { language, project }: Props = $props();
   const caption = Language.English ? project.title_eng : project.title
 </script>
 

@@ -7,8 +7,12 @@
   import { renderBlockText } from "#lib/modules/sanity.js"
   import X from "#lib/components/X.svelte"
   import { Language, type AboutPageType } from "#lib/types/index.ts"
-  export let language: Language
-  export let data: AboutPageType
+  interface Props {
+    language: Language;
+    data: AboutPageType;
+  }
+
+  let { language, data }: Props = $props();
   const urlPrefix = language === Language.English ? "/en/" : "/"
 
   onMount(async () => {

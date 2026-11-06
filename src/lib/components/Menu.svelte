@@ -5,7 +5,11 @@
   import Splash from "#lib/components/Splash.svelte"
   import { languageStore, splashOpen } from "#lib/stores/index.ts"
   import { Language, type MenuItem } from "#lib/types/index.ts"
-  export let splash: any
+  interface Props {
+    splash: any;
+  }
+
+  let { splash }: Props = $props();
 
   const closeSplash = () => {
     splashOpen.set(false)
@@ -61,9 +65,8 @@
     ],
   }
 
-  let activeMenuItems: MenuItem[]
-  $: activeMenuItems =
-    $languageStore === Language.English ? menuItems.eng : menuItems.sve
+  let activeMenuItems: MenuItem[] = $derived($languageStore === Language.English ? menuItems.eng : menuItems.sve)
+  
 
   onMount(async () => {
     setTimeout(closeSplash, 4000)
@@ -79,7 +82,7 @@
     <span
       class="language-option"
       class:selected={$languageStore === Language.Swedish}
-      on:click={() => {
+      onclick={() => {
         languageStore.set(Language.Swedish)
       }}
     >
@@ -89,7 +92,7 @@
     <span
       class="language-option"
       class:selected={$languageStore === Language.English}
-      on:click={() => {
+      onclick={() => {
         languageStore.set(Language.English)
       }}
     >

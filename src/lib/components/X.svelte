@@ -1,7 +1,11 @@
 <script lang="ts">
   import X from "#lib/graphics/X.svelte"
   import { UIColor } from "#lib/types/index.ts"
-  export let color: UIColor = UIColor.Black
+  interface Props {
+    color?: UIColor;
+  }
+
+  let { color = UIColor.Black }: Props = $props();
 </script>
 
 <div class="menu-toggle">

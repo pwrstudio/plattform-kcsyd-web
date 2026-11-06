@@ -4,8 +4,12 @@
   import Image from "#lib/components/Image.svelte"
   import SmallArrowLeft from "#lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "#lib/graphics/SmallArrowRight.svelte"
-  export let language: Language
-  export let projects: any[]
+  interface Props {
+    language: Language;
+    projects: any[];
+  }
+
+  let { language, projects }: Props = $props();
   const urlPrefix = language === Language.English ? "/en/" : "/"
 </script>
 

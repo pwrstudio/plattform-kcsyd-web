@@ -1,8 +1,12 @@
 <script lang="ts">
   import truncate from "lodash/truncate"
 
-  export let title = ""
-  export let description = ""
+  interface Props {
+    title?: string;
+    description?: string;
+  }
+
+  let { title = "", description = "" }: Props = $props();
   // let url = ""
 
   const DEFAULT_DESCRIPTION =

@@ -1,9 +1,18 @@
 <script lang="ts">
   import { type ArtistType, Language } from "#lib/types/index.ts"
-  export let language: Language
-  export let artists: ArtistType[]
-  export let list: any[]
-  export let title: string
+  interface Props {
+    language: Language;
+    artists: ArtistType[];
+    list: any[];
+    title: string;
+  }
+
+  let {
+    language,
+    artists,
+    list,
+    title
+  }: Props = $props();
   const urlPrefix = language === Language.English ? "/en/" : "/"
 
   const specialIDs = list.map(l => l._id)

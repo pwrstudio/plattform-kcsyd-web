@@ -4,8 +4,12 @@
   import { Language } from "#lib/types/index.ts"
   import SmallArrowLeft from "#lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "#lib/graphics/SmallArrowRight.svelte"
-  export let language: Language
-  export let slides: any[]
+  interface Props {
+    language: Language;
+    slides: any[];
+  }
+
+  let { language, slides }: Props = $props();
 </script>
 
 <div class="swiper" use:swiper={{ spaceBetween: 50, slidesPerView: 1, loop: true }}>

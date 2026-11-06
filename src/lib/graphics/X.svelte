@@ -1,6 +1,10 @@
 <script lang="ts">
   import { UIColor } from "#lib/types/index.ts"
-  export let color: UIColor
+  interface Props {
+    color: UIColor;
+  }
+
+  let { color }: Props = $props();
   const colorClass = color === UIColor.White ? "white" : ""
 </script>
 

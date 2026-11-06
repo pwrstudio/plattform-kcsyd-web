@@ -12,11 +12,15 @@
   import SingleProjectImage from "#lib/components/SingleProjectImage.svelte"
   import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
   import { Language, type ProjectType, UIColor } from "#lib/types/index.ts"
-  export let language: Language
-  export let data: { project: ProjectType; projectList: ProjectType[] }
+  interface Props {
+    language: Language;
+    data: { project: ProjectType; projectList: ProjectType[] };
+  }
+
+  let { language, data }: Props = $props();
   const { project, projectList } = data
 
-  let textColumnEl: HTMLElement
+  let textColumnEl: HTMLElement = $state()
 
   function scrollDown() {
     textColumnEl.scrollIntoView({ behavior: "smooth" })
@@ -100,7 +104,7 @@
 
     <div class="content" class:double={project.layout === "alt2"}>
       {#if project.layout === "alt2"}
-        <div class="hero" on:click={scrollDown}>
+        <div class="hero" onclick={scrollDown}>
           <Image imageDyad={project.mainImage} caption={title} />
         </div>
       {/if}

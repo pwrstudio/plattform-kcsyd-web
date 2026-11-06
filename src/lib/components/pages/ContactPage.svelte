@@ -8,8 +8,12 @@
   import Logos from "#lib/components/Logos.svelte"
   import { renderBlockText } from "#lib/modules/sanity.js"
   import { Language, type ContactPageType } from "#lib/types/index.ts"
-  export let language: Language
-  export let data: ContactPageType
+  interface Props {
+    language: Language;
+    data: ContactPageType;
+  }
+
+  let { language, data }: Props = $props();
 
   const infoText =
     language === Language.English

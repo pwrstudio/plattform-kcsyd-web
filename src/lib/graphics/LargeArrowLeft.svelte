@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let black = false
+  interface Props {
+    black?: boolean;
+  }
+
+  let { black = false }: Props = $props();
 </script>
 
 <svg

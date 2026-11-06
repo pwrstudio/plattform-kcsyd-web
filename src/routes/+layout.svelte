@@ -4,7 +4,7 @@
   import Marquee from "#lib/components/Marquee.svelte"
   import { menuActive } from "#lib/stores/index.ts"
 
-  export let data
+  let { data, children } = $props();
   const { splash } = data
 
   const closeMenu = () => {
@@ -17,13 +17,13 @@
 </div>
 
 {#if $menuActive}
-  <span on:click={closeMenu}>
+  <span onclick={closeMenu}>
     <X />
   </span>
   <Menu {splash} />
 {/if}
 
-<slot />
+{@render children?.()}
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
