@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Image from "$lib/components/Image.svelte"
-  import Metadata from "$lib/components/Metadata.svelte"
-  import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
-  import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
-  import { Language, type ArtistType } from "$lib/types"
+  import Image from "#lib/components/Image.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
+  import LargeArrowLeft from "#lib/graphics/LargeArrowLeft.svelte"
+  import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
+  import { Language, type ArtistType } from "#lib/types/index.ts"
   export let language: Language
   export let data: ArtistType
   const title = language === Language.English ? data.title_eng : data.title

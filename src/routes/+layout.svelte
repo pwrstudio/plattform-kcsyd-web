@@ -1,8 +1,8 @@
 <script lang="ts">
-  import X from "$lib/components/X.svelte"
-  import Menu from "$lib/components/Menu.svelte"
-  import Marquee from "$lib/components/Marquee.svelte"
-  import { menuActive } from "$lib/stores"
+  import X from "#lib/components/X.svelte"
+  import Menu from "#lib/components/Menu.svelte"
+  import Marquee from "#lib/components/Marquee.svelte"
+  import { menuActive } from "#lib/stores/index.ts"
 
   export let data
   const { splash } = data

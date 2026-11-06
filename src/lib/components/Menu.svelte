@@ -2,9 +2,9 @@
   import { onMount } from "svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import Splash from "$lib/components/Splash.svelte"
-  import { languageStore, splashOpen } from "$lib/stores"
-  import { Language, type MenuItem } from "$lib/types"
+  import Splash from "#lib/components/Splash.svelte"
+  import { languageStore, splashOpen } from "#lib/stores/index.ts"
+  import { Language, type MenuItem } from "#lib/types/index.ts"
   export let splash: any
 
   const closeSplash = () => {

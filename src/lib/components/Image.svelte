@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { urlFor } from "$lib/modules/sanity"
+  import { urlFor } from "#lib/modules/sanity.js"
   export let imageDyad: any = {}
   export let caption: string = ""
   export let width: number = 0

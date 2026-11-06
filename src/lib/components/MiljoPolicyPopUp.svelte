@@ -1,8 +1,8 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
-  import { Language } from "$lib/types"
+  import { Language } from "#lib/types/index.ts"
   import { createEventDispatcher } from "svelte"
-  import { renderBlockText } from "$lib/modules/sanity"
+  import { renderBlockText } from "#lib/modules/sanity.js"
   const dispatch = createEventDispatcher()
 
   const close = () => {

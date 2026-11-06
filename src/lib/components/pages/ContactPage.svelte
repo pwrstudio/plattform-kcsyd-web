@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import X from "$lib/components/X.svelte"
-  import Logos from "$lib/components/Logos.svelte"
-  import { renderBlockText } from "$lib/modules/sanity.js"
-  import { Language, type ContactPageType } from "$lib/types"
+  import X from "#lib/components/X.svelte"
+  import Logos from "#lib/components/Logos.svelte"
+  import { renderBlockText } from "#lib/modules/sanity.js"
+  import { Language, type ContactPageType } from "#lib/types/index.ts"
   export let language: Language
   export let data: ContactPageType
 

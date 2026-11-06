@@ -1,6 +1,6 @@
 <script lang="ts">
-  import X from "$lib/graphics/X.svelte"
-  import { UIColor } from "$lib/types"
+  import X from "#lib/graphics/X.svelte"
+  import { UIColor } from "#lib/types/index.ts"
   export let color: UIColor = UIColor.Black
 </script>
 

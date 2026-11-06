@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Image from "$lib/components/Image.svelte"
-  import { Language } from "$lib/types"
+  import Image from "#lib/components/Image.svelte"
+  import { Language } from "#lib/types/index.ts"
   export let language: Language
   export let project: any
   const caption = Language.English ? project.title_eng : project.title

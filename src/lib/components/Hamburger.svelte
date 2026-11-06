@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Hamburger from "$lib/graphics/Hamburger.svelte"
-  import { UIColor } from "$lib/types"
+  import Hamburger from "#lib/graphics/Hamburger.svelte"
+  import { UIColor } from "#lib/types/index.ts"
   export let color: UIColor = UIColor.Black
 </script>
 

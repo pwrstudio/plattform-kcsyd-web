@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type ArtistType, Language } from "$lib/types"
+  import { type ArtistType, Language } from "#lib/types/index.ts"
   export let language: Language
   export let artists: ArtistType[]
   export let list: any[]

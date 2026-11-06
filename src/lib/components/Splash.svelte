@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Image from "$lib/components/Image.svelte"
+  import Image from "#lib/components/Image.svelte"
   import { fade } from "svelte/transition"
   import { createEventDispatcher } from "svelte"
   const dispatch = createEventDispatcher()

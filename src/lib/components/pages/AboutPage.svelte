@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import { renderBlockText } from "$lib/modules/sanity.js"
-  import X from "$lib/components/X.svelte"
-  import { Language, type AboutPageType } from "$lib/types"
+  import { renderBlockText } from "#lib/modules/sanity.js"
+  import X from "#lib/components/X.svelte"
+  import { Language, type AboutPageType } from "#lib/types/index.ts"
   export let language: Language
   export let data: AboutPageType
   const urlPrefix = language === Language.English ? "/en/" : "/"

@@ -1,17 +1,17 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
-  import Metadata from "$lib/components/Metadata.svelte"
-  import X from "$lib/components/X.svelte"
-  import Image from "$lib/components/Image.svelte"
-  import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
-  import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
-  import SingleProjectSlideshow from "$lib/components/SingleProjectSlideshow.svelte"
-  import SingleProjectImage from "$lib/components/SingleProjectImage.svelte"
-  import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
-  import { Language, type ProjectType, UIColor } from "$lib/types"
+  import Metadata from "#lib/components/Metadata.svelte"
+  import X from "#lib/components/X.svelte"
+  import Image from "#lib/components/Image.svelte"
+  import LargeArrowLeft from "#lib/graphics/LargeArrowLeft.svelte"
+  import LargeArrowRight from "#lib/graphics/LargeArrowRight.svelte"
+  import SingleProjectSlideshow from "#lib/components/SingleProjectSlideshow.svelte"
+  import SingleProjectImage from "#lib/components/SingleProjectImage.svelte"
+  import { renderBlockText, toPlainText } from "#lib/modules/sanity.js"
+  import { Language, type ProjectType, UIColor } from "#lib/types/index.ts"
   export let language: Language
   export let data: { project: ProjectType; projectList: ProjectType[] }
   const { project, projectList } = data

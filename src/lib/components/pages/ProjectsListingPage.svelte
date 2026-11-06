@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
-  import Hamburger from "$lib/components/Hamburger.svelte"
+  import Metadata from "#lib/components/Metadata.svelte"
+  import Hamburger from "#lib/components/Hamburger.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import Image from "$lib/components/Image.svelte"
-  import { Language, UIColor, type ProjectType } from "$lib/types"
-  import { menuActive } from "$lib/stores"
+  import Image from "#lib/components/Image.svelte"
+  import { Language, UIColor, type ProjectType } from "#lib/types/index.ts"
+  import { menuActive } from "#lib/stores/index.ts"
   import { onMount } from "svelte"
 
   export let language: Language

@@ -1,5 +1,5 @@
 import { writable, derived } from "svelte/store";
-import { Language } from "$lib/types";
+import { Language } from "#lib/types/index.ts";
 
 export const languageStore = writable(Language.Swedish);
 export const menuActive = writable(false);

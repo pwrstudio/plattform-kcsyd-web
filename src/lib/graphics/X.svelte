@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { UIColor } from "$lib/types"
+  import { UIColor } from "#lib/types/index.ts"
   export let color: UIColor
   const colorClass = color === UIColor.White ? "white" : ""
 </script>
