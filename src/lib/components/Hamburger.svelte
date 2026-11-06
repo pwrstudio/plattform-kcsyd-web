@@ -3,19 +3,23 @@
   import { UIColor } from "#lib/types/index.ts"
   interface Props {
     color?: UIColor
+    label: string
+    onclick: () => void
   }
 
-  let { color = UIColor.Black }: Props = $props()
+  let { color = UIColor.Black, label, onclick }: Props = $props()
 </script>
 
-<div class="menu-toggle">
+<button type="button" class="menu-toggle" aria-label={label} {onclick}>
   <Hamburger {color} />
-</div>
+</button>
 
 <style lang="scss">
   @use "src/lib/style/variables.scss" as *;
 
   .menu-toggle {
+    @include button-reset;
+    display: block;
     position: fixed;
     top: 30px;
     right: 15px;

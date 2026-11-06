@@ -70,7 +70,11 @@
     $languageStore === Language.English ? menuItems.eng : menuItems.sve
   )
 
+  let menuEl: HTMLElement | undefined = $state()
+
   onMount(async () => {
+    // Move keyboard focus into the menu, since the button that opened it is gone
+    menuEl?.querySelector<HTMLElement>("button, a")?.focus()
     setTimeout(closeSplash, 4000)
   })
 </script>
@@ -79,27 +83,37 @@
   <Splash {splash} onclose={closeSplash} />
 {/if}
 
-<div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>
+<div
+  class="menu"
+  bind:this={menuEl}
+  in:fade={{ easing: quadOut, duration: 400 }}
+>
   <div class="language-switch">
-    <span
+    <button
+      type="button"
       class="language-option"
       class:selected={$languageStore === Language.Swedish}
+      aria-pressed={$languageStore === Language.Swedish}
+      aria-label="Svenska"
       onclick={() => {
         languageStore.set(Language.Swedish)
       }}
     >
       SVE
-    </span>
+    </button>
     <span class="slash">/</span>
-    <span
+    <button
+      type="button"
       class="language-option"
       class:selected={$languageStore === Language.English}
+      aria-pressed={$languageStore === Language.English}
+      aria-label="English"
       onclick={() => {
         languageStore.set(Language.English)
       }}
     >
       ENG
-    </span>
+    </button>
   </div>
 
   <div class="inner">
@@ -129,6 +143,8 @@
     }
 
     .language-option {
+      @include button-reset;
+
       &.selected {
         border-bottom: 1px solid black;
       }

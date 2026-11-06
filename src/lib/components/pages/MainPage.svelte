@@ -62,9 +62,10 @@
 <Metadata />
 
 {#if !$menuActive}
-  <span onclick={openMenu}>
-    <Hamburger />
-  </span>
+  <Hamburger
+    onclick={openMenu}
+    label={language === Language.English ? "Open menu" : "Öppna meny"}
+  />
 {/if}
 
 {#if mainPageType === MainPageType.Landing && miljopolicy && $miljopolicyOpen}
@@ -96,12 +97,19 @@
 <!-- LEFT -->
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   {#if mainPageType === MainPageType.Landing}
-    <div class="landing-page-image" onclick={scrollDown}>
+    <button
+      type="button"
+      class="landing-page-image"
+      aria-label={language === Language.English
+        ? "Scroll down to artists"
+        : "Scrolla ner till konstnärer"}
+      onclick={scrollDown}
+    >
       <Image imageDyad={hemsideBild.mainImage} caption={"Plattform KcSyd"} />
-      <div class="arrow-down">
+      <span class="arrow-down">
         <LargeArrowDown />
-      </div>
-    </div>
+      </span>
+    </button>
   {/if}
   <div
     class="artists"
@@ -249,6 +257,8 @@
   }
 
   .landing-page-image {
+    @include button-reset;
+    display: block;
     width: 100%;
     height: 100vh;
     position: realtive;

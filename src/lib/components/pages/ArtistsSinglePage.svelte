@@ -45,7 +45,7 @@
   <div class="image">
     <Image imageDyad={data.mainImage} caption={title} />
   </div>
-  <figcaption>{caption}</figcaption>
+  <div class="caption">{caption}</div>
   <h1>{title}</h1>
   <div>{@html renderBlockText(content)}</div>
 </div>
@@ -76,7 +76,7 @@
       line-height: 0;
     }
 
-    figcaption {
+    .caption {
       font-size: $FONT_SIZE_SMALL;
       width: 100%;
       text-align: center;

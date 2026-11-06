@@ -1,27 +1,39 @@
 <script lang="ts">
+  import { tick } from "svelte"
   import X from "#lib/components/X.svelte"
   import Menu from "#lib/components/Menu.svelte"
   import Marquee from "#lib/components/Marquee.svelte"
-  import { menuActive } from "#lib/stores/index.ts"
+  import { menuActive, languageStore } from "#lib/stores/index.ts"
+  import { Language } from "#lib/types/index.ts"
 
   import type { LayoutProps } from "./$types"
 
   let { data, children }: LayoutProps = $props()
   const splash = $derived(data.splash)
 
-  const closeMenu = () => {
+  const closeMenu = async () => {
     menuActive.set(false)
+    // Return focus to the menu button, which re-renders once the menu closes
+    await tick()
+    document.querySelector<HTMLElement>("button.menu-toggle")?.focus()
+  }
+
+  const onkeydown = (event: KeyboardEvent) => {
+    if (event.key === "Escape" && $menuActive) closeMenu()
   }
 </script>
+
+<svelte:window {onkeydown} />
 
 <div class="phone-marquee">
   <Marquee />
 </div>
 
 {#if $menuActive}
-  <span onclick={closeMenu}>
-    <X />
-  </span>
+  <X
+    onclick={closeMenu}
+    label={$languageStore === Language.English ? "Close menu" : "Stäng meny"}
+  />
   <Menu {splash} />
 {/if}
 

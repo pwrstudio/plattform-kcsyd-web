@@ -34,7 +34,10 @@
 
 <Metadata title={"Information / Kontakt"} />
 
-<a href={urlPrefix + ""}>
+<a
+  href={urlPrefix + ""}
+  aria-label={language === Language.English ? "Close" : "Stäng"}
+>
   <X />
 </a>
 

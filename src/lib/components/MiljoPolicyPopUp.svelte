@@ -24,8 +24,10 @@
 </script>
 
 <div class="miljopolicy" transition:fade>
+  <!-- The close button is the keyboard/screen-reader path; clicking anywhere on the card is a mouse shortcut -->
+  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
   <div class="inner" onclick={close}>
-    <div class="close">{buttonText}</div>
+    <button type="button" class="close">{buttonText}</button>
     {@html renderBlockText(content)}
   </div>
 </div>
@@ -62,6 +64,7 @@
       cursor: pointer;
 
       .close {
+        @include button-reset;
         position: absolute;
         top: 10px;
         right: 10px;

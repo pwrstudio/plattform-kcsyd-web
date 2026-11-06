@@ -58,9 +58,11 @@
 <Metadata title={"Projekt"} />
 
 {#if !$menuActive}
-  <span onclick={openMenu}>
-    <Hamburger color={UIColor.White} />
-  </span>
+  <Hamburger
+    color={UIColor.White}
+    onclick={openMenu}
+    label={language === Language.English ? "Open menu" : "Öppna meny"}
+  />
 {/if}
 
 <div class="page">

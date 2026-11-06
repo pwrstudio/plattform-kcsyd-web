@@ -1,6 +1,8 @@
 <script lang="ts">
   import Image from "#lib/components/Image.svelte"
   import { fade } from "svelte/transition"
+  import { languageStore } from "#lib/stores/index.ts"
+  import { Language } from "#lib/types/index.ts"
   interface Props {
     splash: any
     onclose?: () => void
@@ -11,14 +13,22 @@
   const close = () => onclose?.()
 </script>
 
-<div class="splash" onclick={close} out:fade>
+<button
+  type="button"
+  class="splash"
+  aria-label={$languageStore === Language.English ? "Close" : "Stäng"}
+  onclick={close}
+  out:fade
+>
   <Image imageDyad={splash.mainImage} width={500} />
-</div>
+</button>
 
 <style lang="scss">
   @use "src/lib/style/variables.scss" as *;
 
   .splash {
+    @include button-reset;
+    display: block;
     position: fixed;
     top: 50%;
     left: 50%;

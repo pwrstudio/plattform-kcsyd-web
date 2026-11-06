@@ -22,7 +22,10 @@
 
 <Metadata title={"Om Plattform KcSyd"} />
 
-<a href={urlPrefix + ""}>
+<a
+  href={urlPrefix + ""}
+  aria-label={language === Language.English ? "Close" : "Stäng"}
+>
   <X />
 </a>
 

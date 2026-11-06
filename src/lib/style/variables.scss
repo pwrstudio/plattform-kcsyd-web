@@ -70,3 +70,18 @@ $breakpoints: (
   }
   -ms-overflow-style: none;
 }
+
+/// Strip native <button> styling so it looks like the element it replaced.
+/// Keeps the browser's focus ring for keyboard users.
+@mixin button-reset {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}

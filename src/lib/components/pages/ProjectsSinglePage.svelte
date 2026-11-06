@@ -86,7 +86,13 @@
 
 <Metadata {title} {description} />
 
-<a href={urlPrefix + "projekt"} data-sveltekit-preload-data>
+<a
+  href={urlPrefix + "projekt"}
+  data-sveltekit-preload-data
+  aria-label={language === Language.English
+    ? "Back to projects"
+    : "Tillbaka till projekt"}
+>
   <X color={UIColor.White} />
 </a>
 
@@ -110,9 +116,16 @@
 
     <div class="content" class:double={project.layout === "alt2"}>
       {#if project.layout === "alt2"}
-        <div class="hero" onclick={scrollDown}>
+        <button
+          type="button"
+          class="hero"
+          aria-label={language === Language.English
+            ? "Scroll to text"
+            : "Scrolla till texten"}
+          onclick={scrollDown}
+        >
           <Image imageDyad={project.mainImage} caption={title} />
-        </div>
+        </button>
       {/if}
 
       <div class="column left" bind:this={textColumnEl}>
@@ -205,6 +218,8 @@
         overflow-y: auto;
 
         .hero {
+          @include button-reset;
+          display: block;
           padding-bottom: 15px;
           width: 100%;
           height: calc(100vh - 85px);
