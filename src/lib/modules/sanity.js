@@ -67,6 +67,19 @@ export const toPlainText = (blocks = []) => {
 
 const builder = createImageUrlBuilder(client)
 
+/**
+ * The image source of a { dither, bild } pair, preferring the dithered one.
+ * @param {any} imageDyad
+ */
+export const imageSource = imageDyad => imageDyad?.dither ?? imageDyad?.bild
+
+/**
+ * True when the pair has an uploaded asset (an emptied image field in Sanity
+ * still comes back as `{ _type: "image" }`).
+ * @param {any} imageDyad
+ */
+export const hasImage = imageDyad => Boolean(imageSource(imageDyad)?.asset)
+
 /** @param {any} source */
 export const urlFor = source => builder.image(source)
 

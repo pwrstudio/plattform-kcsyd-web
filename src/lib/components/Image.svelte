@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { urlFor } from "#lib/modules/sanity.js"
+  import { hasImage, imageSource, urlFor } from "#lib/modules/sanity.js"
   interface Props {
     imageDyad?: any
     caption?: string
@@ -10,14 +10,17 @@
   let { imageDyad = {}, caption = "", width = 0, height = 0 }: Props = $props()
 
   const url = $derived.by(() => {
-    let builder = urlFor(imageDyad.dither ? imageDyad.dither : imageDyad.bild)
+    if (!hasImage(imageDyad)) return ""
+    let builder = urlFor(imageSource(imageDyad))
     if (width > 0) builder = builder.width(width)
     if (height > 0) builder = builder.height(height)
     return builder.auto("format").saturation(-100).url()
   })
 </script>
 
-<img src={url} alt={caption} />
+{#if url}
+  <img src={url} alt={caption} />
+{/if}
 
 <style lang="scss">
   img {

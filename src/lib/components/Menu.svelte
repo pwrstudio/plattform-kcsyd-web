@@ -3,6 +3,7 @@
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import Splash from "#lib/components/Splash.svelte"
+  import { hasImage } from "#lib/modules/sanity.js"
   import { languageStore, splashOpen } from "#lib/stores/index.ts"
   import { Language, type MenuItem } from "#lib/types/index.ts"
   interface Props {
@@ -74,7 +75,7 @@
   })
 </script>
 
-{#if splash.mainImage && $splashOpen}
+{#if hasImage(splash.mainImage) && $splashOpen}
   <Splash {splash} onclose={closeSplash} />
 {/if}
 
