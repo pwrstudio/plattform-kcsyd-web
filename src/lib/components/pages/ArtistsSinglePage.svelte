@@ -49,7 +49,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .single-artist {
     font-family: $ATLAS_STACK;

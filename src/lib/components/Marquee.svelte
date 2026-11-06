@@ -36,7 +36,7 @@
 </div>
 
 <style lang="scss">
-  @import "src/lib/style/variables.scss";
+  @use "src/lib/style/variables.scss" as *;
 
   .marquee {
     user-select: none;
