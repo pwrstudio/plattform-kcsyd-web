@@ -26,7 +26,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@sanity/block-content-to-html": "^2.0.0",
+    "@portabletext/to-html": "^6.0.0",
     "@sanity/client": "^8.14.1",
     "@sanity/image-url": "^2.1.1",
     "get-video-id": "^4.2.0",
